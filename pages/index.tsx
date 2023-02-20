@@ -9,24 +9,28 @@ import FoodOffers from '../src/components/home/FoodOffers';
 import FoodCollection from '../src/components/home/FoodCollection';
 import DownloadApp from '../src/components/home/DownloadApp';
 import { NextPage } from 'next';
+import AuthComponent from '../src/components/common/AuthComponent';
+import AuthGuard from '../src/components/common/AuthGuard';
 
 interface HomeProps {}
 const Home: NextPage<HomeProps> = () => {
   return (
-    <>
-      <CoverImage />
-      <MaxWidthWrapper>
-        <DiningOut />
-        <Cuisines />
-      </MaxWidthWrapper>
-      <PopularRecipes />
-      <FoodDeliveryImage />
-      <MaxWidthWrapper>
-        <FoodOffers />
-        <FoodCollection />
-        <DownloadApp />
-      </MaxWidthWrapper>
-    </>
+    <AuthComponent>
+      <AuthGuard>
+        <CoverImage />
+        <MaxWidthWrapper>
+          <DiningOut />
+          <Cuisines />
+        </MaxWidthWrapper>
+        <PopularRecipes />
+        <FoodDeliveryImage />
+        <MaxWidthWrapper>
+          <FoodOffers />
+          <FoodCollection />
+          <DownloadApp />
+        </MaxWidthWrapper>
+      </AuthGuard>
+    </AuthComponent>
   );
 };
 

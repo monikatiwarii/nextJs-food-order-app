@@ -1,23 +1,43 @@
 import { Box, Button, Divider, Typography } from '@mui/material';
-import { stat } from 'fs';
 import Image from 'next/image';
 import { useSelector } from '../../store';
 import { foodItem } from '../../data/data';
-
 import { setCartData } from '../../store/reducers/cartItem/CartItem.slice';
 import { useDispatch } from '../../store';
 
 interface CartDataProps {}
-const CartData = () => {
+const CartData: React.FC<CartDataProps> = () => {
   let cartData = useSelector(state => state.cartItemSlice.cartItems);
   const dispatch = useDispatch();
 
   const decrementQuantity = (data: any) => {
-    console.log('decrement data------', data);
+    cartData.map(cartdata => {
+      if (cartdata.quantity > 1) {
+        if (cartdata.foodId == data.foodId) {
+          dispatch(
+            setCartData({
+              foodId: cartdata.foodId,
+              quantity: cartdata.quantity - 1
+            })
+          );
+        }
+      }
+    });
   };
 
   const incrementQuantity = (data: any) => {
-    console.log('increment data----------', data);
+    cartData.map(cartdata => {
+      if (cartdata.quantity < 5) {
+        if (cartdata.foodId == data.foodId) {
+          dispatch(
+            setCartData({
+              foodId: cartdata.foodId,
+              quantity: cartdata.quantity + 1
+            })
+          );
+        }
+      }
+    });
   };
 
   return (
@@ -243,7 +263,7 @@ const CartData = () => {
                         lineHeight: '21px',
                         color: '#FFA500'
                       }}>
-                      ₹{data.price} * {data.quantity}
+                      ₹{data.price} * {foods.quantity}
                     </Typography>
                   </Box>
                   <Divider
@@ -292,7 +312,7 @@ const CartData = () => {
                         lineHeight: '21px',
                         color: '#FFA500'
                       }}>
-                      ₹{data.price * data.quantity}
+                      ₹{data.price * foods.quantity}
                     </Typography>
                   </Box>
                 </Box>

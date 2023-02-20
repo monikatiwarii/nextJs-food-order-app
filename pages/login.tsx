@@ -12,16 +12,16 @@ const Login: NextPage<LoginProps> = () => {
 
   const login = () => {
     localStorage.setItem('isLoggedIn', 'true');
-    // router.push("/home");
+    router.push('/');
   };
 
   useEffect(() => {
     let isLoggedIn = localStorage.getItem('isLoggedIn');
-    // if (!isLoggedIn) {
-    //   router.push("/login");
-    // } else {
-    //   router.push("/home");
-    // }
+    if (!isLoggedIn) {
+      router.push('/login');
+    } else {
+      router.push('/');
+    }
   });
   return (
     <>

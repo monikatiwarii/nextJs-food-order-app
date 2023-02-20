@@ -10,23 +10,23 @@ import {
 import React from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import { states } from '../../data/data';
-// import { useSelector } from "react-redux";
+
 import MaxWidthWrapper from '../common/MaxWidthWrapper';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useSelector } from '../../store';
+import { foodItemType } from '../../types/constants/foodItem.type';
 
 interface CoverImageProps {}
 
 const CoverImage: React.FC<CoverImageProps> = () => {
-  // let counter = 0;
-  // const cartItemCount = useSelector(
-  //   (state) => state.rootReducer.cartItemSlice.getCartData
-  // );
+  let counter = 0;
+  let cartData = useSelector((state: any) => state.cartItemSlice.cartItems);
 
-  // cartItemCount.filter((count) => {
-  //   counter += count.itemCount;
-  //   return count;
-  // });
+  cartData.filter((count: foodItemType) => {
+    counter += count.quantity;
+    return count;
+  });
   return (
     <>
       <Box
@@ -189,7 +189,7 @@ const CoverImage: React.FC<CoverImageProps> = () => {
                     background: '#FFA500',
                     borderRadius: '15px'
                   }}>
-                  {/* {counter} */}
+                  {counter}
                 </Typography>
                 <Link href="/cart">
                   <Image

@@ -9,13 +9,14 @@ import RestaurantDetails from '../../src/components/restaurantDetails/Restaurant
 import { useRouter } from 'next/router';
 import { restaurants } from '../../src/data/data';
 import { restaurantType } from '../../src/types/constants/restaurant.type';
+import AuthComponent from '../../src/components/common/AuthComponent';
 
 interface RestaurantDetailProps {
   selectedRestaurant: restaurantType | undefined;
 }
 const RestaurantDetail: NextPage<RestaurantDetailProps> = ({ selectedRestaurant }) => {
   return (
-    <>
+    <AuthComponent>
       <Header />
       <RestaurantHeader />
       <MaxWidthWrapper>
@@ -23,7 +24,7 @@ const RestaurantDetail: NextPage<RestaurantDetailProps> = ({ selectedRestaurant 
         <Menus />
         <FoodType selectedRestaurant={selectedRestaurant} />
       </MaxWidthWrapper>
-    </>
+    </AuthComponent>
   );
 };
 

@@ -2,39 +2,35 @@ import { Box, Button, Typography } from '@mui/material';
 import MaxWidthWrapper from '../common/MaxWidthWrapper';
 import { foodtype } from '../../data/data';
 import { useState } from 'react';
-// import { cartItemAction } from "../../store/reducers/cartItemSlice";
-//import { useDispatch } from "react-redux";
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { foodtypesType } from '../../types/constants/foodtype.type';
+import { setCartData } from '../../store/reducers/cartItem/CartItem.slice';
+import { useDispatch } from '../../store';
 
 interface PopularRecipesProps {}
 const PopularRecipes: React.FC<PopularRecipesProps> = () => {
   const router = useRouter();
-  //const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [foodList, setFoodList] = useState(foodtype[0].list);
 
   const foodItemHandler = (data: foodtypesType) => {
+    console.log('data-------------', data);
     setFoodList(data.list);
   };
 
-  // const foodDataHandler = (data) => {
-  //   foodList.map((typedata) => {
-  //     if (typedata.id === data.id) {
-  //       typedata = {
-  //         ...typedata,
-  //         addToCart: true,
-  //         itemCount: data.itemCount + 1,
-  //       };
-  //       dispatch(cartItemAction.setCartData(typedata));
-  //       router.push("/cart");
-  //     }
-  //     return typedata;
-  //   });
-  // };
+  const foodDataHandler = (data: any) => {
+    dispatch(
+      setCartData({
+        foodId: data.foodId,
+        quantity: 1
+      })
+    );
+    router.push('/cart');
+  };
 
   const themes = useTheme();
   const matches = useMediaQuery(themes.breakpoints.down('sm'));
@@ -133,14 +129,6 @@ const PopularRecipes: React.FC<PopularRecipesProps> = () => {
                     lineHeight: '22px',
                     textAlign: 'center',
                     color: 'black',
-                    // "&:hover": {
-                    //   backgroundColor: "#F6B716",
-                    //   color: "white",
-                    // },
-                    // "&:active": {
-                    //   backgroundColor: "#F6B716",
-                    //   color: "white",
-                    // },
                     '&:focus': {
                       backgroundColor: '#F6B716',
                       color: 'white'
@@ -226,10 +214,9 @@ const PopularRecipes: React.FC<PopularRecipesProps> = () => {
                       xs: '200px'
                     }
                   }}
-                  // onClick={() => {
-                  //   foodDataHandler(food);
-                  // }}
-                >
+                  onClick={() => {
+                    foodDataHandler(food);
+                  }}>
                   <Image src={food.image} width={242} height={248} alt="" />
                 </Box>
                 <Box style={{ display: 'flex', justifyContent: 'space-between' }}>

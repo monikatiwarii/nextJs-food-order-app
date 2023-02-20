@@ -1,4 +1,5 @@
 import { Box, Button, InputBase, styled, Typography } from '@mui/material';
+import { useRouter } from 'next/router';
 import React from 'react';
 
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
@@ -27,6 +28,10 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
 
 interface DiscountProps {}
 const Discount: React.FC<DiscountProps> = () => {
+  const router = useRouter();
+  const orderHandler = () => {
+    router.push('/order');
+  };
   return (
     <>
       <Box>
@@ -276,7 +281,7 @@ const Discount: React.FC<DiscountProps> = () => {
           </Typography>
         </Box>
         <Button
-          // onClick={orderHandler}
+          onClick={orderHandler}
           sx={{
             width: {
               xl: '345px',
