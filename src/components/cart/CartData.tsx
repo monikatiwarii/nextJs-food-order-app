@@ -2,7 +2,7 @@ import { Box, Button, Divider, Typography } from '@mui/material';
 import Image from 'next/image';
 import { useSelector } from '../../store';
 import { foodItem } from '../../data/data';
-import { setCartData } from '../../store/reducers/cartItem/CartItem.slice';
+import { setCartData, removeCartItem } from '../../store/reducers/cartItem/CartItem.slice';
 import { useDispatch } from '../../store';
 
 interface CartDataProps {}
@@ -12,7 +12,12 @@ const CartData: React.FC<CartDataProps> = () => {
 
   const decrementQuantity = (data: any) => {
     cartData.map(cartdata => {
-      if (cartdata.quantity > 1) {
+      if(cartdata.quantity < 2){
+        dispatch(removeCartItem({
+          foodId: cartdata.foodId,
+          quantity: 0
+        }))
+      } else  {
         if (cartdata.foodId == data.foodId) {
           dispatch(
             setCartData({

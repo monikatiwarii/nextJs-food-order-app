@@ -16,9 +16,13 @@ const CartItems = createSlice({
       } else {
         state.cartItems.push(payload);
       }
+    },
+    removeCartItem(state: cartItemsType, {payload}:  PayloadAction<cartItemType>){
+      state.cartItems= state.cartItems.filter( data => data.foodId !== payload.foodId)
     }
   }
 });
 
 export default CartItems.reducer;
 export const { setCartData } = CartItems.actions;
+export const { removeCartItem } = CartItems.actions;
