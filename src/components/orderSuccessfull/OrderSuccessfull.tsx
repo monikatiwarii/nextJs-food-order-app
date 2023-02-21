@@ -34,6 +34,7 @@ const OrderSuccessfull = () => {
           <Image
             src="/images/successfully-done.gif"
             alt=""
+            priority
             height={768}
             width={768}
             sizes="(max-width:0) 100vw,

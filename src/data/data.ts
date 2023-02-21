@@ -1,4 +1,5 @@
 import { categoryType } from '../types/constants/category.type';
+import { CouponType } from '../types/constants/coupons.type';
 import { foodCollectionImagesType } from '../types/constants/foodCollection.type';
 import { foodItemType } from '../types/constants/foodItem.type';
 import { foodListType } from '../types/constants/foodList.type';
@@ -2621,5 +2622,20 @@ export const menus: menusType[] = [
     id: 2,
     image: '/images/Rectangle 34.png',
     type: 'takeaway menu'
+  }
+];
+
+export const coupons: CouponType[] = [
+  {
+    id: 1,
+    name: 'FLAT100',
+    type: 'FLAT',
+    value: '100'
+  },
+  {
+    id: 2,
+    name: 'FLATFORTY',
+    type: 'PERCENTAGE',
+    value: '40'
   }
 ];

@@ -1,6 +1,8 @@
 import { Box, Button, InputBase, styled, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from '../../store';
+import { coupons, foodItem } from '../../data/data';
 
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
   'label + &': {
@@ -27,11 +29,142 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
 }));
 
 interface DiscountProps {}
+let isCoupenUsed = false;
 const Discount: React.FC<DiscountProps> = () => {
+  const [total, setTotal] = useState(0);
+  const [discount, setDiscount] = useState<string | number>(0);
+  const [grandTotal, setGrandTotal] = useState(0);
+  const [couponValue, setCouponValue] = useState('');
+  const [invalidCoupen, setInvalidCoupen] = useState('');
+  const [invalidCoupenButton, setInvalidCoupenButton] = useState<any>();
+
+  let cartData = useSelector(state => state.cartItemSlice.cartItems);
+
+  let countCartAmount = () => {
+    let total = 0;
+    foodItem.map(foods => {
+      cartData.map(data => {
+        if (data.foodId === foods.foodId) {
+          total += foods.price * data.quantity;
+        }
+      });
+    });
+
+    setTotal(total);
+    return total;
+  };
+
+  useEffect(() => {
+    let total = 0;
+    let totalDiscount: string | number;
+    if (cartData.length > 0) {
+      foodItem.map(foods => {
+        cartData.map(data => {
+          if (data.foodId === foods.foodId) {
+            total += foods.price * data.quantity;
+          }
+        });
+      });
+      setTotal(total);
+      if (!!couponValue) {
+        coupons.map(data => {
+          if (data.name === couponValue) {
+            isCoupenUsed = true;
+            if (data.type === 'PERCENTAGE') {
+              totalDiscount = total * (data.value / 100);
+              total = total - totalDiscount;
+              if (total < 0) total = 0;
+            } else {
+              totalDiscount = data.value;
+              total = total - totalDiscount;
+              if (total < 0) total = 0;
+            }
+          }
+        });
+      }
+      setDiscount(totalDiscount);
+      setGrandTotal(total);
+    }
+  }, [cartData]);
+
+  //to check coupon is valid or not and coupon type
+  const applyCoupon = () => {
+    setInvalidCoupen('');
+    if (!isCoupenUsed) {
+      let couponData = coupons.find(coupon => coupon.name === couponValue);
+      if (!couponData) {
+        setInvalidCoupen('Invalid coupon!');
+      } else {
+        setInvalidCoupen('');
+        isCoupenUsed = true;
+        let gTotal = 0;
+        let totalDiscount: string | number;
+        if (couponData.type === 'PERCENTAGE') {
+          totalDiscount = grandTotal * (couponData.value / 100);
+          gTotal = grandTotal - totalDiscount;
+          if (gTotal < 0) setGrandTotal(0);
+          else setGrandTotal(gTotal);
+        } else {
+          totalDiscount = couponData.value;
+          gTotal = grandTotal - totalDiscount;
+          if (gTotal < 0) setGrandTotal(0);
+          else setGrandTotal(gTotal);
+        }
+        setDiscount(totalDiscount);
+
+        // remove coupon button
+        let removeCouponButton = (
+          <Button
+            onClick={removeCoupon}
+            sx={{
+              width: '50px',
+              height: '40px',
+              fontSize: '18px',
+              marginLeft: '20px',
+              marginTop: '20px',
+              backgroundColor: '#FFC300',
+              color: '#ffffff',
+              '&:hover': {
+                backgroundColor: '#FC0303',
+                color: '#ffffff'
+              }
+            }}>
+            X
+          </Button>
+        );
+        setInvalidCoupenButton(removeCouponButton);
+      }
+    }
+  };
+  // remove coupon
+  const removeCoupon = () => {
+    isCoupenUsed = false;
+    setGrandTotal(countCartAmount());
+    setDiscount(0);
+    setCouponValue('');
+    setInvalidCoupen('');
+    setInvalidCoupenButton('');
+  };
+
+  //to get applied coupon text
+  const handleChangeCoupon = (e: any) => {
+    isCoupenUsed = false;
+    setInvalidCoupenButton('');
+    setDiscount(0);
+    setGrandTotal(countCartAmount());
+    setCouponValue(e.target.value);
+  };
+
   const router = useRouter();
   const orderHandler = () => {
-    router.push('/order');
+    if (grandTotal !== 0) {
+      localStorage.setItem('isOrdered', 'true');
+      router.push('/order');
+      // dispatch(cartItemAction.clearCartData());
+      setGrandTotal(0);
+    }
   };
+
   return (
     <>
       <Box>
@@ -116,7 +249,7 @@ const Discount: React.FC<DiscountProps> = () => {
               lineHeight: '21px',
               color: '#FFA500'
             }}>
-            {/* ₹{total} */}
+            ₹{total}
           </Typography>
         </Box>
 
@@ -160,7 +293,7 @@ const Discount: React.FC<DiscountProps> = () => {
               lineHeight: '21px',
               color: '#FFA500'
             }}>
-            {/* ₹{discount} */}
+            ₹{discount}
           </Typography>
         </Box>
         <Box
@@ -203,10 +336,9 @@ const Discount: React.FC<DiscountProps> = () => {
               lineHeight: '21px',
               color: '#FFA500'
             }}>
-            {/* ₹{grandTotal} */}
+            ₹{grandTotal}
           </Typography>
         </Box>
-        {/* new total/discount End : change End */}
 
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Box
@@ -223,14 +355,14 @@ const Discount: React.FC<DiscountProps> = () => {
             <BootstrapInput
               placeholder="Apply Coupon Code"
               id="bootstrap-input"
-              // onChange={(e) => handleChangeCoupon(e)}
-              // value={couponValue}
+              onChange={e => handleChangeCoupon(e)}
+              value={couponValue}
             />
           </Box>
 
           <Button
             id="applyCoupon"
-            //   onClick={applyCoupon}
+            onClick={applyCoupon}
             sx={{
               width: {
                 xl: '200px',
@@ -265,7 +397,7 @@ const Discount: React.FC<DiscountProps> = () => {
             Apply
           </Button>
 
-          {/* {invalidCoupenButton} */}
+          {invalidCoupenButton}
           <Typography
             sx={{
               fontFamily: 'Poppins',
@@ -277,7 +409,7 @@ const Discount: React.FC<DiscountProps> = () => {
               marginLeft: '20px',
               marginTop: '20px'
             }}>
-            {/* {invalidCoupen} */}
+            {invalidCoupen}
           </Typography>
         </Box>
         <Button
