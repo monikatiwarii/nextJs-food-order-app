@@ -1,9 +1,9 @@
 import { Box } from '@mui/material';
 import React, { useState } from 'react';
 import { useEffect } from 'react';
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
+
 import { useRouter } from 'next/router';
+import LoaderPage from './LoaderPage';
 
 interface AuthComponentProps {
   children: React.ReactNode;
@@ -15,22 +15,12 @@ const AuthComponent: React.FC<AuthComponentProps> = ({ children }) => {
     if (localStorage.getItem('isLoggedIn')) {
       setLoading(false);
     } else {
-      setLoading(false);
+      setLoading(true);
       router.push('/login');
     }
   }, []);
 
-  return (
-    <>
-      {loading ? (
-        <Backdrop sx={{ color: '#fff', zIndex: theme => theme.zIndex.drawer + 1 }} open={true}>
-          <CircularProgress color="inherit" />
-        </Backdrop>
-      ) : (
-        <Box>{children}</Box>
-      )}
-    </>
-  );
+  return <>{loading ? <LoaderPage /> : <Box>{children}</Box>}</>;
 };
 
 export default AuthComponent;

@@ -2,17 +2,25 @@ import { Box, Button, Divider, Typography } from '@mui/material';
 import Image from 'next/image';
 import { useSelector } from '../../store';
 import { foodItem } from '../../data/data';
-import { setCartData } from '../../store/reducers/cartItem/CartItem.slice';
+import { removeCartItem, setCartData } from '../../store/reducers/cartItem/CartItem.slice';
 import { useDispatch } from '../../store';
+import { cartItemType } from '../../types/redux/cartItem.type';
 
 interface CartDataProps {}
 const CartData: React.FC<CartDataProps> = () => {
   let cartData = useSelector(state => state.cartItemSlice.cartItems);
   const dispatch = useDispatch();
 
-  const decrementQuantity = (data: any) => {
+  const decrementQuantity = (data: cartItemType) => {
     cartData.map(cartdata => {
-      if (cartdata.quantity > 1) {
+      if (cartdata.quantity < 2) {
+        dispatch(
+          removeCartItem({
+            foodId: cartdata.foodId,
+            quantity: 0
+          })
+        );
+      } else {
         if (cartdata.foodId == data.foodId) {
           dispatch(
             setCartData({
@@ -25,7 +33,7 @@ const CartData: React.FC<CartDataProps> = () => {
     });
   };
 
-  const incrementQuantity = (data: any) => {
+  const incrementQuantity = (data: cartItemType) => {
     cartData.map(cartdata => {
       if (cartdata.quantity < 5) {
         if (cartdata.foodId == data.foodId) {

@@ -5,7 +5,7 @@ export interface foodtypesType {
 }
 
 interface list {
-  id: string;
+  foodId: string;
   image: string;
   name: string;
   time: string;

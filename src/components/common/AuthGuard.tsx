@@ -1,12 +1,13 @@
 import { Box } from '@mui/material';
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface AuthGuardProps {
   children: React.ReactNode;
 }
 const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
   const router = useRouter();
+
   useEffect(() => {
     if (localStorage.getItem('isOrdered')) {
       console.log('isordered....');

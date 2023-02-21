@@ -1,8 +1,9 @@
 import { Box, Button, InputBase, styled, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { useSelector } from '../../store';
+import { useDispatch, useSelector } from '../../store';
 import { coupons, foodItem } from '../../data/data';
+import { clearCartData } from '../../store/reducers/cartItem/CartItem.slice';
 
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
   'label + &': {
@@ -39,6 +40,7 @@ const Discount: React.FC<DiscountProps> = () => {
   const [invalidCoupenButton, setInvalidCoupenButton] = useState<any>();
 
   let cartData = useSelector(state => state.cartItemSlice.cartItems);
+  const dispatch = useDispatch();
 
   let countCartAmount = () => {
     let total = 0;
@@ -94,6 +96,7 @@ const Discount: React.FC<DiscountProps> = () => {
     setInvalidCoupen('');
     if (!isCoupenUsed) {
       let couponData = coupons.find(coupon => coupon.name === couponValue);
+
       if (!couponData) {
         setInvalidCoupen('Invalid coupon!');
       } else {
@@ -160,10 +163,10 @@ const Discount: React.FC<DiscountProps> = () => {
   const router = useRouter();
   const orderHandler = () => {
     if (grandTotal !== 0) {
-      localStorage.setItem('isOrdered', 'true');
-      router.push('/order');
-      // dispatch(cartItemAction.clearCartData());
+      localStorage.setItem('isOrdered', true.toString());
       setGrandTotal(0);
+      dispatch(clearCartData());
+      router.push('/order');
     }
   };
 
@@ -295,7 +298,7 @@ const Discount: React.FC<DiscountProps> = () => {
               lineHeight: '21px',
               color: '#FFA500'
             }}>
-            ₹{discount}
+            - {discount}₹
           </Typography>
         </Box>
         <Box
@@ -362,43 +365,44 @@ const Discount: React.FC<DiscountProps> = () => {
             />
           </Box>
 
-          <Button
-            id="applyCoupon"
-            onClick={applyCoupon}
-            sx={{
-              width: {
-                xl: '200px',
-                lg: '200px',
-                md: '200px',
-                sm: '100px',
-                xs: '100px'
-              },
-              height: '40px',
-              fontSize: {
-                xl: '18px',
-                lg: '18px',
-                md: '18px',
-                sm: '16px',
-                xs: '14px'
-              },
-              marginLeft: {
-                xl: '20px',
-                lg: '20px',
-                md: '20px',
-                sm: '5px',
-                xs: '10px'
-              },
-              marginTop: '20px',
-              backgroundColor: '#FFC300',
-              color: '#ffffff',
-              '&:hover': {
+          {!isCoupenUsed && (
+            <Button
+              id="applyCoupon"
+              onClick={applyCoupon}
+              sx={{
+                width: {
+                  xl: '200px',
+                  lg: '200px',
+                  md: '200px',
+                  sm: '100px',
+                  xs: '100px'
+                },
+                height: '40px',
+                fontSize: {
+                  xl: '18px',
+                  lg: '18px',
+                  md: '18px',
+                  sm: '16px',
+                  xs: '14px'
+                },
+                marginLeft: {
+                  xl: '20px',
+                  lg: '20px',
+                  md: '20px',
+                  sm: '5px',
+                  xs: '10px'
+                },
+                marginTop: '20px',
                 backgroundColor: '#FFC300',
-                color: '#ffffff'
-              }
-            }}>
-            Apply
-          </Button>
-
+                color: '#ffffff',
+                '&:hover': {
+                  backgroundColor: '#FFC300',
+                  color: '#ffffff'
+                }
+              }}>
+              Apply
+            </Button>
+          )}
           {invalidCoupenButton}
           <Typography
             sx={{
@@ -429,13 +433,6 @@ const Discount: React.FC<DiscountProps> = () => {
             justifyContent: 'flex-start',
             backgroundColor: '#FFC300',
             marginTop: '40px',
-            // marginLeft: {
-            //   xl: '60px',
-            //   lg: '60px',
-            //   md: '60px',
-            //   sm: '40px',
-            //   xs: '5px'
-            // },
             fontFamily: 'Poppins',
             fontSize: {
               xl: '20px',

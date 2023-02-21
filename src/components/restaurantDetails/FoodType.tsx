@@ -11,8 +11,9 @@ import { useRouter } from 'next/router';
 
 interface FoodTypeProps {
   selectedRestaurant: restaurantType | undefined;
+  setAlert: (open: boolean) => void;
 }
-const FoodType: React.FC<FoodTypeProps> = ({ selectedRestaurant }) => {
+const FoodType: React.FC<FoodTypeProps> = ({ selectedRestaurant, setAlert }) => {
   const [categoryType, setCategoryType] = useState<string>('cat-1');
 
   const router = useRouter();
@@ -22,13 +23,15 @@ const FoodType: React.FC<FoodTypeProps> = ({ selectedRestaurant }) => {
   };
 
   const addToCartHandler = (data: foodItemType) => {
+    setAlert(true);
+
     dispatch(
       setCartData({
         foodId: data.foodId,
         quantity: 1
       })
     );
-    router.push('/cart');
+    // router.push('/cart');
   };
 
   return (

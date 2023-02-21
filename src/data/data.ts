@@ -50,13 +50,15 @@ export const restaurantImage: restaurantImageType[] = [
   }
 ];
 
+export const selectedCategory: string[] = ['Pizza', 'Sides', 'Chicken', 'Dessert', 'Drinks'];
+
 export const foodtype: foodtypesType[] = [
   {
     name: 'pizza',
     id: 1,
     list: [
       {
-        id: 'pizza01',
+        foodId: 'pizza01',
         image: '/images/image32.png',
         name: 'Eatalian pizza',
         time: '32min',
@@ -68,7 +70,7 @@ export const foodtype: foodtypesType[] = [
         popular: false
       },
       {
-        id: 'pizza02',
+        foodId: 'pizza02',
         image: '/images/image28.png',
         name: 'Sicilian pizza',
         time: '32min',
@@ -80,7 +82,7 @@ export const foodtype: foodtypesType[] = [
         popular: true
       },
       {
-        id: 'pizza03',
+        foodId: 'pizza03',
         image: '/images/image30.png',
         name: 'Speedy pizza',
         time: '32min',
@@ -92,7 +94,7 @@ export const foodtype: foodtypesType[] = [
         popular: false
       },
       {
-        id: 'pizza04',
+        foodId: 'pizza04',
         image: '/images/image31.png',
         name: 'L’appetitosa ',
         time: '32min',
@@ -104,7 +106,7 @@ export const foodtype: foodtypesType[] = [
         popular: true
       },
       {
-        id: 'pizza05',
+        foodId: 'pizza05',
         image: '/images/image32.png',
         name: 'Squisita',
         time: '32min',
@@ -116,7 +118,7 @@ export const foodtype: foodtypesType[] = [
         popular: false
       },
       {
-        id: 'pizza06',
+        foodId: 'pizza06',
         image: '/images/image28.png',
         name: 'Eatalian pizza',
         time: '32min',
@@ -128,7 +130,7 @@ export const foodtype: foodtypesType[] = [
         popular: false
       },
       {
-        id: 'pizza07',
+        foodId: 'pizza07',
         image: '/images/image30.png',
         name: 'Squisita',
         time: '32min',
@@ -146,7 +148,7 @@ export const foodtype: foodtypesType[] = [
     id: 2,
     list: [
       {
-        id: 'pizza01',
+        foodId: 'pizza01',
         image: '/images/image32.png',
         name: 'Mexican McAloo Tikki Burger',
         time: '32min',
@@ -158,7 +160,7 @@ export const foodtype: foodtypesType[] = [
         popular: false
       },
       {
-        id: 'pizza02',
+        foodId: 'pizza02',
         image: '/images/image28.png',
         name: 'Double Whopper',
         time: '32min',
@@ -170,7 +172,7 @@ export const foodtype: foodtypesType[] = [
         popular: true
       },
       {
-        id: 'pizza03',
+        foodId: 'pizza03',
         image: '/images/image30.png',
         name: 'Hamburger',
         time: '32min',
@@ -182,7 +184,7 @@ export const foodtype: foodtypesType[] = [
         popular: false
       },
       {
-        id: 'pizza04',
+        foodId: 'pizza04',
         image: '/images/image31.png',
         name: 'L’appetitosa ',
         time: '32min',
@@ -194,7 +196,7 @@ export const foodtype: foodtypesType[] = [
         popular: true
       },
       {
-        id: 'pizza05',
+        foodId: 'pizza05',
         image: '/images/image32.png',
         name: 'Double Stacker King',
         time: '32min',
@@ -206,7 +208,7 @@ export const foodtype: foodtypesType[] = [
         popular: false
       },
       {
-        id: 'pizza06',
+        foodId: 'pizza06',
         image: '/images/image28.png',
         name: 'Eatalian pizza',
         time: '32min',
@@ -218,7 +220,7 @@ export const foodtype: foodtypesType[] = [
         popular: false
       },
       {
-        id: 'pizza07',
+        foodId: 'pizza07',
         image: '/images/image30.png',
         name: 'Squisita',
         time: '32min',
@@ -236,7 +238,7 @@ export const foodtype: foodtypesType[] = [
     id: 3,
     list: [
       {
-        id: 'pizza01',
+        foodId: 'pizza01',
         image: '/images/image32.png',
         name: 'Eatalian pizza',
         time: '32min',
@@ -248,7 +250,7 @@ export const foodtype: foodtypesType[] = [
         popular: false
       },
       {
-        id: 'pizza02',
+        foodId: 'pizza02',
         image: '/images/image28.png',
         name: 'Sicilian pizza',
         time: '32min',
@@ -260,7 +262,7 @@ export const foodtype: foodtypesType[] = [
         popular: true
       },
       {
-        id: 'pizza03',
+        foodId: 'pizza03',
         image: '/images/image30.png',
         name: 'Speedy pizza',
         time: '32min',
@@ -272,7 +274,7 @@ export const foodtype: foodtypesType[] = [
         popular: false
       },
       {
-        id: 'pizza04',
+        foodId: 'pizza04',
         image: '/images/image31.png',
         name: 'L’appetitosa ',
         time: '32min',
@@ -284,7 +286,7 @@ export const foodtype: foodtypesType[] = [
         popular: true
       },
       {
-        id: 'pizza05',
+        foodId: 'pizza05',
         image: '/images/image32.png',
         name: 'Squisita',
         time: '32min',
@@ -296,7 +298,7 @@ export const foodtype: foodtypesType[] = [
         popular: false
       },
       {
-        id: 'pizza06',
+        foodId: 'pizza06',
         image: '/images/image28.png',
         name: 'Eatalian pizza',
         time: '32min',
@@ -308,7 +310,7 @@ export const foodtype: foodtypesType[] = [
         popular: false
       },
       {
-        id: 'pizza07',
+        foodId: 'pizza07',
         image: '/images/image30.png',
         name: 'Squisita',
         time: '32min',
@@ -326,7 +328,7 @@ export const foodtype: foodtypesType[] = [
     id: 4,
     list: [
       {
-        id: 'pizza01',
+        foodId: 'pizza01',
         image: '/images/image32.png',
         name: 'Mexican McAloo Tikki Burger',
         time: '32min',
@@ -338,7 +340,7 @@ export const foodtype: foodtypesType[] = [
         popular: false
       },
       {
-        id: 'pizza02',
+        foodId: 'pizza02',
         image: '/images/image28.png',
         name: 'Double Whopper',
         time: '32min',
@@ -350,7 +352,7 @@ export const foodtype: foodtypesType[] = [
         popular: true
       },
       {
-        id: 'pizza03',
+        foodId: 'pizza03',
         image: '/images/image30.png',
         name: 'Hamburger',
         time: '32min',
@@ -362,7 +364,7 @@ export const foodtype: foodtypesType[] = [
         popular: false
       },
       {
-        id: 'pizza04',
+        foodId: 'pizza04',
         image: '/images/image31.png',
         name: 'L’appetitosa ',
         time: '32min',
@@ -374,7 +376,7 @@ export const foodtype: foodtypesType[] = [
         popular: true
       },
       {
-        id: 'pizza05',
+        foodId: 'pizza05',
         image: '/images/image32.png',
         name: 'Double Stacker King',
         time: '32min',
@@ -386,7 +388,7 @@ export const foodtype: foodtypesType[] = [
         popular: false
       },
       {
-        id: 'pizza06',
+        foodId: 'pizza06',
         image: '/images/image28.png',
         name: 'Eatalian pizza',
         time: '32min',
@@ -398,7 +400,7 @@ export const foodtype: foodtypesType[] = [
         popular: false
       },
       {
-        id: 'pizza07',
+        foodId: 'pizza07',
         image: '/images/image30.png',
         name: 'Squisita',
         time: '32min',
@@ -416,7 +418,7 @@ export const foodtype: foodtypesType[] = [
     id: 5,
     list: [
       {
-        id: 'pizza01',
+        foodId: 'pizza01',
         image: '/images/image32.png',
         name: 'Eatalian pizza',
         time: '32min',
@@ -428,7 +430,7 @@ export const foodtype: foodtypesType[] = [
         popular: false
       },
       {
-        id: 'pizza02',
+        foodId: 'pizza02',
         image: '/images/image28.png',
         name: 'Sicilian pizza',
         time: '32min',
@@ -440,7 +442,7 @@ export const foodtype: foodtypesType[] = [
         popular: true
       },
       {
-        id: 'pizza03',
+        foodId: 'pizza03',
         image: '/images/image30.png',
         name: 'Speedy pizza',
         time: '32min',
@@ -452,7 +454,7 @@ export const foodtype: foodtypesType[] = [
         popular: false
       },
       {
-        id: 'pizza04',
+        foodId: 'pizza04',
         image: '/images/image31.png',
         name: 'L’appetitosa ',
         time: '32min',
@@ -464,7 +466,7 @@ export const foodtype: foodtypesType[] = [
         popular: true
       },
       {
-        id: 'pizza05',
+        foodId: 'pizza05',
         image: '/images/image32.png',
         name: 'Squisita',
         time: '32min',
@@ -476,7 +478,7 @@ export const foodtype: foodtypesType[] = [
         popular: false
       },
       {
-        id: 'pizza06',
+        foodId: 'pizza06',
         image: '/images/image28.png',
         name: 'Eatalian pizza',
         time: '32min',
@@ -488,7 +490,7 @@ export const foodtype: foodtypesType[] = [
         popular: false
       },
       {
-        id: 'pizza07',
+        foodId: 'pizza07',
         image: '/images/image30.png',
         name: 'Squisita',
         time: '32min',
@@ -613,7 +615,7 @@ export const category: categoryType[] = [
   },
   {
     categoryId: 'cat-2',
-    name: 'Pizzas'
+    name: 'Pizza'
   },
   {
     categoryId: 'cat-3',
@@ -669,15 +671,15 @@ export const category: categoryType[] = [
   },
   {
     categoryId: 'cat-16',
-    name: 'sides'
+    name: 'Sides'
   },
   {
     categoryId: 'cat-17',
-    name: 'Drinks and Coffee'
+    name: 'Drinks'
   },
   {
     categoryId: 'cat-18',
-    name: 'Chicken Buckets'
+    name: 'Chicken'
   },
   {
     categoryId: 'cat-19',
@@ -1244,1301 +1246,6 @@ export const foodItem: foodItemType[] = [
     addToCart: false
   }
 ];
-
-// export const brandsData: brandsDataType[] = [
-//   {
-//     id: 1,
-//     image: '/images/Ellipse1.png',
-//     name: `La Pino'z Pizza`,
-//     items: 'Pizza, Fast Food, Beverages',
-//     cost: '700rs Per 2 Person',
-//     address: 'Vesu,Surat',
-//     time: '11am – 11pm',
-//     slug: `la-pinoz-pizza`,
-//     types: [
-//       {
-//         id: 'type1-1',
-//         name: 'Recommended',
-//         title: 'recommended',
-//         list: [
-//           {
-//             id: '11',
-//             image: '/images/Rectangle115.png',
-//             name: 'Margherita Pizza',
-//             price: 140,
-//             sentance: `A Classic Cheesy Margharita. Can't Go Wrong.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '12',
-//             image: '/images/Rectangle 73.png',
-//             name: 'Double Cheese Margherita Pizza',
-//             price: 140,
-//             sentance: `A Classic Cheesy Margharita. Can't Go Wrong.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '13',
-//             image: '/images/Rectangle 75.png',
-//             name: 'Garden Delight Pizza',
-//             price: 140,
-//             sentance: `A Classic Cheesy Margharita. Can't Go Wrong.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '14',
-//             image: '/images/Rectangle 77.png',
-//             name: 'Lovers Bite Pizza',
-//             price: 140,
-//             sentance: `A Classic Cheesy Margharita. Can't Go Wrong.`,
-//             addToCart: false,
-//             quantity : 0
-//           }
-//         ]
-//       },
-//       {
-//         id: 'type1-2',
-//         name: 'Pizzas',
-//         title: 'pizzas',
-//         list: [
-//           {
-//             id: '1P',
-//             image: '/images/Rectangle115.png',
-//             name: 'Margherita Pizza',
-//             price: 240,
-//             sentance: `A Classic Cheesy Margharita. Can't Go Wrong.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '2P',
-//             image: '/images/Rectangle 73.png',
-//             name: 'Double Cheese Margherita Pizza',
-//             price: 340,
-//             sentance: `A Classic Cheesy Margharita. Can't Go Wrong.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '3P',
-//             image: '/images/Rectangle 75.png',
-//             name: 'Garden Delight Pizza',
-//             price: 540,
-//             sentance: `A Classic Cheesy Margharita. Can't Go Wrong.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '4P',
-//             image: '/images/Rectangle 77.png',
-//             name: 'Lovers Bite Pizza',
-//             price: 740,
-//             sentance: `A Classic Cheesy Margharita. Can't Go Wrong.`,
-//             addToCart: false,
-//             quantity : 0
-//           }
-//         ]
-//       },
-//       {
-//         id: 'type1-3',
-//         name: 'Classic Pizzas for classic maniacs',
-//         title: 'classic_pizza',
-//         list: [
-//           {
-//             id: '1C',
-//             image: '/images/Rectangle115.png',
-//             name: 'Pizza Napoletana',
-//             price: 640,
-//             sentance: `A Classic Cheesy Margharita. Can't Go Wrong.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '2C',
-//             image: '/images/Rectangle 73.png',
-//             name: 'Pizza Tonda Romana',
-//             price: 840,
-//             sentance: `A Classic Cheesy Margharita. Can't Go Wrong.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '3C',
-//             image: '/images/Rectangle 75.png',
-//             name: 'Pizza Fritta',
-//             price: 540,
-//             sentance: `A Classic Cheesy Margharita. Can't Go Wrong.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '4C',
-//             image: '/images/Rectangle 77.png',
-//             name: 'Pizza Siciliana',
-//             price: 790,
-//             sentance: `A Classic Cheesy Margharita. Can't Go Wrong.`,
-//             addToCart: false,
-//             quantity : 0
-//           }
-//         ]
-//       },
-//       {
-//         id: 'type1-4',
-//         name: 'Garlic Breads',
-//         title: 'garlic_bread',
-//         list: [
-//           {
-//             id: '1G',
-//             image: '/images/Rectangle115.png',
-//             name: 'Cheese Stuffed Garlic Bread',
-//             price: 240,
-//             sentance: `A Classic Cheesy Margharita. Can't Go Wrong.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '2G',
-//             image: '/images/Rectangle 73.png',
-//             name: 'Veggie Stuffed Garlic Bread',
-//             price: 240,
-//             sentance: `A Classic Cheesy Margharita. Can't Go Wrong.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '3G',
-//             image: '/images/Rectangle 75.png',
-//             name: 'Classic Corn Stuffed Garlic Bread',
-//             price: 140,
-//             sentance: `A Classic Cheesy Margharita. Can't Go Wrong.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '4G',
-//             image: '/images/Rectangle 77.png',
-//             name: 'Stuffed Garlic Bread',
-//             price: 340,
-//             sentance: `A Classic Cheesy Margharita. Can't Go Wrong.`,
-//             addToCart: false,
-//             quantity : 0
-//           }
-//         ]
-//       },
-//       {
-//         id: 'type1-5',
-//         name: 'Lasangna',
-//         title: 'lasangna',
-//         list: [
-//           {
-//             id: '1L',
-//             image: '/images/Rectangle115.png',
-//             name: 'Lasagna With Meaty Sauce',
-//             price: 230,
-//             sentance: `A Classic Cheesy Margharita. Can't Go Wrong.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '2L',
-//             image: '/images/Rectangle 73.png',
-//             name: 'Italian Sausage Lasagna',
-//             price: 299,
-//             sentance: `A Classic Cheesy Margharita. Can't Go Wrong.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '3L',
-//             image: '/images/Rectangle 75.png',
-//             name: 'Mexican Green Lasagna',
-//             price: 299,
-//             sentance: `A Classic Cheesy Margharita. Can't Go Wrong.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '4L',
-//             image: '/images/Rectangle 77.png',
-//             name: 'Veg Lasangna Rosy Red',
-//             price: 299,
-//             sentance: `A Classic Cheesy Margharita. Can't Go Wrong.`,
-//             addToCart: false,
-//             quantity : 0
-//           }
-//         ]
-//       },
-//       {
-//         id: 'type1-6',
-//         name: 'Desserts',
-//         title: 'dessert',
-//         list: [
-//           {
-//             id: '1D',
-//             image: '/images/Rectangle115.png',
-//             name: 'Choco Lava',
-//             price: 115,
-//             sentance: `A Classic Cheesy Margharita. Can't Go Wrong.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '2D',
-//             image: '/images/Rectangle 73.png',
-//             name: 'Red Valvet Lava Cake',
-//             price: 109,
-//             sentance: `A Classic Cheesy Margharita. Can't Go Wrong.`,
-//             addToCart: false,
-//             quantity : 0
-//           }
-//         ]
-//       }
-//     ]
-//   },
-//   {
-//     id: 2,
-//     image: '/images/Ellipse2.png',
-//     name: `McDonald's`,
-//     items: 'Burgers, Fast Food, Beverages',
-//     cost: '500rs Per Person',
-//     address: 'Adajan,Surat',
-//     time: '10am – 10pm ',
-//     slug: `McDonald's`,
-//     types: [
-//       {
-//         id: 'type2-1',
-//         name: 'Recommended',
-//         title: 'recommended',
-//         list: [
-//           {
-//             id: '21',
-//             image: '/images/Rectangle115.png',
-//             name: 'Mexican McAloo Tikki Burger',
-//             price: 230,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '22',
-//             image: '/images/Rectangle 73.png',
-//             name: 'Vegetable Deluxe',
-//             price: 450,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '23',
-//             image: '/images/Rectangle 75.png',
-//             name: 'Double Cheeseburger',
-//             price: 350,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '24',
-//             image: '/images/Rectangle 77.png',
-//             name: 'Double McPlant',
-//             price: 440,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           }
-//         ]
-//       },
-//       {
-//         id: 'type2-2',
-//         name: 'Happy Meals',
-//         title: 'happy_meals',
-//         list: [
-//           {
-//             id: '1H',
-//             image: '/images/Rectangle115.png',
-//             name: 'Mexican McAloo Tikki Burger',
-//             price: 230,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '2H',
-//             image: '/images/Rectangle 73.png',
-//             name: 'Vegetable Deluxe',
-//             price: 450,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '3H',
-//             image: '/images/Rectangle 75.png',
-//             name: 'Double Cheeseburger',
-//             price: 350,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '4H',
-//             image: '/images/Rectangle 77.png',
-//             name: 'Double McPlant',
-//             price: 440,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           }
-//         ]
-//       },
-//       {
-//         id: 'type2-3',
-//         name: 'McCafe Coffees',
-//         title: 'mccafe_coffee',
-//         list: [
-//           {
-//             id: '1M',
-//             image: '/images/Rectangle115.png',
-//             name: 'Peppermint Mocha',
-//             price: 230,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '2M',
-//             image: '/images/Rectangle 73.png',
-//             name: 'Premium Tea',
-//             price: 150,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '3M',
-//             image: '/images/Rectangle 75.png',
-//             name: 'Espresso',
-//             price: 250,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '4M',
-//             image: '/images/Rectangle 77.png',
-//             name: 'Caramel Iced Coffee',
-//             price: 240,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           }
-//         ]
-//       },
-//       {
-//         id: 'type2-4',
-//         name: 'Beverages',
-//         title: 'beverages',
-//         list: [
-//           {
-//             id: '1B',
-//             image: '/images/Rectangle115.png',
-//             name: 'Coca-Cola',
-//             price: 130,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '2B',
-//             image: '/images/Rectangle 73.png',
-//             name: 'Diet Coke',
-//             price: 150,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '3B',
-//             image: '/images/Rectangle 75.png',
-//             name: 'Fruitopia Orange Groove',
-//             price: 250,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '4B',
-//             image: '/images/Rectangle 77.png',
-//             name: 'Nestea Iced Tea',
-//             price: 140,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           }
-//         ]
-//       }
-//     ]
-//   },
-//   {
-//     id: 3,
-//     image: '/images/Ellipse3.png',
-//     name: `Starbucks`,
-//     items: 'Coffee, Fast Food, Beverages',
-//     cost: '300rs Per 2 Person',
-//     address: 'Vesu,Surat',
-//     time: '10am – 10pm ',
-//     slug: `Starbucks`,
-//     types: [
-//       {
-//         id: 'type3-1',
-//         name: 'Recommended',
-//         title: 'recommended',
-//         list: [
-//           {
-//             id: '31',
-//             image: '/images/Rectangle115.png',
-//             name: 'Caffe Mocha ',
-//             price: 230,
-//             sentance: `It's not just coffee. It's always about Starbucks.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '32',
-//             image: '/images/Rectangle 73.png',
-//             name: 'Blonde Vanilla Latte ',
-//             price: 350,
-//             sentance: `It's not just coffee. It's always about Starbucks.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '33',
-//             image: '/images/Rectangle 75.png',
-//             name: 'Venti Coffee ',
-//             price: 450,
-//             sentance: `It's not just coffee. It's always about Starbucks.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '34',
-//             image: '/images/Rectangle 77.png',
-//             name: 'Cinnamon Roll Frappuccino ',
-//             price: 500,
-//             sentance: `It's not just coffee. It's always about Starbucks.`,
-//             addToCart: false,
-//             quantity : 0
-//           }
-//         ]
-//       },
-//       {
-//         id: 'type3-2',
-//         name: 'Hot Coffees',
-//         title: 'hot_coffee',
-//         list: [
-//           {
-//             id: '1HC',
-//             image: '/images/Rectangle115.png',
-//             name: 'Caffe Mocha ',
-//             price: 230,
-//             sentance: `It's not just coffee. It's always about Starbucks.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '2HC',
-//             image: '/images/Rectangle 73.png',
-//             name: 'Blonde Vanilla Latte ',
-//             price: 350,
-//             sentance: `It's not just coffee. It's always about Starbucks.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '3HC',
-//             image: '/images/Rectangle 75.png',
-//             name: 'Venti Coffee ',
-//             price: 450,
-//             sentance: `It's not just coffee. It's always about Starbucks.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '4HC',
-//             image: '/images/Rectangle 77.png',
-//             name: 'Cinnamon Roll Frappuccino ',
-//             price: 500,
-//             sentance: `It's not just coffee. It's always about Starbucks.`,
-//             addToCart: false,
-//             quantity : 0
-//           }
-//         ]
-//       },
-//       {
-//         id: 'type3-3',
-//         name: 'Hot Drinks',
-//         title: ' hot_drinks',
-//         list: [
-//           {
-//             id: '1HD',
-//             image: '/images/Rectangle115.png',
-//             name: 'Caffe Mocha ',
-//             price: 230,
-//             sentance: `It's not just coffee. It's always about Starbucks.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '2HD',
-//             image: '/images/Rectangle 73.png',
-//             name: 'Blonde Vanilla Latte ',
-//             price: 350,
-//             sentance: `It's not just coffee. It's always about Starbucks.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '3HD',
-//             image: '/images/Rectangle 75.png',
-//             name: 'Venti Coffee ',
-//             price: 450,
-//             sentance: `It's not just coffee. It's always about Starbucks.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '4HD',
-//             image: '/images/Rectangle 77.png',
-//             name: 'Cinnamon Roll Frappuccino ',
-//             price: 500,
-//             sentance: `It's not just coffee. It's always about Starbucks.`,
-//             addToCart: false,
-//             quantity : 0
-//           }
-//         ]
-//       },
-//       {
-//         id: 'type3-4',
-//         name: 'Cold Coffees',
-//         title: 'cold_coffee',
-//         list: [
-//           {
-//             id: '1CC',
-//             image: '/images/Rectangle115.png',
-//             name: 'Caffe Mocha ',
-//             price: 230,
-//             sentance: `It's not just coffee. It's always about Starbucks.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '2CC',
-//             image: '/images/Rectangle 73.png',
-//             name: 'Blonde Vanilla Latte ',
-//             price: 350,
-//             sentance: `It's not just coffee. It's always about Starbucks.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '3CC',
-//             image: '/images/Rectangle 75.png',
-//             name: 'Venti Coffee',
-//             price: 450,
-//             sentance: `It's not just coffee. It's always about Starbucks.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '4CC',
-//             image: '/images/Rectangle 77.png',
-//             name: 'Cinnamon Roll Frappuccino ',
-//             price: 500,
-//             sentance: `It's not just coffee. It's always about Starbucks.`,
-//             addToCart: false,
-//             quantity : 0
-//           }
-//         ]
-//       },
-//       {
-//         id: 'type3-5',
-//         name: 'Iced Teas',
-//         title: 'iced_teas',
-//         list: [
-//           {
-//             id: '1IT',
-//             image: '/images/Rectangle115.png',
-//             name: 'Caffe Mocha ',
-//             price: 230,
-//             sentance: `It's not just coffee. It's always about Starbucks.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '2IT',
-//             image: '/images/Rectangle 73.png',
-//             name: 'Blonde Vanilla Latte ',
-//             price: 350,
-//             sentance: `It's not just coffee. It's always about Starbucks.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '3IT',
-//             image: '/images/Rectangle 75.png',
-//             name: 'Venti Coffee ',
-//             price: 450,
-//             sentance: `It's not just coffee. It's always about Starbucks.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '4IT',
-//             image: '/images/Rectangle 77.png',
-//             name: 'Cinnamon Roll Frappuccino ',
-//             price: 500,
-//             sentance: `It's not just coffee. It's always about Starbucks.`,
-//             addToCart: false,
-//             quantity : 0
-//           }
-//         ]
-//       }
-//     ]
-//   },
-//   {
-//     id: 4,
-//     image: '/images/Ellipse4.png',
-//     name: `Burger King`,
-//     items: 'Burgers, Fast Food, Beverages',
-//     cost: '400rs Per Person',
-//     address: 'Athwagate,Surat',
-//     time: '12am – 10pm ',
-//     slug: `Burger King`,
-//     types: [
-//       {
-//         id: 'type4-1',
-//         name: 'Recommended',
-//         title: 'recommended',
-//         list: [
-//           {
-//             id: '41',
-//             image: '/images/Rectangle115.png',
-//             name: 'Mexican McAloo Tikki Burger',
-//             price: 230,
-//             sentance: `Burger King, Home of the Whopper..`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '42',
-//             image: '/images/Rectangle 73.png',
-//             name: 'Double Whopper',
-//             price: 450,
-//             sentance: `Burger King, Home of the Whopper..`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '43',
-//             image: '/images/Rectangle 75.png',
-//             name: 'Hamburger',
-//             price: 350,
-//             sentance: `Burger King, Home of the Whopper.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '44',
-//             image: '/images/Rectangle 77.png',
-//             name: 'Double Stacker King.',
-//             price: 440,
-//             sentance: `Burger King, Home of the Whopper.`,
-//             addToCart: false,
-//             quantity : 0
-//           }
-//         ]
-//       },
-//       {
-//         id: 'type4-2',
-//         name: 'Family Bundles',
-//         title: 'family_bundle',
-//         list: [
-//           {
-//             id: '1FB',
-//             image: '/images/Rectangle115.png',
-//             name: 'Mexican McAloo Tikki Burger',
-//             price: 230,
-//             sentance: `Burger King, Home of the Whopper..`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '2FB',
-//             image: '/images/Rectangle 73.png',
-//             name: 'Double Whopper',
-//             price: 450,
-//             sentance: `Burger King, Home of the Whopper..`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '3FB',
-//             image: '/images/Rectangle 75.png',
-//             name: 'Hamburger',
-//             price: 350,
-//             sentance: `Burger King, Home of the Whopper.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '4FB',
-//             image: '/images/Rectangle 77.png',
-//             name: 'Double Stacker King.',
-//             price: 440,
-//             sentance: `Burger King, Home of the Whopper.`,
-//             addToCart: false,
-//             quantity : 0
-//           }
-//         ]
-//       },
-//       {
-//         id: 'type4-3',
-//         name: 'Frame Grilled Burgers',
-//         title: 'grilled_burger',
-//         list: [
-//           {
-//             id: '1GB',
-//             image: '/images/Rectangle115.png',
-//             name: 'Mexican McAloo Tikki Burger',
-//             price: 230,
-//             sentance: `Burger King, Home of the Whopper..`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '2GB',
-//             image: '/images/Rectangle 73.png',
-//             name: 'Double Whopper',
-//             price: 450,
-//             sentance: `Burger King, Home of the Whopper..`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '3GB',
-//             image: '/images/Rectangle 75.png',
-//             name: 'Hamburger',
-//             price: 350,
-//             sentance: `Burger King, Home of the Whopper.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '4GB',
-//             image: '/images/Rectangle 77.png',
-//             name: 'Double Stacker King.',
-//             price: 440,
-//             sentance: `Burger King, Home of the Whopper.`,
-//             addToCart: false,
-//             quantity : 0
-//           }
-//         ]
-//       },
-//       {
-//         id: 'type4-4',
-//         name: 'Sides',
-//         title: 'sides',
-//         list: [
-//           {
-//             id: '1S',
-//             image: '/images/Rectangle115.png',
-//             name: 'Mexican McAloo Tikki Burger',
-//             price: 230,
-//             sentance: `Burger King, Home of the Whopper..`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '2S',
-//             image: '/images/Rectangle 73.png',
-//             name: 'Double Whopper',
-//             price: 450,
-//             sentance: `Burger King, Home of the Whopper..`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '3S',
-//             image: '/images/Rectangle 75.png',
-//             name: 'Hamburger',
-//             price: 350,
-//             sentance: `Burger King, Home of the Whopper.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '4S',
-//             image: '/images/Rectangle 77.png',
-//             name: 'Double Stacker King.',
-//             price: 440,
-//             sentance: `Burger King, Home of the Whopper.`,
-//             addToCart: false,
-//             quantity : 0
-//           }
-//         ]
-//       },
-//       {
-//         id: 'type4-5',
-//         name: 'Drinks and Coffee',
-//         title: 'drinks_coffee',
-//         list: [
-//           {
-//             id: '1DC',
-//             image: '/images/Rectangle115.png',
-//             name: 'Mexican McAloo Tikki Burger',
-//             price: 230,
-//             sentance: `Burger King, Home of the Whopper..`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '2DC',
-//             image: '/images/Rectangle 73.png',
-//             name: 'Double Whopper',
-//             price: 450,
-//             sentance: `Burger King, Home of the Whopper..`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '3DC',
-//             image: '/images/Rectangle 75.png',
-//             name: 'Hamburger',
-//             price: 350,
-//             sentance: `Burger King, Home of the Whopper.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '4DC',
-//             image: '/images/Rectangle 77.png',
-//             name: 'Double Stacker King.',
-//             price: 440,
-//             sentance: `Burger King, Home of the Whopper.`,
-//             addToCart: false,
-//             quantity : 0
-//           }
-//         ]
-//       }
-//     ]
-//   },
-//   {
-//     id: 5,
-//     image: '/images/Ellipse5.png',
-//     name: `KFC`,
-//     items: 'Burgers, Fast Food, Beverages',
-//     cost: '800rs Per 2 Person',
-//     address: 'Athwagate,Surat',
-//     time: '12am – 10pm ',
-//     slug: `KFC`,
-//     types: [
-//       {
-//         id: 'type5-1',
-//         name: 'Recommended',
-//         title: 'recommended',
-//         list: [
-//           {
-//             id: '51',
-//             image: '/images/Rectangle115.png',
-//             name: 'Mashed Potatoes and Gravy',
-//             price: 210,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '52',
-//             image: '/images/Rectangle 73.png',
-//             name: 'Mac and Cheese',
-//             price: 420,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '53',
-//             image: '/images/Rectangle 75.png',
-//             name: 'Nashville Hot Chicken',
-//             price: 650,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '54',
-//             image: '/images/Rectangle 77.png',
-//             name: 'Extra Crispy Tenders',
-//             price: 940,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           }
-//         ]
-//       },
-//       {
-//         id: 'type5-2',
-//         name: 'CHICKEN BUCKETS',
-//         title: 'chicken_bucket ',
-//         list: [
-//           {
-//             id: '1CB',
-//             image: '/images/Rectangle115.png',
-//             name: 'Mashed Potatoes and Gravy',
-//             price: 210,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '2CB',
-//             image: '/images/Rectangle 73.png',
-//             name: 'Mac and Cheese',
-//             price: 420,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '3CB',
-//             image: '/images/Rectangle 75.png',
-//             name: 'Nashville Hot Chicken',
-//             price: 650,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '4CB',
-//             image: '/images/Rectangle 77.png',
-//             name: 'Extra Crispy Tenders',
-//             price: 940,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           }
-//         ]
-//       },
-//       {
-//         id: 'type5-3',
-//         name: 'BIRYANI BUCKETS',
-//         title: 'biryani_bucket',
-//         list: [
-//           {
-//             id: '1BB',
-//             image: '/images/Rectangle115.png',
-//             name: 'Mashed Potatoes and Gravy',
-//             price: 210,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '2BB',
-//             image: '/images/Rectangle 73.png',
-//             name: 'Mac and Cheese',
-//             price: 420,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '3BB',
-//             image: '/images/Rectangle 75.png',
-//             name: 'Nashville Hot Chicken',
-//             price: 650,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '4BB',
-//             image: '/images/Rectangle 77.png',
-//             name: 'Extra Crispy Tenders',
-//             price: 940,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           }
-//         ]
-//       },
-//       {
-//         id: 'type5-4',
-//         name: 'BOX MEALS',
-//         title: 'box_meal',
-//         list: [
-//           {
-//             id: '1BM',
-//             image: '/images/Rectangle115.png',
-//             name: 'Mashed Potatoes and Gravy',
-//             price: 210,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '2BM',
-//             image: '/images/Rectangle 73.png',
-//             name: 'Mac and Cheese',
-//             price: 420,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '3BM',
-//             image: '/images/Rectangle 75.png',
-//             name: 'Nashville Hot Chicken',
-//             price: 650,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '4BM',
-//             image: '/images/Rectangle 77.png',
-//             name: 'Extra Crispy Tenders',
-//             price: 940,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           }
-//         ]
-//       },
-//       {
-//         id: 'type5-5',
-//         name: 'BURGERS',
-//         title: 'kfc_burgers',
-//         list: [
-//           {
-//             id: '1KB',
-//             image: '/images/Rectangle115.png',
-//             name: 'Mashed Potatoes and Gravy',
-//             price: 210,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '2KB',
-//             image: '/images/Rectangle 73.png',
-//             name: 'Mac and Cheese',
-//             price: 420,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '3KB',
-//             image: '/images/Rectangle 75.png',
-//             name: 'Nashville Hot Chicken',
-//             price: 650,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '4KB',
-//             image: '/images/Rectangle 77.png',
-//             name: 'Extra Crispy Tenders',
-//             price: 940,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           }
-//         ]
-//       }
-//     ]
-//   },
-//   {
-//     id: 6,
-//     image: '/images/Ellipse6.png',
-//     name: `Coffee Culture`,
-//     items: 'Coffee, Fast Food, Beverages',
-//     cost: '500rs Per Person',
-//     address: 'Vesu,Surat',
-//     time: '10am – 7pm ',
-//     slug: `Coffee Culture`,
-//     types: [
-//       {
-//         id: 'type6-1',
-//         name: 'Recommended',
-//         title: 'recommended',
-//         list: [
-//           {
-//             id: '61',
-//             image: '/images/Rectangle115.png',
-//             name: 'Cold Brew Black',
-//             price: 250,
-//             sentance: `Life is like a cup of coffee.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '62',
-//             image: '/images/Rectangle 73.png',
-//             name: 'Cold Brew Latte',
-//             price: 250,
-//             sentance: `Life is like a cup of coffee.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '63',
-//             image: '/images/Rectangle 75.png',
-//             name: 'Vietnamese Cold Brew',
-//             price: 370,
-//             sentance: `Life is like a cup of coffee.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '64',
-//             image: '/images/Rectangle 77.png',
-//             name: 'Vegan Cold Brew',
-//             price: 275,
-//             sentance: `Life is like a cup of coffee.`,
-//             addToCart: false,
-//             quantity : 0
-//           }
-//         ]
-//       },
-//       {
-//         id: 'type6-2',
-//         name: 'Burgers',
-//         title: 'cc_burgers',
-//         list: [
-//           {
-//             id: '1CCB',
-//             image: '/images/Rectangle115.png',
-//             name: 'Mashed Potatoes and Gravy',
-//             price: 210,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '2CCB',
-//             image: '/images/Rectangle 73.png',
-//             name: 'Mac and Cheese',
-//             price: 420,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '3CCB',
-//             image: '/images/Rectangle 75.png',
-//             name: 'Nashville Hot Chicken',
-//             price: 650,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '4CCB',
-//             image: '/images/Rectangle 77.png',
-//             name: 'Extra Crispy Tenders',
-//             price: 940,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           }
-//         ]
-//       },
-//       {
-//         id: 'type6-3',
-//         name: 'Salad',
-//         title: 'salad',
-//         list: [
-//           {
-//             id: '1CCS',
-//             image: '/images/Rectangle115.png',
-//             name: 'Mashed Potatoes and Gravy',
-//             price: 210,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '2CCS',
-//             image: '/images/Rectangle 73.png',
-//             name: 'Mac and Cheese',
-//             price: 420,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '3CCS',
-//             image: '/images/Rectangle 75.png',
-//             name: 'Nashville Hot Chicken',
-//             price: 650,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           }
-//         ]
-//       },
-//       {
-//         id: 'type6-4',
-//         name: 'Cold Press Juice',
-//         title: 'cold_juice',
-//         list: [
-//           {
-//             id: '1CJ',
-//             image: '/images/Rectangle115.png',
-//             name: 'Mashed Potatoes and Gravy',
-//             price: 210,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '2CJ',
-//             image: '/images/Rectangle 73.png',
-//             name: 'Mac and Cheese',
-//             price: 420,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '3CJ',
-//             image: '/images/Rectangle 75.png',
-//             name: 'Nashville Hot Chicken',
-//             price: 650,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           },
-//           {
-//             id: '4CJ',
-//             image: '/images/Rectangle 77.png',
-//             name: 'Extra Crispy Tenders',
-//             price: 940,
-//             sentance: `Some fun, some food, it's all inside this Happy Meal.`,
-//             addToCart: false,
-//             quantity : 0
-//           }
-//         ]
-//       }
-//     ]
-//   }
-// ];
 
 export const foodList: foodListType[] = [
   {

@@ -1,28 +1,57 @@
 import { Box, Button, Typography } from '@mui/material';
 import MaxWidthWrapper from '../common/MaxWidthWrapper';
-import { foodtype } from '../../data/data';
-import { useState } from 'react';
+import { category, foodItem, foodtype } from '../../data/data';
+import { useEffect, useState } from 'react';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { foodtypesType } from '../../types/constants/foodtype.type';
 import { setCartData } from '../../store/reducers/cartItem/CartItem.slice';
 import { useDispatch } from '../../store';
+import { cartItemType } from '../../types/redux/cartItem.type';
+import { selectedCategory } from '../../data/data';
+import { categoryType } from '../../types/constants/category.type';
+import { foodItemType } from '../../types/constants/foodItem.type';
 
 interface PopularRecipesProps {}
 const PopularRecipes: React.FC<PopularRecipesProps> = () => {
+  let foodArray: foodItemType[] = [];
   const router = useRouter();
   const dispatch = useDispatch();
-  const [foodList, setFoodList] = useState(foodtype[0].list);
 
-  const foodItemHandler = (data: foodtypesType) => {
-    console.log('data-------------', data);
-    setFoodList(data.list);
+  const [categoryItems, setCategoryItems] = useState<Array<categoryType>>();
+
+  const [foodList, setFoodList] = useState<Array<foodItemType>>();
+  const [categoryId, setCategoryId] = useState<string | undefined>();
+
+  useEffect(() => {
+    let categoryArray: categoryType[] = [];
+    category.map(data => {
+      if (selectedCategory.includes(data.name)) {
+        categoryArray.push(data);
+      }
+    });
+    setCategoryItems(categoryArray);
+    setCategoryId(categoryArray[0].categoryId);
+  }, []);
+
+  useEffect(() => {
+    if (categoryId) {
+      foodItem.map(food => {
+        if (food.category.includes(categoryId)) {
+          foodArray.push(food);
+        }
+      });
+      setFoodList(foodArray);
+    }
+  }, [categoryId]);
+
+  const foodItemHandler = (data: categoryType) => {
+    setCategoryId(data.categoryId);
   };
 
-  const foodDataHandler = (data: any) => {
+  const foodDataHandler = (data: cartItemType) => {
     dispatch(
       setCartData({
         foodId: data.foodId,
@@ -83,12 +112,12 @@ const PopularRecipes: React.FC<PopularRecipesProps> = () => {
             flexWrap: 'wrap',
             justifyContent: 'center'
           }}>
-          {foodtype.map(button => {
+          {categoryItems?.map(data => {
             return (
               <>
                 <Button
                   onClick={() => {
-                    foodItemHandler(button);
+                    foodItemHandler(data);
                   }}
                   sx={{
                     marginLeft: {
@@ -113,7 +142,7 @@ const PopularRecipes: React.FC<PopularRecipesProps> = () => {
                       sm: '67px',
                       xs: '50px'
                     },
-                    backgroundColor: '#ECEEF6',
+                    backgroundColor: categoryId === data.categoryId ? '#F6B716' : '#ECEEF6',
                     borderRadius: '45px',
                     border: '0px',
                     fontFamily: 'Poppins',
@@ -128,13 +157,13 @@ const PopularRecipes: React.FC<PopularRecipesProps> = () => {
                     },
                     lineHeight: '22px',
                     textAlign: 'center',
-                    color: 'black',
+                    color: categoryId === data.categoryId ? '#FFFFFF' : '#000000',
                     '&:focus': {
                       backgroundColor: '#F6B716',
                       color: 'white'
                     }
                   }}>
-                  {button.name}
+                  {data.name}
                 </Button>
               </>
             );
@@ -154,7 +183,7 @@ const PopularRecipes: React.FC<PopularRecipesProps> = () => {
             display: 'none'
           }
         }}>
-        {foodList.map((food, index) => {
+        {foodList?.map((food, index) => {
           return (
             <>
               <Box
@@ -167,7 +196,7 @@ const PopularRecipes: React.FC<PopularRecipesProps> = () => {
                     lg: '493px',
                     md: '493px',
                     sm: '493px',
-                    xs: '490px'
+                    xs: '480px'
                   },
                   background: '#FFFFFF',
                   border: '2px solid #ECEEF7',
@@ -187,7 +216,7 @@ const PopularRecipes: React.FC<PopularRecipesProps> = () => {
                   }
                 }}
                 style={{ marginTop: '115px' }}>
-                {food.popular && (
+                {/* {food.tags[0] && (
                   <Typography
                     sx={{
                       position: 'absolute',
@@ -203,26 +232,38 @@ const PopularRecipes: React.FC<PopularRecipesProps> = () => {
                     }}>
                     Popular
                   </Typography>
-                )}
+                )} */}
                 <Box
                   sx={{
                     width: {
-                      xl: '300px',
-                      lg: '300px',
-                      md: '300px',
-                      sm: '300px',
+                      xl: '260px',
+                      lg: '260px',
+                      md: '260px',
+                      sm: '260px',
                       xs: '200px'
                     }
                   }}
                   onClick={() => {
                     foodDataHandler(food);
                   }}>
-                  <Image src={food.image} width={242} height={248} alt="" />
+                  <Image
+                    src={food.image[0]}
+                    height={0}
+                    width={0}
+                    sizes="(max-width:0) 100vw,
+                                (max-height:0) 100vh"
+                    style={{
+                      borderRadius: '154px',
+                      height: '200px',
+                      width: '200px'
+                    }}
+                    alt=""
+                  />
                 </Box>
                 <Box style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <Typography
                     sx={{
-                      paddingTop: '18px',
+                      paddingTop: '25px',
                       fontFamily: 'Inter',
                       fontStyle: 'normal',
                       fontWeight: 600,
@@ -235,7 +276,7 @@ const PopularRecipes: React.FC<PopularRecipesProps> = () => {
                   </Typography>
                   <Typography
                     sx={{
-                      paddingTop: '20px',
+                      paddingTop: '30px',
                       paddingLeft: '0px',
                       fontFamily: 'Inter',
                       fontStyle: 'normal',
@@ -245,7 +286,7 @@ const PopularRecipes: React.FC<PopularRecipesProps> = () => {
                       textAlign: 'right',
                       color: '#000000'
                     }}>
-                    {food.time}
+                    ₹{food.price}
                   </Typography>
                 </Box>
                 <Typography
@@ -257,13 +298,13 @@ const PopularRecipes: React.FC<PopularRecipesProps> = () => {
                     lineHeight: '17px',
                     color: '#000000',
                     paddingLeft: '18.5px',
-                    marginTop: '10px'
+                    marginTop: '25px'
                   }}>
-                  {food.items}
+                  {food.description}
                 </Typography>
                 <Typography
                   sx={{
-                    paddingTop: '20px',
+                    marginTop: { xl: '80px', lg: '80px', md: '80px', sm: '80px', xs: '60px' },
                     height: '41px',
                     fontFamily: 'Inter',
                     fontStyle: 'normal',
@@ -273,7 +314,7 @@ const PopularRecipes: React.FC<PopularRecipesProps> = () => {
                     textAlign: 'center',
                     color: '#121146'
                   }}>
-                  {food.weight}
+                  500NGN
                 </Typography>
                 <Button
                   id="shoppingBag"
@@ -288,7 +329,7 @@ const PopularRecipes: React.FC<PopularRecipesProps> = () => {
                       sm: '132px',
                       xs: '104px'
                     },
-                    top: '467px',
+                    top: { xl: '467px', lg: '467px', md: '467px', sm: '467px', xs: '456px' },
                     color: 'black',
                     background: '#FFFFFF',
                     borderRadius: '59px',

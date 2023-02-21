@@ -16,6 +16,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useSelector } from '../../store';
 import { foodItemType } from '../../types/constants/foodItem.type';
+import { cartItemsType, cartItemType } from '../../types/redux/cartItem.type';
 
 interface CoverImageProps {}
 

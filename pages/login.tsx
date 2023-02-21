@@ -11,7 +11,7 @@ const Login: NextPage<LoginProps> = () => {
   const router = useRouter();
 
   const login = () => {
-    localStorage.setItem('isLoggedIn', 'true');
+    localStorage.setItem('isLoggedIn', true.toString());
     router.push('/');
   };
 
