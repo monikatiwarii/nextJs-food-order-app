@@ -2,5 +2,5 @@ export interface CouponType {
   id: number;
   name: string;
   type: string;
-  value: string;
+  value: number;
 }

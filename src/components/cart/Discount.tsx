@@ -56,7 +56,7 @@ const Discount: React.FC<DiscountProps> = () => {
 
   useEffect(() => {
     let total = 0;
-    let totalDiscount: string | number;
+    let totalDiscount = 0;
     if (cartData.length > 0) {
       foodItem.map(foods => {
         cartData.map(data => {
@@ -71,18 +71,20 @@ const Discount: React.FC<DiscountProps> = () => {
           if (data.name === couponValue) {
             isCoupenUsed = true;
             if (data.type === 'PERCENTAGE') {
-              totalDiscount = total * (data.value / 100);
+              totalDiscount = total * (Number(data.value) / 100);
               total = total - totalDiscount;
               if (total < 0) total = 0;
             } else {
               totalDiscount = data.value;
-              total = total - totalDiscount;
+              total = total - Number(totalDiscount);
               if (total < 0) total = 0;
             }
           }
         });
       }
+
       setDiscount(totalDiscount);
+
       setGrandTotal(total);
     }
   }, [cartData]);
@@ -100,13 +102,13 @@ const Discount: React.FC<DiscountProps> = () => {
         let gTotal = 0;
         let totalDiscount: string | number;
         if (couponData.type === 'PERCENTAGE') {
-          totalDiscount = grandTotal * (couponData.value / 100);
+          totalDiscount = grandTotal * (Number(couponData.value) / 100);
           gTotal = grandTotal - totalDiscount;
           if (gTotal < 0) setGrandTotal(0);
           else setGrandTotal(gTotal);
         } else {
           totalDiscount = couponData.value;
-          gTotal = grandTotal - totalDiscount;
+          gTotal = grandTotal - Number(totalDiscount);
           if (gTotal < 0) setGrandTotal(0);
           else setGrandTotal(gTotal);
         }

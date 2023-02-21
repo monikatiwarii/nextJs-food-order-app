@@ -2630,12 +2630,12 @@ export const coupons: CouponType[] = [
     id: 1,
     name: 'FLAT100',
     type: 'FLAT',
-    value: '100'
+    value: 100
   },
   {
     id: 2,
     name: 'FLATFORTY',
     type: 'PERCENTAGE',
-    value: '40'
+    value: 40
   }
 ];
