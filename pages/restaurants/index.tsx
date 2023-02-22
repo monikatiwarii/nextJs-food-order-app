@@ -1,5 +1,4 @@
 import { NextPage } from 'next';
-import { useRouter } from 'next/router';
 import AuthComponent from '../../src/components/common/AuthComponent';
 import MaxWidthWrapper from '../../src/components/common/MaxWidthWrapper';
 import Header from '../../src/components/header/Header';

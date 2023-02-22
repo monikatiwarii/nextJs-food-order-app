@@ -29,7 +29,7 @@ const DiningOut: React.FC<DiningOutProps> = () => {
                 marginTop: '20px',
                 paddingBottom: '10px'
               }}>
-              <Link href="/categories">
+              <Link href="/restaurants">
                 <Image
                   src={data.image}
                   alt="imageGirl"

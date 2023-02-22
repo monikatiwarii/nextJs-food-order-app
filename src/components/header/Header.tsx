@@ -4,15 +4,14 @@ import { Typography } from '@mui/material';
 import Link from 'next/link';
 import MaxWidthWrapper from '../common/MaxWidthWrapper';
 import Image from 'next/image';
-import { useSelector } from 'react-redux';
-import { foodItemType } from '../../types/constants/foodItem.type';
+import { useSelector } from '../../store';
 
 interface HeaderProps {}
 const Header: React.FC<HeaderProps> = () => {
   let counter = 0;
-  let cartData = useSelector((state: any) => state.cartItemSlice.cartItems);
+  let cartData = useSelector(state => state.cartItemSlice.cartItems);
 
-  cartData.filter((count: foodItemType) => {
+  cartData.filter(count => {
     counter += count.quantity;
     return count;
   });
@@ -29,8 +28,6 @@ const Header: React.FC<HeaderProps> = () => {
             paddingTop: '40px',
             fontSize: {
               xl: '24px',
-              lg: '20px',
-              sm: '20px',
               md: '20px',
               xs: '16px'
             }
@@ -53,7 +50,6 @@ const Header: React.FC<HeaderProps> = () => {
         <Box
           sx={{
             marginLeft: {
-              xl: '60%',
               lg: '60%',
               md: '50%',
               sm: '40%',
@@ -62,8 +58,6 @@ const Header: React.FC<HeaderProps> = () => {
             paddingTop: '40px',
             fontSize: {
               xl: '24px',
-              lg: '20px',
-              sm: '20px',
               md: '20px',
               xs: '16px'
             }
@@ -82,12 +76,12 @@ const Header: React.FC<HeaderProps> = () => {
             Menu
           </Link>
         </Box>
-        <Box sx={{ paddingRight: { xl: '100px', lg: '100px' } }}>
+        <Box sx={{ paddingRight: { lg: '100px' } }}>
           <Box
             sx={{
               position: 'relative',
               top: '23px',
-              left: { xl: '5px', lg: '5px', md: '5px', sm: '5px', xs: '5px' },
+              left: { xs: '5px' },
               width: '20px',
               height: '20px',
               borderRadius: '15px',
@@ -108,20 +102,16 @@ const Header: React.FC<HeaderProps> = () => {
           </Box>
           <Box
             sx={{
-              // marginRight: "10px",
               paddingTop: '20px',
               width: {
                 xl: '35px',
-                lg: '25px',
                 md: '25px',
                 sm: '20px',
                 xs: '25px'
               },
               height: {
                 xl: '40px',
-                lg: '30px',
                 md: '30px',
-                sm: '25px',
                 xs: '25px'
               }
             }}>

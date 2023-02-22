@@ -17,8 +17,6 @@ const BrandsSection: React.FC<BrandsSectionProps> = () => {
           fontStyle: 'normal',
           fontWeight: '500',
           fontSize: {
-            xl: '28px',
-            lg: '28px',
             md: '28px',
             sm: '24px',
             xs: '20px'

@@ -1,39 +1,23 @@
 import { Box, Button, Divider, Typography } from '@mui/material';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { restaurantType } from '../../types/constants/restaurant.type';
 import { category, foodItem } from '../../data/data';
 import { categoryType } from '../../types/constants/category.type';
 import { foodItemType } from '../../types/constants/foodItem.type';
-import { useDispatch } from '../../store';
-import { setCartData } from '../../store/reducers/cartItem/CartItem.slice';
-import { useRouter } from 'next/router';
 
 interface FoodTypeProps {
   selectedRestaurant: restaurantType | undefined;
-  setAlert: (open: boolean) => void;
+  addToCartHandler: (data: foodItemType) => void;
+  categoryHandler: (data: categoryType) => void;
+  categoryType: string;
 }
-const FoodType: React.FC<FoodTypeProps> = ({ selectedRestaurant, setAlert }) => {
-  const [categoryType, setCategoryType] = useState<string>('cat-1');
-
-  const router = useRouter();
-  const dispatch = useDispatch();
-  const categoryHandler = (data: categoryType) => {
-    setCategoryType(data.categoryId);
-  };
-
-  const addToCartHandler = (data: foodItemType) => {
-    setAlert(true);
-
-    dispatch(
-      setCartData({
-        foodId: data.foodId,
-        quantity: 1
-      })
-    );
-    // router.push('/cart');
-  };
-
+const FoodType: React.FC<FoodTypeProps> = ({
+  selectedRestaurant,
+  addToCartHandler,
+  categoryHandler,
+  categoryType
+}) => {
   return (
     <Box>
       <Typography
@@ -61,9 +45,6 @@ const FoodType: React.FC<FoodTypeProps> = ({ selectedRestaurant, setAlert }) => 
         sx={{
           display: 'flex',
           flexDirection: {
-            xl: 'row',
-            lg: 'row',
-            md: 'row',
             sm: 'row',
             xs: 'column'
           }
@@ -73,9 +54,6 @@ const FoodType: React.FC<FoodTypeProps> = ({ selectedRestaurant, setAlert }) => 
             display: 'flex',
             flexWrap: 'wrap',
             flexDirection: {
-              xl: 'column',
-              lg: 'column',
-              md: 'column',
               sm: 'column',
               xs: 'row'
             },
@@ -83,7 +61,7 @@ const FoodType: React.FC<FoodTypeProps> = ({ selectedRestaurant, setAlert }) => 
               xl: '368px',
               lg: '250px',
               md: '125px',
-              sm: '30px',
+
               xs: '30px'
             },
             rowGap: '10px',
@@ -99,9 +77,7 @@ const FoodType: React.FC<FoodTypeProps> = ({ selectedRestaurant, setAlert }) => 
                     }}
                     sx={{
                       width: {
-                        xl: '245px',
                         lg: '245px',
-                        md: '200px',
                         sm: '200px',
                         xs: '190px'
                       },
@@ -133,8 +109,6 @@ const FoodType: React.FC<FoodTypeProps> = ({ selectedRestaurant, setAlert }) => 
         <Box
           sx={{
             width: {
-              xl: '60px',
-              lg: '60px',
               md: '60px',
               sm: '50px',
               xs: '25px'
@@ -143,23 +117,14 @@ const FoodType: React.FC<FoodTypeProps> = ({ selectedRestaurant, setAlert }) => 
           <Divider
             sx={{
               width: {
-                xl: '677px',
-                lg: '677px',
-                md: '677px',
                 sm: '677px',
                 xs: '300px'
               },
               marginTop: {
-                xl: '370px',
-                lg: '370px',
-                md: '370px',
                 sm: '370px',
                 xs: '50px'
               },
               marginLeft: {
-                xl: '-330px',
-                lg: '-330px',
-                md: '-330px',
                 sm: '-330px',
                 xs: '0px'
               },
@@ -167,9 +132,6 @@ const FoodType: React.FC<FoodTypeProps> = ({ selectedRestaurant, setAlert }) => 
               border: '1px solid #FFC200',
               marginBottom: '100px',
               transform: {
-                xl: 'rotate(90deg)',
-                lg: 'rotate(90deg)',
-                md: 'rotate(90deg)',
                 sm: 'rotate(90deg)',
                 xs: 'rotate(180deg)'
               }
@@ -188,9 +150,7 @@ const FoodType: React.FC<FoodTypeProps> = ({ selectedRestaurant, setAlert }) => 
                       fontStyle: 'normal',
                       fontWeight: '400',
                       fontSize: {
-                        xl: '24px',
                         lg: '24px',
-                        md: '22px',
                         sm: '22px',
                         xs: '20px'
                       },
@@ -198,9 +158,6 @@ const FoodType: React.FC<FoodTypeProps> = ({ selectedRestaurant, setAlert }) => 
                       textTransform: 'capitalize',
                       color: '#000000',
                       marginTop: {
-                        xl: '35px',
-                        lg: '35px',
-                        md: '35px',
                         sm: '35px',
                         xs: '0px'
                       }
@@ -224,16 +181,10 @@ const FoodType: React.FC<FoodTypeProps> = ({ selectedRestaurant, setAlert }) => 
                               display: 'flex',
                               flexDirection: 'row',
                               columnGap: {
-                                xl: '20px',
-                                lg: '20px',
-                                md: '20px',
                                 sm: '20px',
                                 xs: '10px'
                               },
                               marginTop: {
-                                xl: '35px',
-                                lg: '35px',
-                                md: '35px',
                                 sm: '35px',
                                 xs: '20px'
                               }
@@ -242,7 +193,6 @@ const FoodType: React.FC<FoodTypeProps> = ({ selectedRestaurant, setAlert }) => 
                               sx={{
                                 width: {
                                   xl: '180px',
-                                  lg: '160px',
                                   md: '160px',
                                   sm: '170px',
                                   xs: '200px'
@@ -270,9 +220,7 @@ const FoodType: React.FC<FoodTypeProps> = ({ selectedRestaurant, setAlert }) => 
                                   fontStyle: 'normal',
                                   fontWeight: '400',
                                   fontSize: {
-                                    xl: '18px',
                                     lg: '18px',
-                                    md: '16px',
                                     sm: '16px',
                                     xs: '14px'
                                   },
@@ -288,17 +236,12 @@ const FoodType: React.FC<FoodTypeProps> = ({ selectedRestaurant, setAlert }) => 
                                   fontStyle: 'normal',
                                   fontWeight: '400',
                                   fontSize: {
-                                    xl: '14px',
-                                    lg: '14px',
                                     md: '14px',
                                     sm: '12px',
                                     xs: '10px'
                                   },
                                   lineHeight: {
-                                    xl: '36px',
                                     lg: '36px',
-                                    md: '20px',
-                                    sm: '20px',
                                     xs: '20px'
                                   },
                                   textTransform: 'capitalize',
@@ -308,8 +251,6 @@ const FoodType: React.FC<FoodTypeProps> = ({ selectedRestaurant, setAlert }) => 
                               </Typography>
                               <Typography
                                 sx={{
-                                  xl: '14px',
-                                  lg: '14px',
                                   md: '14px',
                                   sm: '12px',
                                   xs: '10px'
@@ -322,24 +263,15 @@ const FoodType: React.FC<FoodTypeProps> = ({ selectedRestaurant, setAlert }) => 
                                 }}
                                 sx={{
                                   width: {
-                                    xl: '125px',
-                                    lg: '125px',
                                     md: '125px',
-                                    sm: '100px',
                                     xs: '100px'
                                   },
                                   height: {
-                                    xl: '35px',
-                                    lg: '35px',
                                     md: '35px',
-                                    sm: '30px',
                                     xs: '30px'
                                   },
                                   fontSize: {
-                                    xl: '14px',
-                                    lg: '14px',
                                     md: '14px',
-                                    sm: '10px',
                                     xs: '10px'
                                   },
                                   textAlign: 'left',

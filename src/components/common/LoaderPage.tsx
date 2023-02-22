@@ -1,8 +1,7 @@
 import { Box } from '@mui/material';
 import React from 'react';
-import Stack from '@mui/material/Stack';
 import CircularProgress from '@mui/material/CircularProgress';
-import { Backdrop, Button, Dialog } from '@mui/material';
+import { Backdrop } from '@mui/material';
 
 const LoaderPage = () => {
   return (

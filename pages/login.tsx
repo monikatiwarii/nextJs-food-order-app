@@ -1,30 +1,55 @@
 import { Box, Button, InputAdornment, TextField } from '@mui/material';
-
+import { Alert, Snackbar } from '@mui/material';
 import LockIcon from '@mui/icons-material/Lock';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { AccountCircle } from '@mui/icons-material';
 import { NextPage } from 'next';
 
 interface LoginProps {}
 const Login: NextPage<LoginProps> = () => {
+  const [loginData, setLoginData] = useState<{ email: string; password: string }>({
+    email: '',
+    password: ''
+  });
+  const [alert, setAlert] = useState<boolean>(false);
   const router = useRouter();
 
   const login = () => {
-    localStorage.setItem('isLoggedIn', true.toString());
-    router.push('/');
+    if (loginData.email == 'propelius@gmail.com' && loginData.password == '12345') {
+      localStorage.setItem('isLoggedIn', true.toString());
+      router.push('/');
+    } else {
+      setAlert(true);
+    }
+  };
+
+  const loginHandler = (e: any) => {
+    setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
 
   useEffect(() => {
     let isLoggedIn = localStorage.getItem('isLoggedIn');
     if (!isLoggedIn) {
-      router.push('/login');
+      router.push({ pathname: '/login' });
     } else {
-      router.push('/');
+      router.push({ pathname: '/' });
     }
-  });
+  }, []);
+
+  const handleClose = () => {
+    setAlert(false);
+  };
+
   return (
     <>
+      {alert && (
+        <Snackbar open={alert} autoHideDuration={1000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+            Invalid Credential!
+          </Alert>
+        </Snackbar>
+      )}
       <Box
         sx={{
           display: 'flex',
@@ -43,15 +68,11 @@ const Login: NextPage<LoginProps> = () => {
             alignItems: 'center',
             margin: 'auto',
             width: {
-              xl: '500px',
-              lg: '500px',
               md: '500px',
               sm: '350px',
               xs: '262px'
             },
             height: {
-              xl: '500px',
-              lg: '500px',
               md: '500px',
               sm: '350px',
               xs: '295px'
@@ -63,8 +84,6 @@ const Login: NextPage<LoginProps> = () => {
             <TextField
               sx={{
                 width: {
-                  xl: '318px',
-                  lg: '318px',
                   md: '318px',
                   sm: '218px',
                   xs: '218px'
@@ -77,10 +96,12 @@ const Login: NextPage<LoginProps> = () => {
                   </InputAdornment>
                 )
               }}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => loginHandler(e)}
               placeholder="Email"
               label="email"
               type="email"
-              value="propelius@gmail.com"
+              value={loginData.email}
+              name="email"
               variant="outlined"
             />
           </Box>
@@ -88,8 +109,6 @@ const Login: NextPage<LoginProps> = () => {
             <TextField
               sx={{
                 width: {
-                  xl: '318px',
-                  lg: '318px',
                   md: '318px',
                   sm: '218px',
                   xs: '218px'
@@ -103,10 +122,12 @@ const Login: NextPage<LoginProps> = () => {
                   </InputAdornment>
                 )
               }}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => loginHandler(e)}
               placeholder="Password"
               label="password"
               type="password"
-              value="12345"
+              value={loginData.password}
+              name="password"
               variant="outlined"
             />
           </Box>
@@ -114,8 +135,6 @@ const Login: NextPage<LoginProps> = () => {
           <Button
             sx={{
               width: {
-                xl: '320px',
-                lg: '320px',
                 md: '320px',
                 sm: '230px',
                 xs: '200px'
@@ -127,8 +146,6 @@ const Login: NextPage<LoginProps> = () => {
               marginTop: '40px',
               fontFamily: 'Poppins',
               fontSize: {
-                xl: '18px',
-                lg: '20px',
                 md: '20px',
                 sm: '16px',
                 xs: '14px'

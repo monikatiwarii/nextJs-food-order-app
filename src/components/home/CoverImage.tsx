@@ -16,7 +16,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useSelector } from '../../store';
 import { foodItemType } from '../../types/constants/foodItem.type';
-import { cartItemsType, cartItemType } from '../../types/redux/cartItem.type';
 
 interface CoverImageProps {}
 
@@ -70,15 +69,10 @@ const CoverImage: React.FC<CoverImageProps> = () => {
               sx={{
                 fontSize: {
                   xl: '24px',
-                  lg: '20px',
-                  sm: '20px',
                   md: '20px',
                   xs: '12px'
                 },
                 marginTop: {
-                  xl: '20px',
-                  lg: '20px',
-                  md: '20px',
                   sm: '20px',
                   xs: '5px'
                 }
@@ -101,8 +95,6 @@ const CoverImage: React.FC<CoverImageProps> = () => {
               sx={{
                 display: 'flex',
                 gap: {
-                  xl: '150px',
-                  lg: '150px',
                   md: '150px',
                   sm: '110px',
                   xs: '45px'
@@ -114,8 +106,6 @@ const CoverImage: React.FC<CoverImageProps> = () => {
                 sx={{
                   fontSize: {
                     xl: '24px',
-                    lg: '20px',
-                    sm: '20px',
                     md: '20px',
                     xs: '12px'
                   },
@@ -138,14 +128,12 @@ const CoverImage: React.FC<CoverImageProps> = () => {
                 sx={{
                   width: {
                     xl: '35px',
-                    lg: '25px',
                     md: '25px',
                     sm: '20px',
                     xs: '20px'
                   },
                   height: {
                     xl: '40px',
-                    lg: '30px',
                     md: '30px',
                     sm: '25px',
                     xs: '20px'
@@ -158,31 +146,21 @@ const CoverImage: React.FC<CoverImageProps> = () => {
                     fontWeight: '500',
                     fontSize: {
                       xl: '16px',
-                      lg: '13px',
-                      md: '13px',
                       sm: '13px',
                       xs: '8px'
                     },
                     width: {
                       xl: '20px',
-                      lg: '20px',
-                      md: '20px',
-                      sm: '15px',
                       xs: '15px'
                     },
                     height: {
-                      xl: '20px',
-                      lg: '20px',
                       md: '20px',
-                      sm: '15px',
                       xs: '15px'
                     },
                     marginLeft: '5px',
                     lineHeight: {
-                      xl: '20px',
                       lg: '20px',
                       md: '18px',
-                      sm: '15px',
                       xs: '15px'
                     },
                     color: '#FFFFFF',
@@ -247,7 +225,6 @@ const CoverImage: React.FC<CoverImageProps> = () => {
                   xs: '14px'
                 },
                 lineHeight: {
-                  xl: '72px',
                   lg: '72px',
                   md: '65px',
                   sm: '30px',
@@ -290,7 +267,6 @@ const CoverImage: React.FC<CoverImageProps> = () => {
                 xs: '200px'
               },
               height: {
-                xl: '65px',
                 lg: '65px',
                 md: '50px',
                 sm: '44px',
@@ -302,17 +278,11 @@ const CoverImage: React.FC<CoverImageProps> = () => {
             <TextField
               sx={{
                 width: {
-                  xl: '108px',
-                  lg: '108px',
-                  md: '108px',
                   sm: '108px',
                   xs: '390px'
                 },
                 textAlign: 'center',
                 margin: {
-                  xl: '10px 10px',
-                  lg: '10px 10px',
-                  md: '10px 10px',
                   sm: '10px 10px',
                   xs: '2px 10px'
                 }
@@ -325,8 +295,6 @@ const CoverImage: React.FC<CoverImageProps> = () => {
                 disableUnderline: true,
                 sx: {
                   fontSize: {
-                    xl: '20px',
-                    lg: '20px',
                     md: '20px',
                     sm: '18px',
                     xs: '10px'
@@ -342,15 +310,11 @@ const CoverImage: React.FC<CoverImageProps> = () => {
             <Divider
               sx={{
                 width: {
-                  xl: '18px',
-                  lg: '18px',
-                  md: '18px',
                   sm: '18px',
                   xs: '10px'
                 },
                 height: '0px',
                 marginTop: {
-                  xl: '30px',
                   lg: '30px',
                   md: '25px',
                   sm: '20px',
@@ -366,14 +330,10 @@ const CoverImage: React.FC<CoverImageProps> = () => {
               <SearchIcon
                 sx={{
                   width: {
-                    xl: '24px',
-                    lg: '24px',
-                    md: '24px',
                     sm: '24px',
                     xs: '12px'
                   },
                   paddingLeft: {
-                    xl: '60px',
                     lg: '60px',
                     md: '10px',
                     sm: '5px',

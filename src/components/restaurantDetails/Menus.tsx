@@ -21,7 +21,6 @@ const Menus: React.FC<MenusProps> = () => {
               xl: '368px',
               lg: '250px',
               md: '125px',
-              sm: '30px',
               xs: '30px'
             },
             paddingTop: '80px'
@@ -43,7 +42,6 @@ const Menus: React.FC<MenusProps> = () => {
               xl: '368px',
               lg: '250px',
               md: '125px',
-              sm: '30px',
               xs: '30px'
             }
           }}>
@@ -71,8 +69,6 @@ const Menus: React.FC<MenusProps> = () => {
                     fontStyle: 'normal',
                     fontWeight: '500',
                     fontSize: {
-                      xl: '20px',
-                      lg: '20px',
                       md: '20px',
                       sm: '16px',
                       xs: '12px'

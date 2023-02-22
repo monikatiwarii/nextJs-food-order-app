@@ -2,52 +2,14 @@ import { Box, Button, Divider, Typography } from '@mui/material';
 import Image from 'next/image';
 import { useSelector } from '../../store';
 import { foodItem } from '../../data/data';
-import { removeCartItem, setCartData } from '../../store/reducers/cartItem/CartItem.slice';
-import { useDispatch } from '../../store';
 import { cartItemType } from '../../types/redux/cartItem.type';
 
-interface CartDataProps {}
-const CartData: React.FC<CartDataProps> = () => {
+interface CartDataProps {
+  decrementQuantity: (data: cartItemType) => void;
+  incrementQuantity: (data: cartItemType) => void;
+}
+const CartData: React.FC<CartDataProps> = ({ decrementQuantity, incrementQuantity }) => {
   let cartData = useSelector(state => state.cartItemSlice.cartItems);
-  const dispatch = useDispatch();
-
-  const decrementQuantity = (data: cartItemType) => {
-    cartData.map(cartdata => {
-      if (cartdata.quantity < 2) {
-        dispatch(
-          removeCartItem({
-            foodId: cartdata.foodId,
-            quantity: 0
-          })
-        );
-      } else {
-        if (cartdata.foodId == data.foodId) {
-          dispatch(
-            setCartData({
-              foodId: cartdata.foodId,
-              quantity: cartdata.quantity - 1
-            })
-          );
-        }
-      }
-    });
-  };
-
-  const incrementQuantity = (data: cartItemType) => {
-    cartData.map(cartdata => {
-      if (cartdata.quantity < 5) {
-        if (cartdata.foodId == data.foodId) {
-          dispatch(
-            setCartData({
-              foodId: cartdata.foodId,
-              quantity: cartdata.quantity + 1
-            })
-          );
-        }
-      }
-    });
-  };
-
   return (
     <Box>
       <Box
@@ -56,7 +18,6 @@ const CartData: React.FC<CartDataProps> = () => {
           display: 'flex',
           columnGap: {
             xl: '50px',
-            lg: '80px',
             md: '80px',
             sm: '50px',
             xs: '50px'
@@ -74,7 +35,6 @@ const CartData: React.FC<CartDataProps> = () => {
                   sx={{
                     backgroundColor: '#F9F9F9',
                     width: {
-                      xl: '350px',
                       lg: '350px',
                       md: '345px',
                       sm: '339px',
@@ -85,8 +45,6 @@ const CartData: React.FC<CartDataProps> = () => {
                   }}>
                   <Box
                     sx={{
-                      xl: '300px',
-                      lg: '300px',
                       md: '300px',
                       sm: '280px',
                       xs: '200px'
@@ -134,10 +92,8 @@ const CartData: React.FC<CartDataProps> = () => {
                         fontStyle: 'normal',
                         fontWeight: '400',
                         fontSize: {
-                          xl: '20px',
                           lg: '20px',
                           md: '18px',
-                          sm: '16px',
                           xs: '16px'
                         },
                         marginTop: '10px',
@@ -153,9 +109,7 @@ const CartData: React.FC<CartDataProps> = () => {
                       fontStyle: 'normal',
                       fontWeight: '400',
                       fontSize: {
-                        xl: '14px',
                         lg: '14px',
-                        md: '12px',
                         sm: '12px',
                         xs: '10px'
                       },
@@ -170,9 +124,6 @@ const CartData: React.FC<CartDataProps> = () => {
                     sx={{
                       display: 'flex',
                       paddingTop: {
-                        xl: '40px',
-                        lg: '40px',
-                        md: '40px',
                         sm: '40px',
                         xs: '20px'
                       }
@@ -183,16 +134,10 @@ const CartData: React.FC<CartDataProps> = () => {
                       }}
                       sx={{
                         width: {
-                          xl: '48px',
-                          lg: '48px',
-                          md: '48px',
                           sm: '48px',
                           xs: '40px'
                         },
                         height: {
-                          xl: '43px',
-                          lg: '43px',
-                          md: '43px',
                           sm: '43px',
                           xs: '38px'
                         },
@@ -217,16 +162,10 @@ const CartData: React.FC<CartDataProps> = () => {
                       }}
                       sx={{
                         width: {
-                          xl: '48px',
-                          lg: '48px',
-                          md: '48px',
                           sm: '48px',
                           xs: '40px'
                         },
                         height: {
-                          xl: '43px',
-                          lg: '43px',
-                          md: '43px',
                           sm: '43px',
                           xs: '38px'
                         },
@@ -262,8 +201,6 @@ const CartData: React.FC<CartDataProps> = () => {
                         fontStyle: 'normal',
                         fontWeight: '400',
                         fontSize: {
-                          xl: '20px',
-                          lg: '20px',
                           md: '20px',
                           sm: '18px',
                           xs: '16px'
@@ -277,7 +214,6 @@ const CartData: React.FC<CartDataProps> = () => {
                   <Divider
                     sx={{
                       width: {
-                        xl: '290px',
                         lg: '290px',
                         md: '285px',
                         sm: '280px',
@@ -311,8 +247,6 @@ const CartData: React.FC<CartDataProps> = () => {
                         fontStyle: 'normal',
                         fontWeight: '400',
                         fontSize: {
-                          xl: '20px',
-                          lg: '20px',
                           md: '20px',
                           sm: '18px',
                           xs: '16px'
@@ -329,6 +263,7 @@ const CartData: React.FC<CartDataProps> = () => {
           });
         })}
       </Box>
+
       {/* </Box> */}
     </Box>
   );

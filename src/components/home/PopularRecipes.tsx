@@ -1,66 +1,27 @@
 import { Box, Button, Typography } from '@mui/material';
 import MaxWidthWrapper from '../common/MaxWidthWrapper';
-import { category, foodItem, foodtype } from '../../data/data';
-import { useEffect, useState } from 'react';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { setCartData } from '../../store/reducers/cartItem/CartItem.slice';
-import { useDispatch } from '../../store';
 import { cartItemType } from '../../types/redux/cartItem.type';
-import { selectedCategory } from '../../data/data';
 import { categoryType } from '../../types/constants/category.type';
 import { foodItemType } from '../../types/constants/foodItem.type';
 
-interface PopularRecipesProps {}
-const PopularRecipes: React.FC<PopularRecipesProps> = () => {
-  let foodArray: foodItemType[] = [];
-  const router = useRouter();
-  const dispatch = useDispatch();
-
-  const [categoryItems, setCategoryItems] = useState<Array<categoryType>>();
-
-  const [foodList, setFoodList] = useState<Array<foodItemType>>();
-  const [categoryId, setCategoryId] = useState<string | undefined>();
-
-  useEffect(() => {
-    let categoryArray: categoryType[] = [];
-    category.map(data => {
-      if (selectedCategory.includes(data.name)) {
-        categoryArray.push(data);
-      }
-    });
-    setCategoryItems(categoryArray);
-    setCategoryId(categoryArray[0].categoryId);
-  }, []);
-
-  useEffect(() => {
-    if (categoryId) {
-      foodItem.map(food => {
-        if (food.category.includes(categoryId)) {
-          foodArray.push(food);
-        }
-      });
-      setFoodList(foodArray);
-    }
-  }, [categoryId]);
-
-  const foodItemHandler = (data: categoryType) => {
-    setCategoryId(data.categoryId);
-  };
-
-  const foodDataHandler = (data: cartItemType) => {
-    dispatch(
-      setCartData({
-        foodId: data.foodId,
-        quantity: 1
-      })
-    );
-    router.push('/cart');
-  };
-
+interface PopularRecipesProps {
+  categoryItems: categoryType[] | undefined;
+  foodList: foodItemType[] | undefined;
+  categoryId: string | undefined;
+  foodItemHandler: (data: categoryType) => void;
+  foodDataHandler: (data: cartItemType) => void;
+}
+const PopularRecipes: React.FC<PopularRecipesProps> = ({
+  categoryItems,
+  foodList,
+  categoryId,
+  foodDataHandler,
+  foodItemHandler
+}) => {
   const themes = useTheme();
   const matches = useMediaQuery(themes.breakpoints.down('sm'));
 
@@ -79,23 +40,16 @@ const PopularRecipes: React.FC<PopularRecipesProps> = () => {
             fontStyle: 'normal',
             fontWeight: 700,
             fontSize: {
-              xl: '48px',
-              lg: '48px',
               md: '48px',
               sm: '38px',
               xs: '24px'
             },
             lineHeight: {
-              xl: '150px',
               lg: '150px',
               md: '58px',
-              sm: '100px',
               xs: '100px'
             },
             marginLeft: {
-              xl: '0px',
-              lg: '0px',
-              md: '0px',
               sm: '0px',
               xs: '55px'
             },
@@ -120,25 +74,13 @@ const PopularRecipes: React.FC<PopularRecipesProps> = () => {
                     foodItemHandler(data);
                   }}
                   sx={{
-                    marginLeft: {
-                      xl: '20px',
-                      lg: '20px',
-                      md: '20px',
-                      sm: '20px',
-                      xs: '20px'
-                    },
+                    marginLeft: '20px',
                     marginTop: '10px',
                     width: {
-                      xl: '161px',
-                      lg: '161px',
                       md: '161px',
-                      sm: '120px',
                       xs: '120px'
                     },
                     height: {
-                      xl: '67px',
-                      lg: '67px',
-                      md: '67px',
                       sm: '67px',
                       xs: '50px'
                     },
@@ -149,9 +91,6 @@ const PopularRecipes: React.FC<PopularRecipesProps> = () => {
                     fontStyle: 'normal',
                     fontWeight: 600,
                     fontSize: {
-                      xl: '16px',
-                      lg: '16px',
-                      md: '16px',
                       sm: '16px',
                       xs: '12px'
                     },
@@ -190,11 +129,8 @@ const PopularRecipes: React.FC<PopularRecipesProps> = () => {
                 sx={{
                   position: 'relative',
                   boxSizing: 'border-box',
-                  width: { xl: '310px', lg: '310px', md: '310px', sm: '300px' },
+                  width: { md: '310px', sm: '300px' },
                   height: {
-                    xl: '493px',
-                    lg: '493px',
-                    md: '493px',
                     sm: '493px',
                     xs: '480px'
                   },
@@ -236,9 +172,6 @@ const PopularRecipes: React.FC<PopularRecipesProps> = () => {
                 <Box
                   sx={{
                     width: {
-                      xl: '260px',
-                      lg: '260px',
-                      md: '260px',
                       sm: '260px',
                       xs: '200px'
                     }
@@ -304,7 +237,7 @@ const PopularRecipes: React.FC<PopularRecipesProps> = () => {
                 </Typography>
                 <Typography
                   sx={{
-                    marginTop: { xl: '80px', lg: '80px', md: '80px', sm: '80px', xs: '60px' },
+                    marginTop: { xl: '50px', sm: '80px', xs: '60px' },
                     height: '41px',
                     fontFamily: 'Inter',
                     fontStyle: 'normal',
@@ -323,13 +256,11 @@ const PopularRecipes: React.FC<PopularRecipesProps> = () => {
                     width: '34px',
                     minWidth: '34px',
                     right: {
-                      xl: '136px',
-                      lg: '136px',
                       md: '136px',
                       sm: '132px',
                       xs: '104px'
                     },
-                    top: { xl: '467px', lg: '467px', md: '467px', sm: '467px', xs: '456px' },
+                    top: { sm: '467px', xs: '456px' },
                     color: 'black',
                     background: '#FFFFFF',
                     borderRadius: '59px',

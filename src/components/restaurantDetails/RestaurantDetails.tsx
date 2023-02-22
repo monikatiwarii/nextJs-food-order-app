@@ -9,16 +9,12 @@ interface RestaurantDetailsProps {
   selectedRestaurant: restaurantType | undefined;
 }
 const RestaurantDetails: React.FC<RestaurantDetailsProps> = ({ selectedRestaurant }) => {
-  console.log(selectedRestaurant);
   return (
     <MaxWidthWrapper>
       <Box
         sx={{
           display: 'flex',
           flexDirection: {
-            xl: 'row',
-            lg: 'row',
-            md: 'row',
             sm: 'row',
             xs: 'column'
           },
@@ -26,7 +22,6 @@ const RestaurantDetails: React.FC<RestaurantDetailsProps> = ({ selectedRestauran
             xl: '368px',
             lg: '250px',
             md: '120px',
-            sm: '20px',
             xs: '20px'
           },
           paddingTop: '25px'
@@ -34,16 +29,10 @@ const RestaurantDetails: React.FC<RestaurantDetailsProps> = ({ selectedRestauran
         <Box
           sx={{
             width: {
-              xl: '187px',
-              lg: '187px',
-              md: '187px',
               sm: '187px',
               xs: '190px'
             },
             paddingLeft: {
-              xl: '0px',
-              lg: '0px',
-              md: '0px',
               sm: '0px',
               xs: '55px'
             }
@@ -65,9 +54,6 @@ const RestaurantDetails: React.FC<RestaurantDetailsProps> = ({ selectedRestauran
         <Box
           sx={{
             paddingLeft: {
-              xl: '30px',
-              lg: '30px',
-              md: '30px',
               sm: '30px',
               xs: '10px'
             }
@@ -78,8 +64,6 @@ const RestaurantDetails: React.FC<RestaurantDetailsProps> = ({ selectedRestauran
               fontStyle: 'normal',
               fontWeight: '500',
               fontSize: {
-                xl: '24px',
-                lg: '24px',
                 md: '24px',
                 sm: '20px',
                 xs: '22px'
@@ -95,9 +79,6 @@ const RestaurantDetails: React.FC<RestaurantDetailsProps> = ({ selectedRestauran
             sx={{
               display: 'flex',
               columnGap: {
-                xl: '20px',
-                lg: '20px',
-                md: '20px',
                 sm: '20px',
                 xs: '0px'
               }
@@ -127,9 +108,6 @@ const RestaurantDetails: React.FC<RestaurantDetailsProps> = ({ selectedRestauran
                 fontStyle: 'normal',
                 fontWeight: '500',
                 fontSize: {
-                  xl: '14px',
-                  lg: '14px',
-                  md: '14px',
                   sm: '14px',
                   xs: '12px'
                 },
@@ -146,9 +124,6 @@ const RestaurantDetails: React.FC<RestaurantDetailsProps> = ({ selectedRestauran
               fontStyle: 'normal',
               fontWeight: '400',
               fontSize: {
-                xl: '14px',
-                lg: '14px',
-                md: '14px',
                 sm: '14px',
                 xs: '16px'
               },
@@ -164,9 +139,6 @@ const RestaurantDetails: React.FC<RestaurantDetailsProps> = ({ selectedRestauran
               fontStyle: 'normal',
               fontWeight: '400',
               fontSize: {
-                xl: '14px',
-                lg: '14px',
-                md: '14px',
                 sm: '12px',
                 xs: '16px'
               },
@@ -181,16 +153,12 @@ const RestaurantDetails: React.FC<RestaurantDetailsProps> = ({ selectedRestauran
             <Button
               sx={{
                 width: {
-                  xl: '140px',
-                  lg: '140px',
                   md: '140px',
                   sm: '120px',
                   xs: '100px'
                 },
                 height: '35px',
                 fontSize: {
-                  xl: '14px',
-                  lg: '14px',
                   md: '14px',
                   sm: '12px',
                   xs: '10px'
@@ -211,17 +179,12 @@ const RestaurantDetails: React.FC<RestaurantDetailsProps> = ({ selectedRestauran
               variant="outlined"
               sx={{
                 width: {
-                  xl: '140px',
-                  lg: '140px',
                   md: '140px',
                   sm: '120px',
                   xs: '100px'
                 },
                 height: '35px',
                 fontSize: {
-                  xl: '14px',
-                  lg: '14px',
-                  md: '14px',
                   sm: '14px',
                   xs: '10px'
                 },
@@ -241,8 +204,6 @@ const RestaurantDetails: React.FC<RestaurantDetailsProps> = ({ selectedRestauran
               variant="outlined"
               sx={{
                 width: {
-                  xl: '140px',
-                  lg: '140px',
                   md: '140px',
                   sm: '120px',
                   xs: '100px'
@@ -250,8 +211,6 @@ const RestaurantDetails: React.FC<RestaurantDetailsProps> = ({ selectedRestauran
                 height: '35px',
                 textAlign: 'center',
                 fontSize: {
-                  xl: '14px',
-                  lg: '14px',
                   md: '14px',
                   sm: '12px',
                   xs: '10px'

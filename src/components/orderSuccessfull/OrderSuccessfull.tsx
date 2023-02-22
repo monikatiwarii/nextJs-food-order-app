@@ -6,10 +6,10 @@ import AuthComponent from '../common/AuthComponent';
 import AuthGuard from '../common/AuthGuard';
 import MaxWidthWrapper from '../common/MaxWidthWrapper';
 
-const OrderSuccessfull = () => {
-  const orderHandler = () => {
-    localStorage.removeItem('isOrdered');
-  };
+interface OrderSuccessfullProps {
+  orderHandler: () => void;
+}
+const OrderSuccessfull: React.FC<OrderSuccessfullProps> = ({ orderHandler }) => {
   return (
     <AuthComponent>
       <AuthGuard>
@@ -26,9 +26,7 @@ const OrderSuccessfull = () => {
             <Box
               sx={{
                 width: {
-                  xl: '50%',
                   lg: '50%',
-                  md: '40%',
                   sm: '40%',
                   xs: '100%'
                 }

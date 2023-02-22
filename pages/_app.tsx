@@ -12,7 +12,7 @@ export default function App({ Component, pageProps }: AppProps) {
     } else {
       router.push('/login');
     }
-  });
+  }, []);
   return (
     <Provider store={store}>
       <Component {...pageProps} />

@@ -12,8 +12,6 @@ const RestaurantHeader: React.FC<RestaurantHeaderProps> = () => {
         sx={{
           marginTop: {
             xl: '10px',
-            lg: '5px',
-            md: '5px',
             sm: '5px',
             xs: '3px'
           }
@@ -38,8 +36,6 @@ const RestaurantHeader: React.FC<RestaurantHeaderProps> = () => {
                   height: '100%',
                   width: '100%'
                 }}
-                // width={912}
-                // height={654}
                 alt=""
               />
             </Box>
