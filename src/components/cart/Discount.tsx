@@ -24,6 +24,7 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
 }));
 
 interface DiscountProps {
+  isCoupenUsed: boolean;
   total: number;
   discount: string | number;
   grandTotal: number;
@@ -44,7 +45,8 @@ const Discount: React.FC<DiscountProps> = ({
   invalidCoupenButton,
   applyCoupon,
   orderHandler,
-  handleChangeCoupon
+  handleChangeCoupon,
+  isCoupenUsed
 }) => {
   return (
     <>

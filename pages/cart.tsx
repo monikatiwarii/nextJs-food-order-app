@@ -15,7 +15,7 @@ import { useRouter } from 'next/router';
 import { removeCartItem, setCartData } from '../src/store/reducers/cartItemSlice/cartItemSlice';
 
 interface CartProps {}
-let isCoupenUsed = false;
+let isCoupenUsed: boolean = false;
 const Cart: NextPage<CartProps> = () => {
   let cartData = useSelector(state => state.cartItemSlice.cartItems);
   const dispatch = useDispatch();
@@ -206,6 +206,7 @@ const Cart: NextPage<CartProps> = () => {
               applyCoupon={applyCoupon}
               handleChangeCoupon={handleChangeCoupon}
               orderHandler={orderHandler}
+              isCoupenUsed={isCoupenUsed}
             />
             <CartData decrementQuantity={decrementQuantity} incrementQuantity={incrementQuantity} />
           </>
