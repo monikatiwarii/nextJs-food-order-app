@@ -44,11 +44,12 @@ const CartData: React.FC<CartDataProps> = ({ decrementQuantity, incrementQuantit
                     padding: '28px'
                   }}>
                   <Box
-                    sx={{
-                      md: '300px',
-                      sm: '280px',
-                      xs: '200px'
-                    }}>
+                  // sx={{
+                  //   md: '300px',
+                  //   sm: '280px',
+                  //   xs: '200px'
+                  // }}>
+                  >
                     <Image
                       src={data.image[0]}
                       alt=""

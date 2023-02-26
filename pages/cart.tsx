@@ -42,8 +42,8 @@ const Cart: NextPage<CartProps> = () => {
         if (cartdata.foodId == data.foodId) {
           dispatch(
             setCartData({
-              foodId: cartdata.foodId,
-              quantity: cartdata.quantity - 1
+              foodId: data.foodId,
+              quantity: data.quantity - 1
             })
           );
         }
