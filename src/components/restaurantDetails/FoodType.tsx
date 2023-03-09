@@ -67,43 +67,44 @@ const FoodType: React.FC<FoodTypeProps> = ({
             rowGap: '10px',
             paddingTop: '50px'
           }}>
-          {/* {category.map(cat => {
-            if (selectedRestaurant?.category.includes(cat.categoryId)) {
-              return (
-                <>
-                  <Button
-                    onClick={() => {
-                      categoryHandler(cat);
-                    }}
-                    sx={{
-                      width: {
-                        lg: '245px',
-                        sm: '200px',
-                        xs: '190px'
-                      },
-                      backgroundColor: cat.categoryId === categoryType ? '#FFC300' : '#fff',
-                      color: cat.categoryId === categoryType ? '#ffffff' : '#000000',
-                      fontFamily: 'Poppins',
-                      fontStyle: 'normal',
-                      fontWeight: '300',
-                      fontSize: '18px',
-                      lineHeight: '30px',
-                      textTransform: 'capitalize',
+          {selectedRestaurant?.category.map(data=> {
+            console.log('category data-------------',data.name)
+            return (
+              <>
+                <Button
+                  onClick={() => {
+                    categoryHandler(data);
+                  }}
+                  sx={{
+                    width: {
+                      lg: '245px',
+                      sm: '200px',
+                      xs: '190px'
+                    },
+                    backgroundColor: data.name === categoryType ? '#FFC300' : '#fff',
+                    color: data.name === categoryType ? '#ffffff' : '#000000',
+                    fontFamily: 'Poppins',
+                    fontStyle: 'normal',
+                    fontWeight: '300',
+                    fontSize: '18px',
+                    lineHeight: '30px',
+                    textTransform: 'capitalize',
 
-                      height: '50px',
-                      textAlign: 'left',
-                      justifyContent: 'flex-start',
-                      '&:hover': {
-                        backgroundColor: '#FFC300',
-                        color: '#ffffff'
-                      }
-                    }}>
-                    {cat.name}
-                  </Button>
-                </>
-              );
-            }
-          })} */}
+                    height: '50px',
+                    textAlign: 'left',
+                    justifyContent: 'flex-start',
+                    '&:hover': {
+                      backgroundColor: '#FFC300',
+                      color: '#ffffff'
+                    }
+                  }}>
+                  {data.name}
+                </Button>
+              </>
+            );
+          })
+
+          }
         </Box>
 
         <Box
@@ -139,7 +140,7 @@ const FoodType: React.FC<FoodTypeProps> = ({
         </Box>
 
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-          <Box>
+          {/* <Box>
             {category.map(data => {
               if (data.categoryId === categoryType)
                 return (
@@ -166,8 +167,8 @@ const FoodType: React.FC<FoodTypeProps> = ({
                   </Typography>
                 );
             })}
-          </Box>
-          {selectedRestaurant?.foods &&
+          </Box> */}
+          {/* {selectedRestaurant?.foods &&
             selectedRestaurant?.foods.map(foodId => {
               return (
                 <>
@@ -294,7 +295,7 @@ const FoodType: React.FC<FoodTypeProps> = ({
                   })}
                 </>
               );
-            })}
+            })} */}
         </Box>
       </Box>
     </Box>

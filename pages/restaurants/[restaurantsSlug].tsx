@@ -42,7 +42,8 @@ const RestaurantDetail: NextPage<RestaurantDetailProps> = ({ selectedRestaurant 
   };
 
   const categoryHandler = (data: categoryType) => {
-    setCategoryType(data.categoryId);
+    if(!!data?.name)
+    setCategoryType(data.name);
   };
 
   return (

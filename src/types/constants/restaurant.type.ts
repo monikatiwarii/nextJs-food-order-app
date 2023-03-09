@@ -7,7 +7,7 @@ export interface restaurantType {
   price: number;
   foods: number[];
   images: string;
-  category: string[];
+  category: Category[]
   menu :{
     key : number,
     value : string
@@ -18,3 +18,8 @@ export interface Time {
   opentime: string;
   closetime: string;
 }
+
+export interface Category {
+  name: string;
+  [key: number]: string
+};
