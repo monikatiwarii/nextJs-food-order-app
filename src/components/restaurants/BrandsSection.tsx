@@ -1,11 +1,27 @@
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import axios from "axios"
 
 import { restaurants } from '../../data/data';
+import baseURL from '../../api';
 
 interface BrandsSectionProps {}
 const BrandsSection: React.FC<BrandsSectionProps> = () => {
+
+  const [restaurants,setRestaurants] = useState<any>()
+
+  useEffect(()=>{
+    const callApi = async()=>{
+      await axios.get(`${baseURL}/api/restaurants`).then((response)=>{
+        console.log('restaurants response------------',response.data.payload)
+          setRestaurants(response.data.payload)
+      })
+    }
+    callApi();
+  },[])
+
   return (
     <Box
       sx={{
@@ -36,9 +52,9 @@ const BrandsSection: React.FC<BrandsSectionProps> = () => {
             display: 'none'
           }
         }}>
-        {restaurants.map((data, index) => {
+        {restaurants?.map((data:any, index: any) => {
           return (
-            <Box key={data.restaurantId}>
+            <Box key={data.id}>
               <Link href={`/restaurants/${data.slug}`}>
                 <Box
                   sx={{
@@ -56,8 +72,6 @@ const BrandsSection: React.FC<BrandsSectionProps> = () => {
                     marginRight: '20px',
                     marginTop: '50px'
                   }}>
-                  {data.images.map(image => {
-                    return (
                       <>
                         <Image
                           height={0}
@@ -69,12 +83,10 @@ const BrandsSection: React.FC<BrandsSectionProps> = () => {
                             height: '100%',
                             width: '100%'
                           }}
-                          src={image}
+                          src={`${baseURL}/${data.images['0']}`}
                           alt=""
                         />
                       </>
-                    );
-                  })}
                 </Box>
               </Link>
               <Typography

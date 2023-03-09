@@ -14,6 +14,8 @@ import { foodItemType } from '../../src/types/constants/foodItem.type';
 import { categoryType } from '../../src/types/constants/category.type';
 import { useDispatch } from '../../src/store';
 import { setCartData } from '../../src/store/reducers/cartItemSlice/cartItemSlice';
+import baseURL from '../../src/api';
+import axios from 'axios';
 
 interface RestaurantDetailProps {
   selectedRestaurant: restaurantType | undefined;
@@ -56,7 +58,7 @@ const RestaurantDetail: NextPage<RestaurantDetailProps> = ({ selectedRestaurant 
       <RestaurantHeader />
       <MaxWidthWrapper>
         <RestaurantDetails selectedRestaurant={selectedRestaurant} />
-        <Menus />
+        <Menus selectedRestaurant={selectedRestaurant} />
         <FoodType
           addToCartHandler={addToCartHandler}
           selectedRestaurant={selectedRestaurant}
@@ -70,8 +72,12 @@ const RestaurantDetail: NextPage<RestaurantDetailProps> = ({ selectedRestaurant 
 
 export const getServerSideProps: GetServerSideProps = async context => {
   const restaurantSlug = context.query.restaurantsSlug;
-  const restaurant = restaurants.find(data => data.slug === restaurantSlug);
-  return { props: { selectedRestaurant: restaurant } };
+
+  console.log(restaurantSlug)
+  const restaurant = await axios.get(`${baseURL}/api/restaurants/find/${restaurantSlug}`)
+  
+  console.log('get propos data------------------',restaurant.data.payload)
+  return { props: { selectedRestaurant: restaurant.data.payload } };
 };
 
 export default RestaurantDetail;

@@ -1,7 +1,8 @@
 import { Box, Button, Typography } from '@mui/material';
 import Image from 'next/image';
 import React from 'react';
-import { restaurantType } from '../../types/constants/restaurant.type';
+import baseURL from '../../api';
+import { restaurantType, Time } from '../../types/constants/restaurant.type';
 
 import MaxWidthWrapper from '../common/MaxWidthWrapper';
 
@@ -9,6 +10,8 @@ interface RestaurantDetailsProps {
   selectedRestaurant: restaurantType | undefined;
 }
 const RestaurantDetails: React.FC<RestaurantDetailsProps> = ({ selectedRestaurant }) => {
+  
+  
   return (
     <MaxWidthWrapper>
       <Box
@@ -38,7 +41,8 @@ const RestaurantDetails: React.FC<RestaurantDetailsProps> = ({ selectedRestauran
             }
           }}>
           <Image
-            src={selectedRestaurant?.images[0] || ''}
+            src={ `${baseURL}/${selectedRestaurant?.images[0]}` || ''}
+            
             height={0}
             width={0}
             sizes="(max-width:0) 100vw,
@@ -115,7 +119,7 @@ const RestaurantDetails: React.FC<RestaurantDetailsProps> = ({ selectedRestauran
                 textTransform: 'capitalize',
                 color: '#999999'
               }}>
-              Average Cost: {selectedRestaurant?.averageCost}
+              Average Cost: {selectedRestaurant?.price}
             </Typography>
           </Box>
           <Typography
@@ -131,7 +135,11 @@ const RestaurantDetails: React.FC<RestaurantDetailsProps> = ({ selectedRestauran
               textTransform: 'capitalize',
               color: '#999999'
             }}>
-            Address : {selectedRestaurant?.address}
+            Address : {
+              selectedRestaurant?.address ? 
+              Object.values(selectedRestaurant?.address).join(' ,')
+              : ''
+            }
           </Typography>
           <Typography
             sx={{
@@ -147,7 +155,7 @@ const RestaurantDetails: React.FC<RestaurantDetailsProps> = ({ selectedRestauran
               color: '#999999'
             }}>
             <span style={{ color: '#C84B11' }}>Open now </span>
-            {selectedRestaurant?.time.open} to {selectedRestaurant?.time.closes}
+            {selectedRestaurant?.time.opentime} to {selectedRestaurant?.time.closetime}
           </Typography>
           <Box>
             <Button

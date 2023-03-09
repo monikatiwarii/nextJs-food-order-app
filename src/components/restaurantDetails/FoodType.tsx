@@ -67,7 +67,7 @@ const FoodType: React.FC<FoodTypeProps> = ({
             rowGap: '10px',
             paddingTop: '50px'
           }}>
-          {category.map(cat => {
+          {/* {category.map(cat => {
             if (selectedRestaurant?.category.includes(cat.categoryId)) {
               return (
                 <>
@@ -103,7 +103,7 @@ const FoodType: React.FC<FoodTypeProps> = ({
                 </>
               );
             }
-          })}
+          })} */}
         </Box>
 
         <Box

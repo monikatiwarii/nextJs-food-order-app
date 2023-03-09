@@ -10,6 +10,7 @@ const CartItems = createSlice({
   initialState,
   reducers: {
     setCartData: (state: cartItemsType, { payload }: PayloadAction<cartItemType>) => {
+      
       let alreadyExist = state.cartItems.findIndex(data => data.foodId === payload.foodId);
       if (alreadyExist >= 0) {
         state.cartItems[alreadyExist] = payload;

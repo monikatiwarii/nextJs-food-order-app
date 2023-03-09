@@ -4,13 +4,17 @@ export interface restaurantType {
   address: string;
   time: Time;
   slug: string;
-  averageCost: number;
+  price: number;
   foods: number[];
-  images: string[];
+  images: string;
   category: string[];
+  menu :{
+    key : number,
+    value : string
+  }
 }
 
 export interface Time {
-  open: string;
-  closes: string;
+  opentime: string;
+  closetime: string;
 }
