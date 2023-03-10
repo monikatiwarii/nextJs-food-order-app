@@ -71,10 +71,10 @@ const FoodType: React.FC<FoodTypeProps> = ({
             rowGap: '10px',
             paddingTop: '50px'
           }}>
-          {selectedRestaurant?.category.map(data => {
+          {selectedRestaurant?.category.map((data,index) => {
             return (
               <>
-                <Button
+                <Button key={index}
                   onClick={() => {
                     categoryHandler(data);
                   }}

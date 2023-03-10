@@ -5,6 +5,8 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { AccountCircle } from '@mui/icons-material';
 import { NextPage } from 'next';
+import axios from 'axios';
+import baseURL from '../src/api';
 
 interface LoginProps {}
 const Login: NextPage<LoginProps> = () => {
@@ -14,28 +16,35 @@ const Login: NextPage<LoginProps> = () => {
   });
   const [alert, setAlert] = useState<boolean>(false);
   const router = useRouter();
+  const [error, setError] = useState("");
+  const [message,setMessage] = useState("");
 
-  const login = () => {
-    if (loginData.email == 'propelius@gmail.com' && loginData.password == '12345') {
-      localStorage.setItem('isLoggedIn', true.toString());
-      router.push('/');
-    } else {
+  
+  const login = async(e: React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
+    e.preventDefault()
+    if (loginData.email !== "" && loginData.password !== "") {
+      setError("");
+      try {
+          let res = await axios.post(`${baseURL}/api/login`, loginData);
+          
+          localStorage.setItem("token", res.data.payload.token);
+          localStorage.setItem("isLoggedIn","true");
+          router.push("/");
+      } catch (error) {
+          setMessage("Invalid credentials!");
+          setAlert(true);
+      }
+  } else {
       setAlert(true);
-    }
-  };
+      setMessage("Please Provide credentials!!!");
+  }
+  }
 
-  const loginHandler = (e: any) => {
+
+  const loginHandler = async(e: any) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
+    
   };
-
-  useEffect(() => {
-    let isLoggedIn = localStorage.getItem('isLoggedIn');
-    if (!isLoggedIn) {
-      router.push({ pathname: '/login' });
-    } else {
-      router.push({ pathname: '/' });
-    }
-  }, []);
 
   const handleClose = () => {
     setAlert(false);
@@ -46,7 +55,7 @@ const Login: NextPage<LoginProps> = () => {
       {alert && (
         <Snackbar open={alert} autoHideDuration={1000} onClose={handleClose}>
           <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-            Invalid Credential!
+            {message}
           </Alert>
         </Snackbar>
       )}

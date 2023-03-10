@@ -38,8 +38,25 @@ const RestaurantDetail: NextPage<RestaurantDetailProps> = ({ selectedRestaurant,
   },[])
 
   const dispatch = useDispatch();
+ 
 
-  const addToCartHandler = (data: foodItemType) => {
+  const addToCartHandler = async(data: foodItemType) => {
+
+    let token = localStorage.getItem("token")
+    let method = "PATCH"
+    let url = `${baseURL}/api/cart`
+    let body= {
+      id: data.fooditem_id,
+      action: 1
+    }
+    let headers = {
+      "Authorization": `Bearer ${token}`,
+      "Content-Type": "application/json",
+    }
+    // let response = await axios({ method, url, headers, data })
+    const result = await axios({ method, url, headers, data: body})
+
+    console.log('result--------------------',result)
     setAlert(true);
 
     dispatch(
