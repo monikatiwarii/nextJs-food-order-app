@@ -5,7 +5,7 @@ import Menus from '../../src/components/restaurantDetails/Menus';
 import RestaurantHeader from '../../src/components/restaurantDetails/RestaurantHeader';
 import FoodType from '../../src/components/restaurantDetails/FoodType';
 import RestaurantDetails from '../../src/components/restaurantDetails/RestaurantDetails';
-import { restaurants } from '../../src/data/data';
+import { category, restaurants } from '../../src/data/data';
 import { restaurantType } from '../../src/types/constants/restaurant.type';
 import AuthComponent from '../../src/components/common/AuthComponent';
 import { Alert, Snackbar } from '@mui/material';
@@ -19,14 +19,17 @@ import axios from 'axios';
 
 interface RestaurantDetailProps {
   selectedRestaurant: restaurantType | undefined;
+  selectedFoods : foodItemType[] | undefined
 }
-const RestaurantDetail: NextPage<RestaurantDetailProps> = ({ selectedRestaurant }) => {
+const RestaurantDetail: NextPage<RestaurantDetailProps> = ({ selectedRestaurant ,selectedFoods}) => {
+  
   const [alert, setAlert] = useState<boolean>(false);
+ 
   const handleClose = () => {
     setAlert(false);
   };
 
-  const [categoryType, setCategoryType] = useState<string>('cat-1');
+  const [categoryType, setCategoryType] = useState<string>('Recommended');
 
   const dispatch = useDispatch();
 
@@ -35,14 +38,14 @@ const RestaurantDetail: NextPage<RestaurantDetailProps> = ({ selectedRestaurant 
 
     dispatch(
       setCartData({
-        foodId: data.foodId,
+        foodId: data.fooditem_id,
         quantity: 1
       })
     );
   };
 
   const categoryHandler = (data: categoryType) => {
-    if(!!data?.name)
+    if(data?.name)
     setCategoryType(data.name);
   };
 
@@ -61,6 +64,7 @@ const RestaurantDetail: NextPage<RestaurantDetailProps> = ({ selectedRestaurant 
         <RestaurantDetails selectedRestaurant={selectedRestaurant} />
         <Menus selectedRestaurant={selectedRestaurant} />
         <FoodType
+          selectedFoods = {selectedFoods}
           addToCartHandler={addToCartHandler}
           selectedRestaurant={selectedRestaurant}
           categoryHandler={categoryHandler}
@@ -73,12 +77,23 @@ const RestaurantDetail: NextPage<RestaurantDetailProps> = ({ selectedRestaurant 
 
 export const getServerSideProps: GetServerSideProps = async context => {
   const restaurantSlug = context.query.restaurantsSlug;
-
   console.log(restaurantSlug)
-  const restaurant = await axios.get(`${baseURL}/api/restaurants/find/${restaurantSlug}`)
-  
-  console.log('get propos data------------------',restaurant.data.payload)
-  return { props: { selectedRestaurant: restaurant.data.payload } };
+  const restaurant = await axios.get(`${baseURL}/api/restaurants/find/${restaurantSlug}`) 
+  console.log('restaurant :: :: :: :: :: :: ' ,restaurant.data.payload)
+  let rP = { // rP : Restaurent Params
+    rId : restaurant.data.payload.id
+,   cId : restaurant.data.payload.category[0].id
+  }
+  const fooditems = await axios.get(`${baseURL}/api/foods/category/${rP.cId}/${rP.rId}`,)
+
+  return { 
+    props: { 
+      selectedRestaurant: restaurant.data.payload,
+      selectedFoods : fooditems.data.payload     
+    } 
+  };
+
+ 
 };
 
 export default RestaurantDetail;

@@ -7,6 +7,7 @@ import { categoryType } from '../../types/constants/category.type';
 import { foodItemType } from '../../types/constants/foodItem.type';
 
 interface FoodTypeProps {
+  selectedFoods: foodItemType[] | undefined;
   selectedRestaurant: restaurantType | undefined;
   addToCartHandler: (data: foodItemType) => void;
   categoryHandler: (data: categoryType) => void;
@@ -16,7 +17,8 @@ const FoodType: React.FC<FoodTypeProps> = ({
   selectedRestaurant,
   addToCartHandler,
   categoryHandler,
-  categoryType
+  categoryType,
+  selectedFoods
 }) => {
   return (
     <Box>
@@ -67,8 +69,8 @@ const FoodType: React.FC<FoodTypeProps> = ({
             rowGap: '10px',
             paddingTop: '50px'
           }}>
-          {selectedRestaurant?.category.map(data=> {
-            console.log('category data-------------',data.name)
+          {selectedRestaurant?.category.map(data => {
+            console.log('category data-------------', data.name)
             return (
               <>
                 <Button
@@ -140,12 +142,12 @@ const FoodType: React.FC<FoodTypeProps> = ({
         </Box>
 
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-          {/* <Box>
-            {category.map(data => {
-              if (data.categoryId === categoryType)
+          <Box>
+            {selectedRestaurant?.category.map(data => {
+              if (data.name === categoryType)
                 return (
                   <Typography
-                    key={data.categoryId}
+                    key={data.name}
                     sx={{
                       fontFamily: 'Poppins',
                       fontStyle: 'normal',
@@ -167,135 +169,127 @@ const FoodType: React.FC<FoodTypeProps> = ({
                   </Typography>
                 );
             })}
-          </Box> */}
-          {/* {selectedRestaurant?.foods &&
-            selectedRestaurant?.foods.map(foodId => {
+          </Box>
+          {selectedFoods &&
+            selectedFoods.map(data => {
+
               return (
-                <>
-                  {foodItem.map(data => {
-                    if (data.foodId === foodId && data.category.includes(categoryType)) {
-                      {
-                        return (
-                          <Box
-                            key={data.foodId}
-                            sx={{
-                              display: 'flex',
-                              flexDirection: 'row',
-                              columnGap: {
-                                sm: '20px',
-                                xs: '10px'
-                              },
-                              marginTop: {
-                                sm: '35px',
-                                xs: '20px'
-                              }
-                            }}>
-                            <Box
-                              sx={{
-                                width: {
-                                  xl: '180px',
-                                  md: '160px',
-                                  sm: '170px',
-                                  xs: '200px'
-                                }
-                              }}>
-                              <Image
-                                height={0}
-                                width={0}
-                                sizes="(max-width:0) 100vw,
-                                    (max-height:0) 100vh"
-                                style={{
-                                  objectFit: 'cover',
-                                  height: 'auto',
-                                  width: '100%',
-                                  borderRadius: '10px'
-                                }}
-                                src={data.image[0]}
-                                alt=""
-                              />
-                            </Box>
-                            <Box>
-                              <Typography
-                                sx={{
-                                  fontFamily: 'Poppins',
-                                  fontStyle: 'normal',
-                                  fontWeight: '400',
-                                  fontSize: {
-                                    lg: '18px',
-                                    sm: '16px',
-                                    xs: '14px'
-                                  },
-                                  lineHeight: '25px',
-                                  textTransform: 'capitalize',
-                                  color: '#000000'
-                                }}>
-                                {data.name}
-                              </Typography>
-                              <Typography
-                                sx={{
-                                  fontFamily: 'Poppins',
-                                  fontStyle: 'normal',
-                                  fontWeight: '400',
-                                  fontSize: {
-                                    md: '14px',
-                                    sm: '12px',
-                                    xs: '10px'
-                                  },
-                                  lineHeight: {
-                                    lg: '36px',
-                                    xs: '20px'
-                                  },
-                                  textTransform: 'capitalize',
-                                  color: '#848484'
-                                }}>
-                                {data.description}
-                              </Typography>
-                              <Typography
-                                sx={{
-                                  md: '14px',
-                                  sm: '12px',
-                                  xs: '10px'
-                                }}>
-                                ₹{data.price}
-                              </Typography>
-                              <Button
-                                onClick={() => {
-                                  addToCartHandler(data);
-                                }}
-                                sx={{
-                                  width: {
-                                    md: '125px',
-                                    xs: '100px'
-                                  },
-                                  height: {
-                                    md: '35px',
-                                    xs: '30px'
-                                  },
-                                  fontSize: {
-                                    md: '14px',
-                                    xs: '10px'
-                                  },
-                                  textAlign: 'left',
-                                  justifyContent: 'flex-start',
-                                  backgroundColor: '#FFC300',
-                                  marginTop: '10px',
-                                  color: '#ffffff',
-                                  '&:hover': {
-                                    backgroundColor: '#FFC300',
-                                    color: '#ffffff'
-                                  }
-                                }}>
-                                add to cart
-                              </Button>
-                            </Box>
-                          </Box>
-                        );
-                      }
+                <Box
+                  key={data.fooditem_id}
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    columnGap: {
+                      sm: '20px',
+                      xs: '10px'
+                    },
+                    marginTop: {
+                      sm: '35px',
+                      xs: '20px'
                     }
-                  })}
-                </>
+                  }}>
+                  <Box
+                    sx={{
+                      width: {
+                        xl: '180px',
+                        md: '160px',
+                        sm: '170px',
+                        xs: '200px'
+                      }
+                    }}>
+                    <Image
+                      height={0}
+                      width={0}
+                      sizes="(max-width:0) 100vw,
+                                    (max-height:0) 100vh"
+                      style={{
+                        objectFit: 'cover',
+                        height: 'auto',
+                        width: '100%',
+                        borderRadius: '10px'
+                      }}
+                      src={data.fooditem_image}
+                      alt=""
+                    />
+                  </Box>
+                  <Box>
+                    <Typography
+                      sx={{
+                        fontFamily: 'Poppins',
+                        fontStyle: 'normal',
+                        fontWeight: '400',
+                        fontSize: {
+                          lg: '18px',
+                          sm: '16px',
+                          xs: '14px'
+                        },
+                        lineHeight: '25px',
+                        textTransform: 'capitalize',
+                        color: '#000000'
+                      }}>
+                      {data.fooditem_name}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontFamily: 'Poppins',
+                        fontStyle: 'normal',
+                        fontWeight: '400',
+                        fontSize: {
+                          md: '14px',
+                          sm: '12px',
+                          xs: '10px'
+                        },
+                        lineHeight: {
+                          lg: '36px',
+                          xs: '20px'
+                        },
+                        textTransform: 'capitalize',
+                        color: '#848484'
+                      }}>
+                      {data.fooditem_description}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        md: '14px',
+                        sm: '12px',
+                        xs: '10px'
+                      }}>
+                      ₹{data.fooditem_price}
+                    </Typography>
+                    <Button
+                      onClick={() => {
+                        addToCartHandler(data);
+                      }}
+                      sx={{
+                        width: {
+                          md: '125px',
+                          xs: '100px'
+                        },
+                        height: {
+                          md: '35px',
+                          xs: '30px'
+                        },
+                        fontSize: {
+                          md: '14px',
+                          xs: '10px'
+                        },
+                        textAlign: 'left',
+                        justifyContent: 'flex-start',
+                        backgroundColor: '#FFC300',
+                        marginTop: '10px',
+                        color: '#ffffff',
+                        '&:hover': {
+                          backgroundColor: '#FFC300',
+                          color: '#ffffff'
+                        }
+                      }}>
+                      add to cart
+                    </Button>
+                  </Box>
+                </Box>
               );
-            })} */}
+
+            })}
         </Box>
       </Box>
     </Box>
