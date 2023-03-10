@@ -12,13 +12,15 @@ interface FoodTypeProps {
   addToCartHandler: (data: foodItemType) => void;
   categoryHandler: (data: categoryType) => void;
   categoryType: string;
+  catWiseFoods : foodItemType[]
 }
 const FoodType: React.FC<FoodTypeProps> = ({
   selectedRestaurant,
   addToCartHandler,
   categoryHandler,
   categoryType,
-  selectedFoods
+  selectedFoods,
+  catWiseFoods
 }) => {
   return (
     <Box>
@@ -70,7 +72,6 @@ const FoodType: React.FC<FoodTypeProps> = ({
             paddingTop: '50px'
           }}>
           {selectedRestaurant?.category.map(data => {
-            console.log('category data-------------', data.name)
             return (
               <>
                 <Button
@@ -170,8 +171,8 @@ const FoodType: React.FC<FoodTypeProps> = ({
                 );
             })}
           </Box>
-          {selectedFoods &&
-            selectedFoods.map(data => {
+          {catWiseFoods &&
+            catWiseFoods.map(data => {
 
               return (
                 <Box

@@ -9,6 +9,7 @@
       fooditem_image: string;
       fooditem_categoryId: number;
       fooditem_restaurantsId: number;
+      restaurantId : number
   }
 
 
