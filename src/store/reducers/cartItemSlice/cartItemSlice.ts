@@ -24,6 +24,8 @@ const CartItems = createSlice({
         },
         userId :0
       }
+
+    
       // let alreadyExist = state.cartItems.findIndex(data => data.foodId === payload.foodId);
       // if (alreadyExist >= 0) {
       //   state.cartItems[alreadyExist] = payload;
@@ -39,7 +41,10 @@ const CartItems = createSlice({
     }
   },
   extraReducers :(builder)=>{
+    
     builder.addMatcher(isAnyOf(addFoodItemToCart.fulfilled),(state,actions)=>{
+      console.log("state-----------------",state)
+      console.log("action payload-----------------",actions.payload)
       state.foodDetails = actions.payload 
     })
   }

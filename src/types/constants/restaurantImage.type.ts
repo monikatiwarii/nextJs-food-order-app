@@ -1,6 +1,7 @@
-export interface restaurantImageType {
-  id: string;
-  image: string;
-  title: string;
-  details: string;
-}
+
+  export interface restaurantImageType {
+      id: number;
+      image: string;
+      title: string;
+      description: string;
+  }

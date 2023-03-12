@@ -57,7 +57,6 @@ const RestaurantDetail: NextPage<RestaurantDetailProps> = ({ selectedRestaurant,
    
     const result = await axios({ method, url, headers, data: body})
 
-    console.log('result--------------------',result)
     setAlert(true);
 
     dispatch(

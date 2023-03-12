@@ -18,6 +18,8 @@ import { category, foodItem, selectedCategory } from '../src/data/data';
 import { useDispatch } from '../src/store';
 import { setCartData } from '../src/store/reducers/cartItemSlice/cartItemSlice';
 import { cartItemType } from '../src/types/redux/cartItem.type';
+import axios from 'axios';
+import baseURL from '../src/api';
 
 interface HomeProps {}
 const Home: NextPage<HomeProps> = () => {
@@ -25,6 +27,7 @@ const Home: NextPage<HomeProps> = () => {
   const dispatch = useDispatch();
 
   const [categoryItems, setCategoryItems] = useState<Array<categoryType>>();
+  const [diningOut,setDiningOut] = useState()
 
   const [foodList, setFoodList] = useState<Array<foodItemType>>();
   const [categoryId, setCategoryId] = useState<string | undefined>();
@@ -72,6 +75,18 @@ const Home: NextPage<HomeProps> = () => {
     );
     router.push('/cart');
   };
+
+  useEffect(()=>{
+    const callApi = async()=>{
+      await axios.get(`${baseURL}/api/res/details`).then((response)=>{
+        setDiningOut(response.data.payload)
+      })
+    }
+    callApi();
+  },[])
+
+
+
   return (
     <>
       {loading ? (
@@ -80,7 +95,7 @@ const Home: NextPage<HomeProps> = () => {
         <AuthGuard>
           <CoverImage />
           <MaxWidthWrapper>
-            <DiningOut />
+            <DiningOut diningOut = {diningOut}  />
             <Cuisines />
           </MaxWidthWrapper>
           <PopularRecipes

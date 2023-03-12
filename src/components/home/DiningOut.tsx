@@ -3,8 +3,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { restaurantImage } from '../../data/data';
 
-interface DiningOutProps {}
-const DiningOut: React.FC<DiningOutProps> = () => {
+interface DiningOutProps {
+  diningOut : any
+}
+const DiningOut: React.FC<DiningOutProps> = ({diningOut}) => {
+
+  
+
   return (
     <Grid
       container
@@ -18,7 +23,7 @@ const DiningOut: React.FC<DiningOutProps> = () => {
           xs: '10px'
         }
       }}>
-      {restaurantImage.map((data, index) => {
+      {diningOut?.map((data:any, index:any) => {
         return (
           <Grid item xs={12} sm={6} md={4} key={index}>
             <Box
@@ -69,7 +74,7 @@ const DiningOut: React.FC<DiningOutProps> = () => {
                   textTransform: 'capitalize',
                   color: '#000000'
                 }}>
-                {data.details}
+                {data.description}
               </Typography>
             </Box>
           </Grid>

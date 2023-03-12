@@ -31,22 +31,22 @@ export const states: statesType[] = [
 
 export const restaurantImage: restaurantImageType[] = [
   {
-    id: 'res1',
+    id: 1,
     image: '/images/Rectangle 9.png',
     title: 'dinning  out',
-    details: 'Explore curated lists of top restaurants'
+    description: 'Explore curated lists of top restaurants'
   },
   {
-    id: 'res2',
+    id: 2,
     image: '/images/Rectangle 7.png',
     title: 'dinning  out',
-    details: 'Explore curated lists of top restaurants'
+    description: 'Explore curated lists of top restaurants'
   },
   {
-    id: 'res3',
+    id: 3,
     image: '/images/Rectangle 11.png',
     title: 'dinning  out',
-    details: 'Explore curated lists of top restaurants'
+    description: 'Explore curated lists of top restaurants'
   }
 ];
 
