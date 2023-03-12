@@ -71,7 +71,7 @@ const FoodType: React.FC<FoodTypeProps> = ({
             rowGap: '10px',
             paddingTop: '50px'
           }}>
-          {selectedRestaurant?.category.map((data,index) => {
+          {selectedRestaurant?.category.map((data:any,index) => {
             return (
               <>
                 <Button key={index}
@@ -257,6 +257,62 @@ const FoodType: React.FC<FoodTypeProps> = ({
                       }}>
                       ₹{data.fooditem_price}
                     </Typography>
+                    <Box
+                    sx={{
+                      display: 'flex',
+                      paddingTop: {
+                        sm: '40px',
+                        xs: '20px'
+                      }
+                    }}>
+                    <Button
+                      // onClick={() => {
+                      //   decrementQuantity(foods);
+                      // }}
+                      sx={{
+                        width: {
+                          sm: '48px',
+                          xs: '40px'
+                        },
+                        height: {
+                          sm: '43px',
+                          xs: '38px'
+                        },
+                        backgroundColor: '#F3F3F3',
+                        color: '#999999',
+                        fontSize: '20px'
+                      }}>
+                      -
+                    </Button>
+                    <Typography
+                      sx={{
+                        width: '48px',
+                        height: '43px',
+                        fontSize: '20px',
+                        textAlign: 'center'
+                      }}>
+                      {/* {foods.quantity} */}
+                    </Typography>
+                    <Button
+                      // onClick={() => {
+                      //   incrementQuantity(foods);
+                      // }}
+                      sx={{
+                        width: {
+                          sm: '48px',
+                          xs: '40px'
+                        },
+                        height: {
+                          sm: '43px',
+                          xs: '38px'
+                        },
+                        backgroundColor: '#F3F3F3',
+                        color: '#999999',
+                        fontSize: '20px'
+                      }}>
+                      +
+                    </Button>
+                  </Box>
                     <Button
                       onClick={() => {
                         addToCartHandler(data);

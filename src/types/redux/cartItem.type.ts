@@ -1,5 +1,5 @@
 export interface cartItemType {
-  foodId: number;
+  id: number;
   quantity: number;
 }
 export interface cartItemsType {

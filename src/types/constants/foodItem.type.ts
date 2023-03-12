@@ -1,5 +1,6 @@
 
   export interface foodItemType {
+      includes(categoryName: string): unknown;
       fooditem_id: number;
       fooditem_created_at: Date;
       fooditem_updated_at: Date;

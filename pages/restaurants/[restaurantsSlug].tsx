@@ -67,7 +67,7 @@ const RestaurantDetail: NextPage<RestaurantDetailProps> = ({ selectedRestaurant,
     );
   };
 
-  const categoryHandler = async (data: categoryType) => {
+  const categoryHandler = async (data: any) => {
 
     let rP = {
       rId: restaurantId,
@@ -118,8 +118,6 @@ export const getServerSideProps: GetServerSideProps = async context => {
     , cId: restaurant.data.payload.category[0].id
   }
   const fooditems = await axios.get(`${baseURL}/api/foods/category/${rP.cId}/${rP.rId}`,)
-  
-  
 
   return {
     props: {

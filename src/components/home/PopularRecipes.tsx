@@ -7,25 +7,86 @@ import Image from 'next/image';
 import { cartItemType } from '../../types/redux/cartItem.type';
 import { categoryType } from '../../types/constants/category.type';
 import { foodItemType } from '../../types/constants/foodItem.type';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import baseURL from '../../api';
+import { addFoodItemToCart } from '../../store/reducers/cartItemSlice/caerItem.api';
+import { useRouter } from 'next/router';
+import { useDispatch } from '../../store';
+import { selectedCategoryType } from '../../types/constants/selectedCategory.type';
 
 interface PopularRecipesProps {
-  categoryItems: categoryType[] | undefined;
-  foodList: foodItemType[] | undefined;
-  categoryId: string | undefined;
-  foodItemHandler: (data: categoryType) => void;
-  foodDataHandler: (data: cartItemType) => void;
+  selectedCategory : selectedCategoryType[] | undefined
+  categoryItem : categoryType[] | undefined
+  foodsItem : foodItemType[] | undefined
 }
 const PopularRecipes: React.FC<PopularRecipesProps> = ({
-  categoryItems,
-  foodList,
-  categoryId,
-  foodDataHandler,
-  foodItemHandler
+  selectedCategory, 
+  categoryItem ,
+  foodsItem 
+
 }) => {
   const themes = useTheme();
   const matches = useMediaQuery(themes.breakpoints.down('sm'));
 
+
+  const [categoryItems, setCategoryItems] = useState<Array<categoryType>>();
+  const [foodList, setFoodList] = useState<Array<foodItemType>>();
+  const [categoryName, setCategoryName] = useState<string | undefined>();
+
+ 
+ 
+  const router = useRouter();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    let categoryArray : any[]= [];
+    categoryItem?.map(data => {
+      console.log('category data----------------------------',data)
+      if (selectedCategory?.find(val => val.name === data.name)) {
+        console.log('selected data-----------',data)
+        categoryArray.push(data);
+      }
+    }); 
+    console.log('selected category Array----------------------------',categoryArray)
+    if(categoryArray.length > 0){
+      setCategoryItems(categoryArray);
+      setCategoryName(categoryArray[0].name);
+    }
+  },[]);
+
+ 
+
+  let foodArray: foodItemType[] = [];
+  useEffect(() => {
+    console.log('category name-----------------------',categoryName)
+    if (categoryName) {
+      foodsItem?.map(food => {
+        console.log('foodssssssssssssssssss-------------------------',food)
+          // if (food.includes(categoryName)) {
+          //   foodArray.push(food);
+          // }
+      });
+      setFoodList(foodArray);
+    }
+  }, [categoryName]);
+
+  const foodItemHandler = (data: any) => {
+    setCategoryName(data.name);
+  };
+
+  const foodDataHandler = (data: any) => {
+    dispatch(
+      addFoodItemToCart({
+        id: data.id,
+        quantity: 1
+      })
+    );
+    router.push('/cart');
+  };
+
   return (
+    
     <>
       <Box
         sx={{
@@ -67,6 +128,7 @@ const PopularRecipes: React.FC<PopularRecipesProps> = ({
             justifyContent: 'center'
           }}>
           {categoryItems?.map(data => {
+            console.log('category items -----------',data)
             return (
               <>
                 <Button
@@ -84,7 +146,7 @@ const PopularRecipes: React.FC<PopularRecipesProps> = ({
                       sm: '67px',
                       xs: '50px'
                     },
-                    backgroundColor: categoryId === data.categoryId ? '#F6B716' : '#ECEEF6',
+                    backgroundColor: categoryName === data.name ? '#F6B716' : '#ECEEF6',
                     borderRadius: '45px',
                     border: '0px',
                     fontFamily: 'Poppins',
@@ -96,7 +158,7 @@ const PopularRecipes: React.FC<PopularRecipesProps> = ({
                     },
                     lineHeight: '22px',
                     textAlign: 'center',
-                    color: categoryId === data.categoryId ? '#FFFFFF' : '#000000',
+                    color: categoryName === data.name ? '#FFFFFF' : '#000000',
                     '&:focus': {
                       backgroundColor: '#F6B716',
                       color: 'white'
@@ -122,7 +184,8 @@ const PopularRecipes: React.FC<PopularRecipesProps> = ({
             display: 'none'
           }
         }}>
-        {foodList?.map((food, index) => {
+        {foodList?.map((food :any, index:any) => {
+          console.log('my food list-----------------------------------',food)
           return (
             <>
               <Box
@@ -178,9 +241,10 @@ const PopularRecipes: React.FC<PopularRecipesProps> = ({
                   }}
                   onClick={() => {
                     foodDataHandler(food);
-                  }}>
+                  }}
+                  >
                   <Image
-                    src={food.image[0]}
+                    src={food.image}
                     height={0}
                     width={0}
                     sizes="(max-width:0) 100vw,

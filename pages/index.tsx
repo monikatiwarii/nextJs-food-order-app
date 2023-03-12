@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import CoverImage from '../src/components/home/CoverImage';
 import MaxWidthWrapper from '../src/components/common/MaxWidthWrapper';
@@ -8,86 +9,38 @@ import FoodDeliveryImage from '../src/components/home/FoodDeliveryImage';
 import FoodOffers from '../src/components/home/FoodOffers';
 import FoodCollection from '../src/components/home/FoodCollection';
 import DownloadApp from '../src/components/home/DownloadApp';
-import { NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import AuthGuard from '../src/components/common/AuthGuard';
 import { useRouter } from 'next/router';
 import LoaderPage from '../src/components/common/LoaderPage';
 import { foodItemType } from '../src/types/constants/foodItem.type';
 import { categoryType } from '../src/types/constants/category.type';
-import { category, foodItem, selectedCategory } from '../src/data/data';
+//import { category, foodItem, selectedCategory } from '../src/data/data';
 import { useDispatch } from '../src/store';
 import { setCartData } from '../src/store/reducers/cartItemSlice/cartItemSlice';
 import { cartItemType } from '../src/types/redux/cartItem.type';
 import axios from 'axios';
 import baseURL from '../src/api';
 import { selectedCategoryType } from '../src/types/constants/selectedCategory.type';
+import { addFoodItemToCart } from '../src/store/reducers/cartItemSlice/caerItem.api';
 
-interface HomeProps {}
-const Home: NextPage<HomeProps> = () => {
-  const router = useRouter();
-  const dispatch = useDispatch();
-
-  const [categoryItems, setCategoryItems] = useState<Array<categoryType>>();
-  const [diningOut,setDiningOut] = useState()
-  const [selectedCategory,setSelectedCategory]= useState<Array<selectedCategoryType>> ()
-
-  const [foodList, setFoodList] = useState<Array<foodItemType>>();
-  const [categoryId, setCategoryId] = useState<string | undefined>();
+interface HomeProps {
+  selectedCategory : selectedCategoryType[] | undefined
+  categoryItem : categoryType[] | undefined
+  foodsItem : foodItemType[] | undefined
+}
+const Home: NextPage<HomeProps> = ({selectedCategory,categoryItem,foodsItem}) => {
+  
+  const [diningOut,setDiningOut] = useState()  
   const [loading, setLoading] = React.useState(true);
-
-  useEffect(()=>{
-    const callApi = async()=>{
-    const selectedCategory  =  await axios.get(`${baseURL}/api/res/cat`).then((response)=>{
-      setSelectedCategory(response.data.payload)
-      })
+  
+  useEffect(() => {
+    if (localStorage.getItem('isLoggedIn')) {
+      setLoading(false);
     }
-    callApi();
-  },[])
+  }, []);
 
-
-  // useEffect(() => {
-  //   let categoryArray: categoryType[] = [];
-  //   category.map(data => {
-  //     if (selectedCategory.includes(data.name)) {
-  //       categoryArray.push(data);
-  //     }
-  //   });
-  //   setCategoryItems(categoryArray);
-  //   setCategoryId(categoryArray[0].categoryId);
-  // }, []);
-
-  // let foodArray: foodItemType[] = [];
-  // useEffect(() => {
-  //   if (categoryId) {
-  //     foodItem.map(food => {
-  //       if (food.category.includes(categoryId)) {
-  //         foodArray.push(food);
-  //       }
-  //     });
-  //     setFoodList(foodArray);
-  //   }
-  // }, [categoryId]);
-
-  // useEffect(() => {
-  //   if (localStorage.getItem('isLoggedIn')) {
-  //     setLoading(false);
-  //   }
-  // }, []);
-
-  // const foodItemHandler = (data: categoryType) => {
-  //   setCategoryId(data.categoryId);
-  // };
-
-  // const foodDataHandler = (data: cartItemType) => {
-  //   dispatch(
-  //     setCartData({
-  //       foodId: data.foodId,
-  //       quantity: 1
-  //     })
-  //   );
-  //   router.push('/cart');
-  // };
-
+  
   useEffect(()=>{
     const callApi = async()=>{
       await axios.get(`${baseURL}/api/res/details`).then((response)=>{
@@ -110,13 +63,16 @@ const Home: NextPage<HomeProps> = () => {
             <DiningOut diningOut = {diningOut}  />
             <Cuisines />
           </MaxWidthWrapper>
-          {/* <PopularRecipes
-            categoryItems={categoryItems}
-            foodList={foodList}
-            categoryId={categoryId}
-            foodItemHandler={foodItemHandler}
-            foodDataHandler={foodDataHandler}
-          /> */}
+          <PopularRecipes
+          selectedCategory ={selectedCategory}
+          categoryItem = {categoryItem}
+          foodsItem = {foodsItem}
+            // categoryItems={categoryItems}
+            // foodList={foodList}
+            // categoryName={categoryName}
+            // foodItemHandler={foodItemHandler}
+            // foodDataHandler={foodDataHandler}
+          />
           <FoodDeliveryImage />
           <MaxWidthWrapper>
             <FoodOffers />
@@ -128,5 +84,22 @@ const Home: NextPage<HomeProps> = () => {
     </>
   );
 };
+
+export const getServerSideProps : GetServerSideProps = async context => {
+  
+  const selectedCategoryItem  =  await axios.get(`${baseURL}/api/res/cat`)
+  const categoryItem  =  await axios.get(`${baseURL}/api/category`)
+  const foodsItem  =  await axios.get(`${baseURL}/api/foods`)
+    
+  return {
+    props: {
+      selectedCategory: selectedCategoryItem.data.payload,
+      categoryItem: categoryItem.data.payload,
+      foodsItem: foodsItem.data.payload 
+    }
+  };
+};
+
+
 
 export default Home;
