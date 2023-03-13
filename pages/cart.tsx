@@ -207,12 +207,18 @@ const Cart: NextPage<CartProps> = ({cartDataItems}) => {
   };
 
   const router = useRouter();
-  const orderHandler = () => {
+  const orderHandler = async() => {
     if (grandTotal !== 0) {
+      let data = {
+        coupon : couponValue,
+        total : grandTotal
+      }
+      const orderResponse =  await callAPI("POST","checkout",data)
+      console.log('order response---------------',orderResponse)
       localStorage.setItem('isOrdered', true.toString());
       router.push('/order');
       setLoading(true);
-      setGrandTotal(0);
+      //setGrandTotal(0);
     }
   };
 
