@@ -3,7 +3,7 @@ import Header from '../src/components/header/Header';
 import MaxWidthWrapper from '../src/components/common/MaxWidthWrapper';
 import Discount from '../src/components/cart/Discount';
 import React, { useEffect, useState } from 'react';
-import { NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import CartData from '../src/components/cart/CartData';
 import EmptyCart from '../src/components/cart/EmptyCart';
 import { useDispatch, useSelector } from '../src/store';
@@ -13,10 +13,18 @@ import { cartItemType } from '../src/types/redux/cartItem.type';
 import { coupons, foodItem } from '../src/data/data';
 import { useRouter } from 'next/router';
 import { removeCartItem, setCartData } from '../src/store/reducers/cartItemSlice/cartItemSlice';
+import axios from 'axios';
+import baseURL from '../src/api';
+import callAPI from './api/callAPI';
 
-interface CartProps {}
+interface CartProps {
+  cartDataItems : any | undefined
+}
 let isCoupenUsed: boolean = false;
-const Cart: NextPage<CartProps> = () => {
+const Cart: NextPage<CartProps> = ({cartDataItems}) => {
+ 
+console.log("cart dtaa items--------------------",cartDataItems)
+
   let cartData = useSelector(state => state.cartItemSlice.cartItems);
   const dispatch = useDispatch();
 
@@ -34,15 +42,15 @@ const Cart: NextPage<CartProps> = () => {
       if (cartdata.quantity < 2) {
         dispatch(
           removeCartItem({
-            foodId: data.foodId,
+            foodId: data.id,
             quantity: 0
           })
         );
       } else {
-        if (cartdata.foodId == data.foodId) {
+        if (cartdata.id == data.id) {
           dispatch(
             setCartData({
-              foodId: data.foodId,
+              foodId: data.id,
               quantity: data.quantity - 1
             })
           );
@@ -54,10 +62,10 @@ const Cart: NextPage<CartProps> = () => {
   const incrementQuantity = (data: cartItemType) => {
     cartData.map(cartdata => {
       if (cartdata.quantity < 5) {
-        if (cartdata.foodId == data.foodId) {
+        if (cartdata.id== data.id) {
           dispatch(
             setCartData({
-              foodId: data.foodId,
+              foodId: data.id,
               quantity: data.quantity + 1
             })
           );
@@ -69,8 +77,8 @@ const Cart: NextPage<CartProps> = () => {
     let total = 0;
     foodItem.map(foods => {
       cartData.map(data => {
-        if (data.foodId === foods.foodId) {
-          total += foods.price * data.quantity;
+        if (data.id === foods.fooditem_id) {
+          total += foods.fooditem_id * data.quantity;
         }
       });
     });
@@ -84,8 +92,8 @@ const Cart: NextPage<CartProps> = () => {
     if (cartData.length > 0) {
       foodItem.map(foods => {
         cartData.map(data => {
-          if (data.foodId === foods.foodId) {
-            total += foods.price * data.quantity;
+          if (data.id === foods.fooditem_id) {
+            total += foods.fooditem_price * data.quantity;
           }
         });
       });
@@ -208,7 +216,10 @@ const Cart: NextPage<CartProps> = () => {
               orderHandler={orderHandler}
               isCoupenUsed={isCoupenUsed}
             />
-            <CartData decrementQuantity={decrementQuantity} incrementQuantity={incrementQuantity} />
+            <CartData 
+            cartDataItems = {cartDataItems}
+            decrementQuantity={decrementQuantity} 
+            incrementQuantity={incrementQuantity} />
           </>
         ) : (
           <EmptyCart />
@@ -217,5 +228,20 @@ const Cart: NextPage<CartProps> = () => {
     </AuthComponent>
   );
 };
+
+export const getServerSideProps : GetServerSideProps = async context => {
+  let url = `cart`
+  let method = `GET`  
+  const cartDataItems: any = await callAPI(method, url)
+
+  console.log('cartDataItems :: :: :: ', cartDataItems)
+
+  return {
+    props: {
+      cartDataItems: cartDataItems?.data?.payload || {},
+    }
+  };
+};
+
 
 export default Cart;

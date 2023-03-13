@@ -5,27 +5,20 @@ import { useEffect, useState } from 'react';
 import baseURL from '../../api';
 import { useSelector } from '../../store';
 import { cartItemType } from '../../types/redux/cartItem.type';
-
+import callAPI from '../../../pages/api/callAPI';
 interface CartDataProps {
+  cartDataItems : any | undefined
   decrementQuantity: (data: cartItemType) => void;
   incrementQuantity: (data: cartItemType) => void;
 }
-const CartData: React.FC<CartDataProps> = ({ decrementQuantity, incrementQuantity }) => {
-  const[foodItem,setFoodItem] = useState()
-
-  useEffect(()=>{
-    const callApi = async()=>{
-      await axios.get(`${baseURL}/api/cart/`).then((response)=>{
-        setFoodItem(response.data.payload)
-      })
-    }
-    callApi();
-  },[])
+const CartData: React.FC<CartDataProps> = ({ decrementQuantity, incrementQuantity,cartDataItems }) => {
+ 
 
   let cartData = useSelector(state => state.cartItemSlice);
 
-  console.log('slice wala cartData--------------------',cartData)
-  console.log('slice wala cartData--------------------',foodItem)
+  console.log('slice wala cartData 1--------------------',cartData)
+  console.log('cart data item 2--------------------------',cartDataItems.cartData)
+  
 
   return (
     <Box>
@@ -43,12 +36,10 @@ const CartData: React.FC<CartDataProps> = ({ decrementQuantity, incrementQuantit
           alignItems: { xs: 'center' },
           flexWrap: 'wrap'
         }}>
-        {/* {foodItem.map(data => {
-          return cartData.map(foods => {
-            if (data.foodId === foods.foodId) {
+        {cartDataItems.cartData?.map((data:any) => {
               return (
                 <Box
-                  key={foods.foodId}
+                  key={data.fooditem.name}
                   sx={{
                     backgroundColor: '#F9F9F9',
                     width: {
@@ -68,7 +59,7 @@ const CartData: React.FC<CartDataProps> = ({ decrementQuantity, incrementQuantit
                   // }}>
                   >
                     <Image
-                      src={data.image[0]}
+                      src={data.fooditem.image}
                       alt=""
                       height={0}
                       width={0}
@@ -102,7 +93,7 @@ const CartData: React.FC<CartDataProps> = ({ decrementQuantity, incrementQuantit
                         color: '#000000',
                         marginTop: '10px'
                       }}>
-                      {data.name}
+                      {data.fooditem.name}
                     </Typography>
                     <Typography
                       sx={{
@@ -118,7 +109,7 @@ const CartData: React.FC<CartDataProps> = ({ decrementQuantity, incrementQuantit
                         lineHeight: '30px',
                         color: '#FFA500'
                       }}>
-                      ₹{data.price}
+                      ₹{data.fooditem.price}
                     </Typography>
                   </Box>
                   <Typography
@@ -135,7 +126,7 @@ const CartData: React.FC<CartDataProps> = ({ decrementQuantity, incrementQuantit
                       color: '#848484',
                       paddingTop: '10px'
                     }}>
-                    {data.description}
+                    {data.fooditem.description}
                   </Typography>
 
                   <Box
@@ -147,9 +138,9 @@ const CartData: React.FC<CartDataProps> = ({ decrementQuantity, incrementQuantit
                       }
                     }}>
                     <Button
-                      onClick={() => {
-                        decrementQuantity(foods);
-                      }}
+                      // onClick={() => {
+                      //   decrementQuantity(foods);
+                      // }}
                       sx={{
                         width: {
                           sm: '48px',
@@ -172,12 +163,12 @@ const CartData: React.FC<CartDataProps> = ({ decrementQuantity, incrementQuantit
                         fontSize: '20px',
                         textAlign: 'center'
                       }}>
-                      {foods.quantity}
+                      {data.quantity}
                     </Typography>
                     <Button
-                      onClick={() => {
-                        incrementQuantity(foods);
-                      }}
+                      // onClick={() => {
+                      //   incrementQuantity(foods);
+                      // }}
                       sx={{
                         width: {
                           sm: '48px',
@@ -226,7 +217,7 @@ const CartData: React.FC<CartDataProps> = ({ decrementQuantity, incrementQuantit
                         lineHeight: '21px',
                         color: '#FFA500'
                       }}>
-                      ₹{data.price} * {foods.quantity}
+                      ₹{data.fooditem.price} * {data.quantity}
                     </Typography>
                   </Box>
                   <Divider
@@ -272,14 +263,13 @@ const CartData: React.FC<CartDataProps> = ({ decrementQuantity, incrementQuantit
                         lineHeight: '21px',
                         color: '#FFA500'
                       }}>
-                      ₹{data.price * foods.quantity}
+                      ₹{data.fooditem.price * data.quantity}
                     </Typography>
                   </Box>
                 </Box>
               );
-            }
-          });
-        })} */}
+          
+        })}
       </Box>
 
       {/* </Box> */}
