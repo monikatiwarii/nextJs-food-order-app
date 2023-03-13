@@ -81,7 +81,7 @@ export const getServerSideProps : GetServerSideProps = async context => {
   
   const selectedCategoryItem  =  await axios.get(`${baseURL}/api/res/cat`)
   const categoryItem  =  await axios.get(`${baseURL}/api/category`)
-  const foodsItem  =  await axios.get(`${baseURL}/api/foods`)
+  const foodsItem  =  await axios.get(`${baseURL}/api/foods/`)
   
     let url = `cart`
     let method = `GET`  

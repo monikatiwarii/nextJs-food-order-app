@@ -57,7 +57,9 @@ const PopularRecipes: React.FC<PopularRecipesProps> = ({
   let foodArray: foodItemType[] = [];
   useEffect(() => {
     if (categoryName) {
+      console.log('category ka naam :::: : : : : : : : ',categoryName)
       foodsItem?.map(food => {
+        console.log('food ka data : : ::  : :: : :: :: : ',food)
           // if (food.includes(categoryName)) {
           //   foodArray.push(food);
           // }
