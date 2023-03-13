@@ -29,6 +29,7 @@ const Cart: NextPage<CartProps> = ({cartDataItems}) => {
   const dispatch = useDispatch();
 
   const [loading, setLoading] = useState(false);
+  const [count,setCount] = useState<number>(0)
 
   const [total, setTotal] = useState<number>(0);
   const [discount, setDiscount] = useState<string | number>(0);
@@ -39,19 +40,24 @@ const Cart: NextPage<CartProps> = ({cartDataItems}) => {
   
   const[cartData,setCartData] = useState<any>(cartDataItems)
 
+  const [newTotal, setNewTotal] = useState<number>(0)
+
 
   const setNewCartData= async ()=>{
       let url = `cart`
       let method = `GET`  
      const response: any =  await callAPI(method, url) 
      console.log('response :: :: :: :: ',response)
-     setCartData(response?.data?.payload?.cartData || {})
-     
+     setCartData(response?.data?.payload.cartData)
+     setNewTotal(response?.data?.payload?.total)
+     setGrandTotal(response?.data?.payload?.total)
     }
   
   useEffect(()=>{
     if(Object.keys(cartDataItems).length > 0 ){
       setCartData(cartDataItems.cartData)
+      setNewTotal(cartDataItems.total)
+      setGrandTotal(cartDataItems.total)
     }
     else{
       setNewCartData()
@@ -59,6 +65,7 @@ const Cart: NextPage<CartProps> = ({cartDataItems}) => {
   },[])
 
 
+  
   const decrementQuantity = (data: any) => {
 
     dispatch(
@@ -68,6 +75,10 @@ const Cart: NextPage<CartProps> = ({cartDataItems}) => {
       })
     )
       setNewCartData()
+      setCouponValue('')
+      setDiscount(0)
+      removeCoupon()
+
   };
 
   const incrementQuantity = (data : any) => {
@@ -79,6 +90,9 @@ const Cart: NextPage<CartProps> = ({cartDataItems}) => {
       })
     )
     setNewCartData()
+    setCouponValue('')
+    setDiscount(0)
+    removeCoupon()
   };
   let countCartAmount = () => {
 
@@ -95,93 +109,84 @@ const Cart: NextPage<CartProps> = ({cartDataItems}) => {
     return total;
   };
 
-  useEffect(() => {
-    let total = 0;
-    let totalDiscount = 0;
-    if (cartData.length > 0) {
-      foodItem.map(foods => {
-        cartData.map(data => {
-          if (data.id === foods.fooditem_id) {
-            total += foods.fooditem_price * data.quantity;
-          }
-        });
-      });
-      setTotal(total);
-      if (!!couponValue) {
-        coupons.map(data => {
-          if (data.name === couponValue) {
-            isCoupenUsed = true;
-            if (data.type === 'PERCENTAGE') {
-              totalDiscount = total * (Number(data.value) / 100);
-              total = total - totalDiscount;
-              if (total < 0) total = 0;
-            } else {
-              totalDiscount = data.value;
-              total = total - Number(totalDiscount);
-              if (total < 0) total = 0;
-            }
-          }
-        });
-      }
-      setDiscount(totalDiscount);
-      setGrandTotal(total);
-    }
-  }, [cartData]);
+  // useEffect(() => {
+  //   let total = 0;
+  //   let totalDiscount = 0;
+  //   if (cartData.length > 0) {
+  //     foodItem.map(foods => {
+  //       cartData.map(data => {
+  //         if (data.id === foods.fooditem_id) {
+  //           total += foods.fooditem_price * data.quantity;
+  //         }
+  //       });
+  //     });
+  //     setTotal(total);
+  //     if (!!couponValue) {
+  //       coupons.map(data => {
+  //         if (data.name === couponValue) {
+  //           isCoupenUsed = true;
+  //           if (data.type === 'PERCENTAGE') {
+  //             totalDiscount = total * (Number(data.value) / 100);
+  //             total = total - totalDiscount;
+  //             if (total < 0) total = 0;
+  //           } else {
+  //             totalDiscount = data.value;
+  //             total = total - Number(totalDiscount);
+  //             if (total < 0) total = 0;
+  //           }
+  //         }
+  //       });
+  //     }
+  //     setDiscount(totalDiscount);
+  //     setGrandTotal(total);
+  //   }
+  // }, [cartData]);
 
   //to check coupon is valid or not and coupon type
-  const applyCoupon = () => {
+  const applyCoupon = async() => {
     setInvalidCoupen('');
-    if (!isCoupenUsed) {
-      let couponData = coupons.find(coupon => coupon.name === couponValue);
+    
+    let method = "GET"
+    let url = `coupons/${couponValue}`
+    const couponData: any = await callAPI(method,url) 
+    console.log('coupon data :: ::: :: :: :: ::',couponData)
+    if(couponData?.data.success){
+      let couponRes = couponData?.data.payload;
 
-      if (!couponData) {
-        setInvalidCoupen('Invalid coupon!');
-      } else {
-        setInvalidCoupen('');
-        isCoupenUsed = true;
-        let gTotal = 0;
-        let totalDiscount: string | number;
-        if (couponData.type === 'PERCENTAGE') {
-          totalDiscount = grandTotal * (Number(couponData.value) / 100);
-          gTotal = grandTotal - totalDiscount;
-          if (gTotal < 0) setGrandTotal(0);
-          else setGrandTotal(gTotal);
-        } else {
-          totalDiscount = couponData.value;
-          gTotal = grandTotal - Number(totalDiscount);
-          if (gTotal < 0) setGrandTotal(0);
-          else setGrandTotal(gTotal);
-        }
-        setDiscount(totalDiscount);
-
-        // remove coupon button
-        let removeCouponButton = (
-          <Button
-            onClick={removeCoupon}
-            sx={{
-              width: '50px',
-              height: '40px',
-              fontSize: '18px',
-              marginLeft: '20px',
-              marginTop: '20px',
-              backgroundColor: '#FFC300',
-              color: '#ffffff',
-              '&:hover': {
-                backgroundColor: '#FC0303',
-                color: '#ffffff'
-              }
-            }}>
-            X
-          </Button>
-        );
-        setInvalidCoupenButton(removeCouponButton);
+      if(couponRes.type === "FLAT"){
+        setDiscount(couponRes.value)
+        setGrandTotal(newTotal-couponRes.value) 
       }
+      let removeCouponButton = (
+        <Button
+          onClick={removeCoupon}
+          sx={{
+            width: '50px',
+            height: '40px',
+            fontSize: '18px',
+            marginLeft: '20px',
+            marginTop: '20px',
+            backgroundColor: '#FFC300',
+            color: '#ffffff',
+            '&:hover': {
+              backgroundColor: '#FC0303',
+              color: '#ffffff'
+            }
+          }}>
+          X
+        </Button>
+      );
+      setInvalidCoupenButton(removeCouponButton);
+      isCoupenUsed = true
+    }
+    else{
+      setInvalidCoupen('');
     }
   };
-  // remove coupon
+      // remove coupon
   const removeCoupon = () => {
     isCoupenUsed = false;
-    setGrandTotal(countCartAmount());
+    setGrandTotal(newTotal);
     setDiscount(0);
     setCouponValue('');
     setInvalidCoupen('');
@@ -193,7 +198,6 @@ const Cart: NextPage<CartProps> = ({cartDataItems}) => {
     isCoupenUsed = false;
     setInvalidCoupenButton('');
     setDiscount(0);
-    setGrandTotal(countCartAmount());
     setCouponValue(e.target.value);
   };
 
@@ -207,37 +211,39 @@ const Cart: NextPage<CartProps> = ({cartDataItems}) => {
     }
   };
 
-  return (
-    <AuthComponent>
-      <MaxWidthWrapper>
-        <Header cartDataItems={cartDataItems}/>
-        {cartData.length > 0 ? (
-          <>
-            <Discount
-              total={total}
-              discount={discount}
-              grandTotal={grandTotal}
-              couponValue={couponValue}
-              invalidCoupen={invalidCoupen}
-              invalidCoupenButton={invalidCoupenButton}
-              applyCoupon={applyCoupon}
-              handleChangeCoupon={handleChangeCoupon}
-              orderHandler={orderHandler}
-              isCoupenUsed={isCoupenUsed}
+    return (
+      <AuthComponent>
+        <MaxWidthWrapper>
+          <Header cartData={cartData}/>
+          {cartData.length > 0 ? (
+            <>
+              <Discount
+                total={total}
+                discount={discount}
+                grandTotal={grandTotal}
+                couponValue={couponValue}
+                invalidCoupen={invalidCoupen}
+                invalidCoupenButton={invalidCoupenButton}
+                applyCoupon={applyCoupon}
+                handleChangeCoupon={handleChangeCoupon}
+                orderHandler={orderHandler}
+                isCoupenUsed={isCoupenUsed}
+                cartData = {cartDataItems}
+                newTotal={newTotal}
+              />
+              <CartData 
               cartData = {cartData}
-            />
-            <CartData 
-            cartData = {cartData}
-            decrementQuantity={decrementQuantity} 
-            incrementQuantity={incrementQuantity} />
-          </>
-        ) : (
-          <EmptyCart />
-        )}
-      </MaxWidthWrapper>
-    </AuthComponent>
-  );
+              decrementQuantity={decrementQuantity} 
+              incrementQuantity={incrementQuantity} />
+            </>
+          ) : (
+            <EmptyCart />
+          )}
+        </MaxWidthWrapper>
+      </AuthComponent>
+    );
 };
+
 
 export const getServerSideProps : GetServerSideProps = async context => {
   let url = `cart`

@@ -17,16 +17,21 @@ import Link from 'next/link';
 import { useSelector } from '../../store';
 import { foodItemType } from '../../types/constants/foodItem.type';
 
-interface CoverImageProps {}
+interface CoverImageProps {
+  cartData : any | undefined
+}
 
-const CoverImage: React.FC<CoverImageProps> = () => {
+
+
+const CoverImage: React.FC<CoverImageProps> = ({cartData}) => {
   let counter = 0;
-  let cartData = useSelector((state: any) => state.cartItemSlice.cartItems);
+  let cartDataItems = useSelector((state: any) => state.cartItemSlice.cartItems);
 
-  cartData.filter((count: foodItemType) => {
+  cartData?.map((count: any) => {
     counter += count.quantity;
     return count;
   });
+
   return (
     <>
       <Box
@@ -127,7 +132,7 @@ const CoverImage: React.FC<CoverImageProps> = () => {
               <Box
                 sx={{
                   width: {
-                    xl: '35px',
+                    xl: '40px',
                     md: '25px',
                     sm: '20px',
                     xs: '20px'
@@ -145,12 +150,12 @@ const CoverImage: React.FC<CoverImageProps> = () => {
                     fontStyle: 'normal',
                     fontWeight: '500',
                     fontSize: {
-                      xl: '16px',
+                      xl: '14px',
                       sm: '13px',
                       xs: '8px'
                     },
                     width: {
-                      xl: '20px',
+                      xl: '25px',
                       xs: '15px'
                     },
                     height: {
@@ -159,7 +164,7 @@ const CoverImage: React.FC<CoverImageProps> = () => {
                     },
                     marginLeft: '5px',
                     lineHeight: {
-                      lg: '20px',
+                      lg: '18px',
                       md: '18px',
                       xs: '15px'
                     },

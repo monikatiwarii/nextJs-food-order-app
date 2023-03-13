@@ -24,7 +24,7 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
 }));
 
 interface DiscountProps {
-  cartData :any
+  cartData : any;
   isCoupenUsed: boolean;
   total: number;
   discount: string | number;
@@ -35,6 +35,7 @@ interface DiscountProps {
   applyCoupon: () => void;
   orderHandler: () => void;
   handleChangeCoupon: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  newTotal: number;
 }
 let isCoupenUsed = false;
 const Discount: React.FC<DiscountProps> = ({
@@ -48,8 +49,11 @@ const Discount: React.FC<DiscountProps> = ({
   applyCoupon,
   orderHandler,
   handleChangeCoupon,
-  isCoupenUsed
+  isCoupenUsed,
+  newTotal
 }) => {
+
+ 
   return (
     <>
       <Box>
@@ -125,7 +129,7 @@ const Discount: React.FC<DiscountProps> = ({
                 lineHeight: '21px',
                 color: '#FFA500'
               }}>
-              ₹{total}
+              ₹{newTotal}
             </Typography>
           </Box>
 

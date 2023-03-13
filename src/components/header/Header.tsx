@@ -7,18 +7,22 @@ import Image from 'next/image';
 import { useSelector } from '../../store';
 
 interface HeaderProps {
-  cartDataItems :any | undefined
+  cartData :any | undefined
 }
 const Header: React.FC<HeaderProps> = ({
-  cartDataItems
+  cartData
 }) => {
-  let counter = 0;
-  let cartData = useSelector(state => state.cartItemSlice.cartItems);
 
-  cartDataItems?.carData?.map((count: any) => {
-    counter += count.quantity;
-    return count;
-  });
+  
+  let counter = 0;
+  let cartDataItems = useSelector(state => state.cartItemSlice.cartItems);
+
+  if(Array.isArray(cartData)){
+    cartData?.map((count: any) => {
+      counter += count.quantity;
+      return count;
+    });
+  }
 
   return (
     <MaxWidthWrapper>

@@ -17,15 +17,20 @@ import { setCartData } from '../../src/store/reducers/cartItemSlice/cartItemSlic
 import baseURL from '../../src/api';
 import axios from 'axios';
 import { addFoodItemToCart } from '../../src/store/reducers/cartItemSlice/caerItem.api';
+import callAPI from '../api/callAPI';
 
 interface RestaurantDetailProps {
   selectedRestaurant: restaurantType | undefined;
   selectedFoods: foodItemType[] | undefined
   restaurantId: number
+  cartDataItems  : any | undefined
 }
-const RestaurantDetail: NextPage<RestaurantDetailProps> = ({ selectedRestaurant, selectedFoods, restaurantId }) => {
+const RestaurantDetail: NextPage<RestaurantDetailProps> = ({ selectedRestaurant, selectedFoods, restaurantId,cartDataItems }) => {
 
   const [alert, setAlert] = useState<boolean>(false);
+  const[cartData,setCartData] = useState<any>(cartDataItems)
+
+  
 
   const handleClose = () => {
     setAlert(false);
@@ -76,7 +81,7 @@ const RestaurantDetail: NextPage<RestaurantDetailProps> = ({ selectedRestaurant,
           </Alert>
         </Snackbar>
       )}
-      <Header />
+      <Header cartData={ cartDataItems.cartData} />
       <RestaurantHeader />
       <MaxWidthWrapper>
         <RestaurantDetails selectedRestaurant={selectedRestaurant} />
@@ -104,16 +109,18 @@ export const getServerSideProps: GetServerSideProps = async context => {
     , cId: restaurant.data.payload.category[0].id
   }
   const fooditems = await axios.get(`${baseURL}/api/foods/category/${rP.cId}/${rP.rId}`,)
-
+ 
+  let url = `cart`
+  let method = `GET`  
+  const cartDataItems: any = await callAPI(method, url)
   return {
     props: {
       selectedRestaurant: restaurant.data.payload,
       selectedFoods: fooditems.data.payload,
-      restaurantId: restaurant.data.payload.id
+      restaurantId: restaurant.data.payload.id,
+      cartDataItems: cartDataItems?.data?.payload || {}
     }
   };
-
-
 };
 
 export default RestaurantDetail;

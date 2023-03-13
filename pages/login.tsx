@@ -26,7 +26,6 @@ const Login: NextPage<LoginProps> = () => {
       setError("");
       try {
           let res = await axios.post(`${baseURL}/api/login`, loginData);
-          
           localStorage.setItem("token", res.data.payload.token);
           localStorage.setItem("isLoggedIn","true");
           router.push("/");

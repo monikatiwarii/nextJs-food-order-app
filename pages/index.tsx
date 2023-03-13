@@ -17,14 +17,16 @@ import { categoryType } from '../src/types/constants/category.type';
 import axios from 'axios';
 import baseURL from '../src/api';
 import { selectedCategoryType } from '../src/types/constants/selectedCategory.type';
+import callAPI from './api/callAPI';
 
 
 interface HomeProps {
   selectedCategory : selectedCategoryType[] | undefined
   categoryItem : categoryType[] | undefined
   foodsItem : foodItemType[] | undefined
+  cartDataItems : any | undefined
 }
-const Home: NextPage<HomeProps> = ({selectedCategory,categoryItem,foodsItem}) => {
+const Home: NextPage<HomeProps> = ({selectedCategory,categoryItem,foodsItem,cartDataItems}) => {
   
   const [diningOut,setDiningOut] = useState()  
   const [loading, setLoading] = React.useState(true);
@@ -53,7 +55,7 @@ const Home: NextPage<HomeProps> = ({selectedCategory,categoryItem,foodsItem}) =>
         <LoaderPage />
       ) : (
         <AuthGuard>
-          <CoverImage />
+          <CoverImage cartData ={cartDataItems.cartData}/>
           <MaxWidthWrapper>
             <DiningOut diningOut = {diningOut}  />
             <Cuisines />
@@ -62,11 +64,6 @@ const Home: NextPage<HomeProps> = ({selectedCategory,categoryItem,foodsItem}) =>
           selectedCategory ={selectedCategory}
           categoryItem = {categoryItem}
           foodsItem = {foodsItem}
-            // categoryItems={categoryItems}
-            // foodList={foodList}
-            // categoryName={categoryName}
-            // foodItemHandler={foodItemHandler}
-            //foodDataHandler={foodDataHandler}
           />
           <FoodDeliveryImage />
           <MaxWidthWrapper>
@@ -85,12 +82,18 @@ export const getServerSideProps : GetServerSideProps = async context => {
   const selectedCategoryItem  =  await axios.get(`${baseURL}/api/res/cat`)
   const categoryItem  =  await axios.get(`${baseURL}/api/category`)
   const foodsItem  =  await axios.get(`${baseURL}/api/foods`)
+  
+    let url = `cart`
+    let method = `GET`  
+    const cartDataItems: any = await callAPI(method, url)
+    
     
   return {
     props: {
       selectedCategory: selectedCategoryItem.data.payload,
       categoryItem: categoryItem.data.payload,
-      foodsItem: foodsItem.data.payload 
+      foodsItem: foodsItem.data.payload ,
+      cartDataItems: cartDataItems?.data?.payload || {},
     }
   };
 };
