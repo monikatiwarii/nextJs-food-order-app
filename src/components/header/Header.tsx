@@ -6,15 +6,19 @@ import MaxWidthWrapper from '../common/MaxWidthWrapper';
 import Image from 'next/image';
 import { useSelector } from '../../store';
 
-interface HeaderProps {}
-const Header: React.FC<HeaderProps> = () => {
+interface HeaderProps {
+  cartDataItems :any | undefined
+}
+const Header: React.FC<HeaderProps> = ({
+  cartDataItems
+}) => {
   let counter = 0;
   let cartData = useSelector(state => state.cartItemSlice.cartItems);
 
-  // cartData.filter(count => {
-  //   counter += count.quantity;
-  //   return count;
-  // });
+  cartDataItems?.carData?.map((count: any) => {
+    counter += count.quantity;
+    return count;
+  });
 
   return (
     <MaxWidthWrapper>

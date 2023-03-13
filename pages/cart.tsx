@@ -13,19 +13,17 @@ import { cartItemType } from '../src/types/redux/cartItem.type';
 import { coupons, foodItem } from '../src/data/data';
 import { useRouter } from 'next/router';
 import { removeCartItem, setCartData } from '../src/store/reducers/cartItemSlice/cartItemSlice';
-import axios from 'axios';
-import baseURL from '../src/api';
 import callAPI from './api/callAPI';
+import { addFoodItemToCart } from '../src/store/reducers/cartItemSlice/caerItem.api';
 
 interface CartProps {
   cartDataItems : any | undefined
 }
 let isCoupenUsed: boolean = false;
 const Cart: NextPage<CartProps> = ({cartDataItems}) => {
- 
-console.log("cart dtaa items--------------------",cartDataItems)
+  
 
-  let cartData = useSelector(state => state.cartItemSlice.cartItems);
+  let cartDataItem = useSelector(state => state.cartItemSlice.cartItems);
   const dispatch = useDispatch();
 
   const [loading, setLoading] = useState(false);
@@ -36,6 +34,26 @@ console.log("cart dtaa items--------------------",cartDataItems)
   const [couponValue, setCouponValue] = useState<string>('');
   const [invalidCoupen, setInvalidCoupen] = useState<string>('');
   const [invalidCoupenButton, setInvalidCoupenButton] = useState<any>();
+  const[cartData,setCartData] = useState<Array<any>>([])
+
+
+  useEffect(()=>{
+    if(cartDataItems.cartData.length > 0){
+      console.log('in IF')
+      setCartData(cartDataItems.cartData)
+    }
+    else{
+      (async ()=>{
+      console.log('outSide IF')
+        let url = `cart`
+        let method = `GET`  
+       const response: any =  await callAPI(method, url) 
+
+       setCartData(response?.data?.payload || {})
+      })
+    }
+  },[])
+
 
   const decrementQuantity = (data: cartItemType) => {
     cartData.map(cartdata => {
@@ -49,7 +67,7 @@ console.log("cart dtaa items--------------------",cartDataItems)
       } else {
         if (cartdata.id == data.id) {
           dispatch(
-            setCartData({
+            addFoodItemToCart({
               foodId: data.id,
               quantity: data.quantity - 1
             })
@@ -64,7 +82,7 @@ console.log("cart dtaa items--------------------",cartDataItems)
       if (cartdata.quantity < 5) {
         if (cartdata.id== data.id) {
           dispatch(
-            setCartData({
+            addFoodItemToCart({
               foodId: data.id,
               quantity: data.quantity + 1
             })
@@ -201,7 +219,7 @@ console.log("cart dtaa items--------------------",cartDataItems)
   return (
     <AuthComponent>
       <MaxWidthWrapper>
-        <Header />
+        <Header cartDataItems={cartDataItems}/>
         {cartData.length > 0 ? (
           <>
             <Discount
@@ -217,7 +235,7 @@ console.log("cart dtaa items--------------------",cartDataItems)
               isCoupenUsed={isCoupenUsed}
             />
             <CartData 
-            cartDataItems = {cartDataItems}
+            cartData = {cartData}
             decrementQuantity={decrementQuantity} 
             incrementQuantity={incrementQuantity} />
           </>
@@ -233,9 +251,6 @@ export const getServerSideProps : GetServerSideProps = async context => {
   let url = `cart`
   let method = `GET`  
   const cartDataItems: any = await callAPI(method, url)
-
-  console.log('cartDataItems :: :: :: ', cartDataItems)
-
   return {
     props: {
       cartDataItems: cartDataItems?.data?.payload || {},

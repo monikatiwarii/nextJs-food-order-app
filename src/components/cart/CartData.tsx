@@ -7,19 +7,14 @@ import { useSelector } from '../../store';
 import { cartItemType } from '../../types/redux/cartItem.type';
 import callAPI from '../../../pages/api/callAPI';
 interface CartDataProps {
-  cartDataItems : any | undefined
+  cartData : any | undefined
   decrementQuantity: (data: cartItemType) => void;
   incrementQuantity: (data: cartItemType) => void;
 }
-const CartData: React.FC<CartDataProps> = ({ decrementQuantity, incrementQuantity,cartDataItems }) => {
+const CartData: React.FC<CartDataProps> = ({ decrementQuantity, incrementQuantity,cartData }) => {
  
-
-  let cartData = useSelector(state => state.cartItemSlice);
-
-  console.log('slice wala cartData 1--------------------',cartData)
-  console.log('cart data item 2--------------------------',cartDataItems.cartData)
+  let cartDataItem = useSelector(state => state.cartItemSlice);
   
-
   return (
     <Box>
       <Box
@@ -36,7 +31,7 @@ const CartData: React.FC<CartDataProps> = ({ decrementQuantity, incrementQuantit
           alignItems: { xs: 'center' },
           flexWrap: 'wrap'
         }}>
-        {cartDataItems.cartData?.map((data:any) => {
+        {cartData?.map((data:any) => {
               return (
                 <Box
                   key={data.fooditem.name}
