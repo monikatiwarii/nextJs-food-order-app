@@ -157,6 +157,11 @@ const Cart: NextPage<CartProps> = ({cartDataItems}) => {
         setDiscount(couponRes.value)
         setGrandTotal(newTotal-couponRes.value) 
       }
+      else if(couponRes.type === "PERCENTAGE"){
+        let discountValue = newTotal * ((couponRes.value)/100)
+        setDiscount(discountValue)
+        setGrandTotal(newTotal - discountValue) 
+      }
       let removeCouponButton = (
         <Button
           onClick={removeCoupon}
