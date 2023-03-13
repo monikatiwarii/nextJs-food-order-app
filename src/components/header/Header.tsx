@@ -11,10 +11,10 @@ const Header: React.FC<HeaderProps> = () => {
   let counter = 0;
   let cartData = useSelector(state => state.cartItemSlice.cartItems);
 
-  cartData.filter(count => {
-    counter += count.quantity;
-    return count;
-  });
+  // cartData.filter(count => {
+  //   counter += count.quantity;
+  //   return count;
+  // });
 
   return (
     <MaxWidthWrapper>

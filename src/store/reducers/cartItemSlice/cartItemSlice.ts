@@ -11,17 +11,14 @@ const initialState: any = {
   userId :0
 };
 
-const CartItems = createSlice({
+const CartItems:any = createSlice({
   name: 'CartItems',
   initialState,
   reducers: {
     setCartData: (state) => {  
       return{
         cartItems: [],
-        total : {
-          grandTotal : 0,
-          subtotal :0,
-        },
+        total : 0,
         userId :0
       }
 
@@ -34,21 +31,25 @@ const CartItems = createSlice({
       // }
     },
     removeCartItem(state: cartItemsType, { payload }: PayloadAction<cartItemType>) {
-      state.cartItems = state.cartItems.filter(data => data.foodId !== payload.foodId);
+      state.cartItems = state.cartItems.filter(data => data.id !== payload.id);
     },
     clearCartData(state: cartItemsType) {
       return { ...state, cartItems: [] };
     }
   },
   extraReducers :(builder)=>{
-    
-    builder.addMatcher(isAnyOf(addFoodItemToCart.fulfilled),(state,actions)=>{
+    // console.log('builder :: :: :: ', builder)
+    // console.log('addFoodItemToCart :: :: :: :: :: :: ', addFoodItemToCart.fulfilled)
+    builder.addMatcher(isAnyOf(addFoodItemToCart.fulfilled),(state,action)=>{
+      state.cartItems = action.payload
       console.log("state-----------------",state)
-      console.log("action payload-----------------",actions.payload)
-      state.foodDetails = actions.payload 
+      console.log("action payload-----------------",action.payload)
+     // state.foodDetails = action.payload 
     })
   }
 });
+
+console.log('initial states-------------',initialState)
 
 export default CartItems.reducer;
 export const { setCartData } = CartItems.actions;

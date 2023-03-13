@@ -1,7 +1,9 @@
 import { Box, Button, Divider, Typography } from '@mui/material';
+import axios from 'axios';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import baseURL from '../../api';
 import { useSelector } from '../../store';
-import { foodItem } from '../../data/data';
 import { cartItemType } from '../../types/redux/cartItem.type';
 
 interface CartDataProps {
@@ -9,7 +11,22 @@ interface CartDataProps {
   incrementQuantity: (data: cartItemType) => void;
 }
 const CartData: React.FC<CartDataProps> = ({ decrementQuantity, incrementQuantity }) => {
-  let cartData = useSelector(state => state.cartItemSlice.cartItems);
+  const[foodItem,setFoodItem] = useState()
+
+  useEffect(()=>{
+    const callApi = async()=>{
+      await axios.get(`${baseURL}/api/cart/`).then((response)=>{
+        setFoodItem(response.data.payload)
+      })
+    }
+    callApi();
+  },[])
+
+  let cartData = useSelector(state => state.cartItemSlice);
+
+  console.log('slice wala cartData--------------------',cartData)
+  console.log('slice wala cartData--------------------',foodItem)
+
   return (
     <Box>
       <Box
@@ -26,7 +43,7 @@ const CartData: React.FC<CartDataProps> = ({ decrementQuantity, incrementQuantit
           alignItems: { xs: 'center' },
           flexWrap: 'wrap'
         }}>
-        {foodItem.map(data => {
+        {/* {foodItem.map(data => {
           return cartData.map(foods => {
             if (data.foodId === foods.foodId) {
               return (
@@ -262,7 +279,7 @@ const CartData: React.FC<CartDataProps> = ({ decrementQuantity, incrementQuantit
               );
             }
           });
-        })}
+        })} */}
       </Box>
 
       {/* </Box> */}

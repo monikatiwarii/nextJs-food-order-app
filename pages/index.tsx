@@ -11,18 +11,13 @@ import FoodCollection from '../src/components/home/FoodCollection';
 import DownloadApp from '../src/components/home/DownloadApp';
 import { GetServerSideProps, NextPage } from 'next';
 import AuthGuard from '../src/components/common/AuthGuard';
-import { useRouter } from 'next/router';
 import LoaderPage from '../src/components/common/LoaderPage';
 import { foodItemType } from '../src/types/constants/foodItem.type';
 import { categoryType } from '../src/types/constants/category.type';
-//import { category, foodItem, selectedCategory } from '../src/data/data';
-import { useDispatch } from '../src/store';
-import { setCartData } from '../src/store/reducers/cartItemSlice/cartItemSlice';
-import { cartItemType } from '../src/types/redux/cartItem.type';
 import axios from 'axios';
 import baseURL from '../src/api';
 import { selectedCategoryType } from '../src/types/constants/selectedCategory.type';
-import { addFoodItemToCart } from '../src/store/reducers/cartItemSlice/caerItem.api';
+
 
 interface HomeProps {
   selectedCategory : selectedCategoryType[] | undefined
@@ -71,7 +66,7 @@ const Home: NextPage<HomeProps> = ({selectedCategory,categoryItem,foodsItem}) =>
             // foodList={foodList}
             // categoryName={categoryName}
             // foodItemHandler={foodItemHandler}
-            // foodDataHandler={foodDataHandler}
+            //foodDataHandler={foodDataHandler}
           />
           <FoodDeliveryImage />
           <MaxWidthWrapper>

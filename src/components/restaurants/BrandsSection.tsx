@@ -15,8 +15,7 @@ const BrandsSection: React.FC<BrandsSectionProps> = () => {
   useEffect(()=>{
     const callApi = async()=>{
       await axios.get(`${baseURL}/api/restaurants`).then((response)=>{
-        console.log('restaurants response------------',response.data.payload)
-          setRestaurants(response.data.payload)
+        setRestaurants(response.data.payload)
       })
     }
     callApi();

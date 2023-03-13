@@ -41,14 +41,11 @@ const PopularRecipes: React.FC<PopularRecipesProps> = ({
 
   useEffect(() => {
     let categoryArray : any[]= [];
-    categoryItem?.map(data => {
-      console.log('category data----------------------------',data)
+    categoryItem?.map(data => {   
       if (selectedCategory?.find(val => val.name === data.name)) {
-        console.log('selected data-----------',data)
         categoryArray.push(data);
       }
     }); 
-    console.log('selected category Array----------------------------',categoryArray)
     if(categoryArray.length > 0){
       setCategoryItems(categoryArray);
       setCategoryName(categoryArray[0].name);
@@ -59,10 +56,8 @@ const PopularRecipes: React.FC<PopularRecipesProps> = ({
 
   let foodArray: foodItemType[] = [];
   useEffect(() => {
-    console.log('category name-----------------------',categoryName)
     if (categoryName) {
       foodsItem?.map(food => {
-        console.log('foodssssssssssssssssss-------------------------',food)
           // if (food.includes(categoryName)) {
           //   foodArray.push(food);
           // }
@@ -128,7 +123,6 @@ const PopularRecipes: React.FC<PopularRecipesProps> = ({
             justifyContent: 'center'
           }}>
           {categoryItems?.map(data => {
-            console.log('category items -----------',data)
             return (
               <>
                 <Button
@@ -185,7 +179,6 @@ const PopularRecipes: React.FC<PopularRecipesProps> = ({
           }
         }}>
         {foodList?.map((food :any, index:any) => {
-          console.log('my food list-----------------------------------',food)
           return (
             <>
               <Box

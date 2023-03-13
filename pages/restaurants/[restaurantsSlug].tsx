@@ -43,25 +43,11 @@ const RestaurantDetail: NextPage<RestaurantDetailProps> = ({ selectedRestaurant,
 
   const addToCartHandler = async(data: foodItemType) => {
 
-    let token = localStorage.getItem("token")
-    let method = "PATCH"
-    let url = `${baseURL}/api/cart`
-    let body= {
-      id: data.fooditem_id,
-      action: 1
-    }
-    let headers = {
-      "Authorization": `Bearer ${token}`,
-      "Content-Type": "application/json",
-    }
-   
-    const result = await axios({ method, url, headers, data: body})
-
     setAlert(true);
 
     dispatch(
       addFoodItemToCart({
-        foodId: data.fooditem_id,
+        id: data.fooditem_id,
         quantity: 1
       })
     );
