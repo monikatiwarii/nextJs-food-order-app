@@ -11,10 +11,10 @@ interface CartDataProps {
   decrementQuantity: (data: cartItemType) => void;
   incrementQuantity: (data: cartItemType) => void;
 }
-const CartData: React.FC<CartDataProps> = ({ decrementQuantity, incrementQuantity,cartData }) => {
+const CartData: React.FC<CartDataProps> = ({ decrementQuantity, incrementQuantity,cartData}) => {
  
-  let cartDataItem = useSelector(state => state.cartItemSlice);
-  
+
+
   return (
     <Box>
       <Box
@@ -133,9 +133,9 @@ const CartData: React.FC<CartDataProps> = ({ decrementQuantity, incrementQuantit
                       }
                     }}>
                     <Button
-                      // onClick={() => {
-                      //   decrementQuantity(foods);
-                      // }}
+                      onClick={() => {
+                        decrementQuantity(data);
+                      }}
                       sx={{
                         width: {
                           sm: '48px',
@@ -161,9 +161,9 @@ const CartData: React.FC<CartDataProps> = ({ decrementQuantity, incrementQuantit
                       {data.quantity}
                     </Typography>
                     <Button
-                      // onClick={() => {
-                      //   incrementQuantity(foods);
-                      // }}
+                      onClick={() => {
+                        incrementQuantity(data);
+                      }}
                       sx={{
                         width: {
                           sm: '48px',

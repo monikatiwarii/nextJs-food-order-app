@@ -24,6 +24,7 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
 }));
 
 interface DiscountProps {
+  cartData :any
   isCoupenUsed: boolean;
   total: number;
   discount: string | number;
@@ -37,6 +38,7 @@ interface DiscountProps {
 }
 let isCoupenUsed = false;
 const Discount: React.FC<DiscountProps> = ({
+  cartData,
   total,
   discount,
   grandTotal,

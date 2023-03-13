@@ -4,10 +4,8 @@ import { addFoodItemToCart } from './caerItem.api';
 
 const initialState: any = {
   cartItems: [],
-  total : {
-    grandTotal : 0,
-    subtotal :0,
-  },
+  quantity : 0,
+  total : 0,
   userId :0
 };
 
@@ -18,17 +16,11 @@ const CartItems:any = createSlice({
     setCartData: (state) => {  
       return{
         cartItems: [],
+        quantity : 0,
         total : 0,
         userId :0
       }
 
-    
-      // let alreadyExist = state.cartItems.findIndex(data => data.foodId === payload.foodId);
-      // if (alreadyExist >= 0) {
-      //   state.cartItems[alreadyExist] = payload;
-      // } else {
-      //   state.cartItems.push(payload);
-      // }
     },
     removeCartItem(state: cartItemsType, { payload }: PayloadAction<cartItemType>) {
       state.cartItems = state.cartItems.filter(data => data.id !== payload.id);
@@ -38,13 +30,13 @@ const CartItems:any = createSlice({
     }
   },
   extraReducers :(builder)=>{
-    // console.log('builder :: :: :: ', builder)
-    // console.log('addFoodItemToCart :: :: :: :: :: :: ', addFoodItemToCart.fulfilled)
+  
     builder.addMatcher(isAnyOf(addFoodItemToCart.fulfilled),(state,action)=>{
       state.cartItems = action.payload
+      state.quantity = state.cartItems.quantity
       console.log("state-----------------",state)
-      console.log("action payload-----------------",action.payload)
-     // state.foodDetails = action.payload 
+      console.log("action payload-----------------",action.payload.quantity)
+
     })
   }
 });

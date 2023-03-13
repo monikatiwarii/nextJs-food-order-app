@@ -18,12 +18,14 @@ import { addFoodItemToCart } from '../src/store/reducers/cartItemSlice/caerItem.
 
 interface CartProps {
   cartDataItems : any | undefined
+ 
 }
 let isCoupenUsed: boolean = false;
 const Cart: NextPage<CartProps> = ({cartDataItems}) => {
   
 
   let cartDataItem = useSelector(state => state.cartItemSlice.cartItems);
+  
   const dispatch = useDispatch();
 
   const [loading, setLoading] = useState(false);
@@ -34,67 +36,56 @@ const Cart: NextPage<CartProps> = ({cartDataItems}) => {
   const [couponValue, setCouponValue] = useState<string>('');
   const [invalidCoupen, setInvalidCoupen] = useState<string>('');
   const [invalidCoupenButton, setInvalidCoupenButton] = useState<any>();
-  const[cartData,setCartData] = useState<Array<any>>([])
+  
+  const[cartData,setCartData] = useState<any>(cartDataItems)
 
 
+  const setNewCartData= async ()=>{
+      let url = `cart`
+      let method = `GET`  
+     const response: any =  await callAPI(method, url) 
+     console.log('response :: :: :: :: ',response)
+     setCartData(response?.data?.payload?.cartData || {})
+     
+    }
+  
   useEffect(()=>{
-    if(cartDataItems.cartData.length > 0){
-      console.log('in IF')
+    if(Object.keys(cartDataItems).length > 0 ){
       setCartData(cartDataItems.cartData)
     }
     else{
-      (async ()=>{
-      console.log('outSide IF')
-        let url = `cart`
-        let method = `GET`  
-       const response: any =  await callAPI(method, url) 
-
-       setCartData(response?.data?.payload || {})
-      })
+      setNewCartData()
     }
   },[])
 
 
-  const decrementQuantity = (data: cartItemType) => {
-    cartData.map(cartdata => {
-      if (cartdata.quantity < 2) {
-        dispatch(
-          removeCartItem({
-            foodId: data.id,
-            quantity: 0
-          })
-        );
-      } else {
-        if (cartdata.id == data.id) {
-          dispatch(
-            addFoodItemToCart({
-              foodId: data.id,
-              quantity: data.quantity - 1
-            })
-          );
-        }
-      }
-    });
+  const decrementQuantity = (data: any) => {
+
+    dispatch(
+      addFoodItemToCart({
+        id: data.fooditem.id,
+        action: 0
+      })
+    )
+      setNewCartData()
   };
 
-  const incrementQuantity = (data: cartItemType) => {
-    cartData.map(cartdata => {
-      if (cartdata.quantity < 5) {
-        if (cartdata.id== data.id) {
-          dispatch(
-            addFoodItemToCart({
-              foodId: data.id,
-              quantity: data.quantity + 1
-            })
-          );
-        }
-      }
-    });
+  const incrementQuantity = (data : any) => {
+   
+    dispatch(
+      addFoodItemToCart({
+        id: data.fooditem.id,
+        action: 1
+      })
+    )
+    setNewCartData()
   };
   let countCartAmount = () => {
+
+    setTotal(cartData.total)
     let total = 0;
-    foodItem.map(foods => {
-      cartData.map(data => {
+    cartData.map((foods : any) => {
+      cartData.map((data :any) => {
         if (data.id === foods.fooditem_id) {
           total += foods.fooditem_id * data.quantity;
         }
@@ -233,6 +224,7 @@ const Cart: NextPage<CartProps> = ({cartDataItems}) => {
               handleChangeCoupon={handleChangeCoupon}
               orderHandler={orderHandler}
               isCoupenUsed={isCoupenUsed}
+              cartData = {cartData}
             />
             <CartData 
             cartData = {cartData}

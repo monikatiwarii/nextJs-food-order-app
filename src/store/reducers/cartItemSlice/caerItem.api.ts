@@ -20,5 +20,5 @@ export const addFoodItemToCart = createAsyncThunk('api/cart',async(foodDetails :
     console.log('in add food item to cart:: :: :: :": :: :: ::',token)
     const response = await axios({method, url, headers, data: foodDetails})
     console.log('thunk response---------------',response)
-    return response.data.payload
+    return response.data.payload[0] 
 }) 
