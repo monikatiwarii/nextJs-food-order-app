@@ -18,12 +18,13 @@ import { useSelector } from '../../store';
 import { foodItemType } from '../../types/constants/foodItem.type';
 
 interface CoverImageProps {
-  cartData : any | undefined
+  cartData: any | undefined
+  logoutHandler : ()=>void
 }
 
 
 
-const CoverImage: React.FC<CoverImageProps> = ({cartData}) => {
+const CoverImage: React.FC<CoverImageProps> = ({ cartData,logoutHandler }) => {
   let counter = 0;
   let cartDataItems = useSelector((state: any) => state.cartItemSlice.cartItems);
 
@@ -191,7 +192,30 @@ const CoverImage: React.FC<CoverImageProps> = ({cartData}) => {
                   />
                 </Link>
               </Box>
+              <Box sx={{
+                 marginTop: '20px',
+                 cursor:'pointer'
+              }}
+              onClick={() => {
+                logoutHandler()
+              }}
+              >
+                <Typography
+                  sx={{
+                    fontFamily: 'Poppins',
+                    fontStyle: 'normal',
+                    fontWeight: '500',
+                    lineHeight: '20px',
+                    color: '#FFC300',
+                    fontSize: {
+                      xl: '24px',
+                      md: '20px',
+                      xs: '16px'
+                    }
+                  }}> LOGOUT</Typography>
+              </Box>
             </Box>
+
           </Box>
         </MaxWidthWrapper>
 

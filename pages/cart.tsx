@@ -20,9 +20,16 @@ interface CartProps {
 }
 let isCoupenUsed: boolean = false;
 const Cart: NextPage<CartProps> = ({cartDataItems}) => {
+ 
   
   let cartDataItem = useSelector(state => state.cartItemSlice.cartItems);
-  
+  const logoutHandler = ()=>{
+    localStorage.removeItem("token")
+    localStorage.removeItem("isLoggedIn")
+    router.push('/login')
+
+  }
+
   const dispatch = useDispatch();
 
   const [loading, setLoading] = useState(false);
@@ -173,7 +180,8 @@ const Cart: NextPage<CartProps> = ({cartDataItems}) => {
     return (
       <AuthComponent>
         <MaxWidthWrapper>
-          <Header cartData={cartData}/>
+          <Header cartData={cartData}
+          logoutHandler={logoutHandler}/>
           {cartData.length > 0 ? (
             <>
               <Discount

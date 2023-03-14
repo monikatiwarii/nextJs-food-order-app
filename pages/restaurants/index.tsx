@@ -1,4 +1,5 @@
 import { GetServerSideProps, NextPage } from 'next';
+import { useRouter } from 'next/router';
 import AuthComponent from '../../src/components/common/AuthComponent';
 import MaxWidthWrapper from '../../src/components/common/MaxWidthWrapper';
 import Header from '../../src/components/header/Header';
@@ -11,9 +12,18 @@ interface RestaurantsProps {
   cartDataItems : any | undefined
 }
 const Restaurants: NextPage<RestaurantsProps> = ({cartDataItems}) => {
+
+  const router = useRouter()
+
+  const logoutHandler = ()=>{
+    localStorage.removeItem("token")
+    localStorage.removeItem("isLoggedIn")
+    router.push('/login')
+  }
   return (
     <AuthComponent>
-      <Header cartData={cartDataItems.cartData} />
+      <Header cartData={cartDataItems.cartData}
+      logoutHandler ={logoutHandler} />
       <MaxWidthWrapper>
         <BrandsSection />
         <FoodItemSection />

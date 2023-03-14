@@ -19,6 +19,7 @@ import baseURL from '../src/api';
 import { selectedCategoryType } from '../src/types/constants/selectedCategory.type';
 import callAPI from './api/callAPI';
 import { selectedCategory } from '../src/data/data';
+import { useRouter } from 'next/router';
 
 
 interface HomeProps {
@@ -29,6 +30,7 @@ interface HomeProps {
 }
 const Home: NextPage<HomeProps> = ({selectedCategory,categoryItem,foodsItem,cartDataItems}) => {
   
+  const router = useRouter()
   const [diningOut,setDiningOut] = useState()  
   const [loading, setLoading] = React.useState(true);
   
@@ -48,6 +50,12 @@ const Home: NextPage<HomeProps> = ({selectedCategory,categoryItem,foodsItem,cart
     callApi();
   },[])
 
+  const logoutHandler = ()=>{
+    localStorage.removeItem("token")
+    localStorage.removeItem("isLoggedIn")
+    setLoading(true)
+    router.push('/login')
+  }
 
 
   return (
@@ -56,7 +64,8 @@ const Home: NextPage<HomeProps> = ({selectedCategory,categoryItem,foodsItem,cart
         <LoaderPage />
       ) : (
         <AuthGuard>
-          <CoverImage cartData ={cartDataItems.cartData}/>
+          <CoverImage cartData ={cartDataItems.cartData}
+          logoutHandler={logoutHandler}/>
           <MaxWidthWrapper>
             <DiningOut diningOut = {diningOut}  />
             <Cuisines />

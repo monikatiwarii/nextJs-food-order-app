@@ -18,6 +18,7 @@ import baseURL from '../../src/api';
 import axios from 'axios';
 import { addFoodItemToCart } from '../../src/store/reducers/cartItemSlice/caerItem.api';
 import callAPI from '../api/callAPI';
+import { useRouter } from 'next/router';
 
 interface RestaurantDetailProps {
   selectedRestaurant: restaurantType | undefined;
@@ -30,7 +31,13 @@ const RestaurantDetail: NextPage<RestaurantDetailProps> = ({ selectedRestaurant,
   const [alert, setAlert] = useState<boolean>(false);
   const[cartData,setCartData] = useState<any>(cartDataItems)
 
-  
+  const router = useRouter()
+
+  const logoutHandler = ()=>{
+    localStorage.removeItem("token")
+    localStorage.removeItem("isLoggedIn")
+    router.push('/login')
+  }
 
   const handleClose = () => {
     setAlert(false);
@@ -81,7 +88,8 @@ const RestaurantDetail: NextPage<RestaurantDetailProps> = ({ selectedRestaurant,
           </Alert>
         </Snackbar>
       )}
-      <Header cartData={ cartDataItems.cartData} />
+      <Header cartData={ cartDataItems.cartData}
+      logoutHandler= {logoutHandler} />
       <RestaurantHeader />
       <MaxWidthWrapper>
         <RestaurantDetails selectedRestaurant={selectedRestaurant} />

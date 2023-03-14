@@ -8,9 +8,11 @@ import { useSelector } from '../../store';
 
 interface HeaderProps {
   cartData :any | undefined
+  logoutHandler :()=> void
 }
 const Header: React.FC<HeaderProps> = ({
-  cartData
+  cartData,
+  logoutHandler
 }) => {
 
   
@@ -84,7 +86,7 @@ const Header: React.FC<HeaderProps> = ({
             Menu
           </Link>
         </Box>
-        <Box sx={{ paddingRight: { lg: '100px' } }}>
+        <Box >
           <Box
             sx={{
               position: 'relative',
@@ -143,6 +145,28 @@ const Header: React.FC<HeaderProps> = ({
             </Link>
           </Box>
         </Box>
+        <Box sx={{
+            paddingTop: '40px', 
+            cursor : 'pointer'
+          }}
+          onClick={() => {
+            logoutHandler()
+          }}>
+        <Typography
+          sx={{
+            fontFamily: 'Poppins',
+            fontStyle: 'normal',
+            fontWeight: '500',
+            lineHeight: '20px',
+            color: '#FFC300',
+            fontSize: {
+              xl: '24px',
+              md: '20px',
+              xs: '16px'
+            }
+        }}> LOGOUT</Typography>
+       
+      </Box>
       </Box>
     </MaxWidthWrapper>
   );
