@@ -23,7 +23,7 @@ interface RestaurantDetailProps {
   selectedRestaurant: restaurantType | undefined;
   selectedFoods: foodItemType[] | undefined
   restaurantId: number
-  cartDataItems  : any | undefined
+   cartDataItems  : any | undefined
 }
 const RestaurantDetail: NextPage<RestaurantDetailProps> = ({ selectedRestaurant, selectedFoods, restaurantId,cartDataItems }) => {
 

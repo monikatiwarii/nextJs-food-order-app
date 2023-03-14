@@ -78,13 +78,14 @@ const Cart: NextPage<CartProps> = ({cartDataItems}) => {
   };
 
   const incrementQuantity = (data : any) => {
-    
+    if(data.quantity < 5){ 
     dispatch(
       addFoodItemToCart({
         id: data.fooditem.id,
         action: 1
       })
     )
+  }
     setNewCartData()
     setCouponValue('')
     setDiscount(0)
