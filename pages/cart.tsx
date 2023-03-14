@@ -8,13 +8,11 @@ import CartData from '../src/components/cart/CartData';
 import EmptyCart from '../src/components/cart/EmptyCart';
 import { useDispatch, useSelector } from '../src/store';
 import AuthComponent from '../src/components/common/AuthComponent';
-import { cartItemType } from '../src/types/redux/cartItem.type';
-
-import { coupons, foodItem } from '../src/data/data';
 import { useRouter } from 'next/router';
-import { removeCartItem, setCartData } from '../src/store/reducers/cartItemSlice/cartItemSlice';
 import callAPI from './api/callAPI';
 import { addFoodItemToCart } from '../src/store/reducers/cartItemSlice/caerItem.api';
+import { foodItemType } from '../src/types/constants/foodItem.type';
+import { cartDataItemType } from '../src/types/constants/cartDataItem.types';
 
 interface CartProps {
   cartDataItems : any | undefined
@@ -23,7 +21,6 @@ interface CartProps {
 let isCoupenUsed: boolean = false;
 const Cart: NextPage<CartProps> = ({cartDataItems}) => {
   
-
   let cartDataItem = useSelector(state => state.cartItemSlice.cartItems);
   
   const dispatch = useDispatch();
@@ -82,7 +79,7 @@ const Cart: NextPage<CartProps> = ({cartDataItems}) => {
   };
 
   const incrementQuantity = (data : any) => {
-   
+    
     dispatch(
       addFoodItemToCart({
         id: data.fooditem.id,
@@ -94,53 +91,7 @@ const Cart: NextPage<CartProps> = ({cartDataItems}) => {
     setDiscount(0)
     removeCoupon()
   };
-  let countCartAmount = () => {
-
-    setTotal(cartData.total)
-    let total = 0;
-    cartData.map((foods : any) => {
-      cartData.map((data :any) => {
-        if (data.id === foods.fooditem_id) {
-          total += foods.fooditem_id * data.quantity;
-        }
-      });
-    });
-    setTotal(total);
-    return total;
-  };
-
-  // useEffect(() => {
-  //   let total = 0;
-  //   let totalDiscount = 0;
-  //   if (cartData.length > 0) {
-  //     foodItem.map(foods => {
-  //       cartData.map(data => {
-  //         if (data.id === foods.fooditem_id) {
-  //           total += foods.fooditem_price * data.quantity;
-  //         }
-  //       });
-  //     });
-  //     setTotal(total);
-  //     if (!!couponValue) {
-  //       coupons.map(data => {
-  //         if (data.name === couponValue) {
-  //           isCoupenUsed = true;
-  //           if (data.type === 'PERCENTAGE') {
-  //             totalDiscount = total * (Number(data.value) / 100);
-  //             total = total - totalDiscount;
-  //             if (total < 0) total = 0;
-  //           } else {
-  //             totalDiscount = data.value;
-  //             total = total - Number(totalDiscount);
-  //             if (total < 0) total = 0;
-  //           }
-  //         }
-  //       });
-  //     }
-  //     setDiscount(totalDiscount);
-  //     setGrandTotal(total);
-  //   }
-  // }, [cartData]);
+  
 
   //to check coupon is valid or not and coupon type
   const applyCoupon = async() => {
@@ -214,11 +165,9 @@ const Cart: NextPage<CartProps> = ({cartDataItems}) => {
         total : grandTotal
       }
       const orderResponse =  await callAPI("POST","checkout",data)
-      console.log('order response---------------',orderResponse)
       localStorage.setItem('isOrdered', true.toString());
       router.push('/order');
       setLoading(true);
-      //setGrandTotal(0);
     }
   };
 

@@ -14,6 +14,7 @@ import { addFoodItemToCart } from '../../store/reducers/cartItemSlice/caerItem.a
 import { useRouter } from 'next/router';
 import { useDispatch } from '../../store';
 import { selectedCategoryType } from '../../types/constants/selectedCategory.type';
+import callAPI from '../../../pages/api/callAPI';
 
 interface PopularRecipesProps {
   selectedCategory : selectedCategoryType[] | undefined
@@ -56,16 +57,14 @@ const PopularRecipes: React.FC<PopularRecipesProps> = ({
 
   let foodArray: foodItemType[] = [];
   useEffect(() => {
-    if (categoryName) {
-      console.log('category ka naam :::: : : : : : : : ',categoryName)
-      foodsItem?.map(food => {
-        console.log('food ka data : : ::  : :: : :: :: : ',food)
-          // if (food.includes(categoryName)) {
-          //   foodArray.push(food);
-          // }
-      });
-      setFoodList(foodArray);
-    }
+    console.log('in category name useeffect',categoryName);  
+    (async ()=>{
+    console.log('in category name useeffect FN');  
+
+      const res:any = await callAPI("GET",`foods/find/${categoryName}`)
+      setFoodList(res.data.payload)
+    })();
+
   }, [categoryName]);
 
   const foodItemHandler = (data: any) => {

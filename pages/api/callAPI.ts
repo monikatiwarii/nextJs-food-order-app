@@ -4,7 +4,7 @@ import baseURL from "../../src/api"
 export default async (method='', url='', data={}, headers={}) => {
     let response= null
     // let token =  typeof window !== 'undefined' && localStorage.getItem("token")? localStorage.getItem("token") : ``
-    let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJpYXQiOjE2Nzg2ODYwMTEsImV4cCI6MTY3ODc3MjQxMX0.W3Qmy_nP3478TMlom0sf_xgNAOE9JOQoqkyWu1VhB8Y'
+    let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJpYXQiOjE2Nzg3NTc4NTksImV4cCI6MTY3ODg0NDI1OX0.ukCehxE3FIs7XPeh48kBfK_F_x_Q3c6Mb9_zyKjTE90'
 
     url= `${baseURL}/api/${url}`
     console.log('url :: :: :: :: ', url);
