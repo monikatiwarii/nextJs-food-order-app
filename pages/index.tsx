@@ -18,6 +18,7 @@ import axios from 'axios';
 import baseURL from '../src/api';
 import { selectedCategoryType } from '../src/types/constants/selectedCategory.type';
 import callAPI from './api/callAPI';
+import { selectedCategory } from '../src/data/data';
 
 
 interface HomeProps {

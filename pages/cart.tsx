@@ -44,7 +44,6 @@ const Cart: NextPage<CartProps> = ({cartDataItems}) => {
       let url = `cart`
       let method = `GET`  
      const response: any =  await callAPI(method, url) 
-     console.log('response :: :: :: :: ',response)
      setCartData(response?.data?.payload.cartData)
      setNewTotal(response?.data?.payload?.total)
      setGrandTotal(response?.data?.payload?.total)
@@ -100,7 +99,6 @@ const Cart: NextPage<CartProps> = ({cartDataItems}) => {
     let method = "GET"
     let url = `coupons/${couponValue}`
     const couponData: any = await callAPI(method,url) 
-    console.log('coupon data :: ::: :: :: :: ::',couponData)
     if(couponData?.data.success){
       let couponRes = couponData?.data.payload;
 

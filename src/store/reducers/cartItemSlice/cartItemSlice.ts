@@ -34,14 +34,11 @@ const CartItems:any = createSlice({
     builder.addMatcher(isAnyOf(addFoodItemToCart.fulfilled),(state,action)=>{
       state.cartItems = action.payload
       state.quantity = state.cartItems.quantity
-      console.log("state-----------------",state)
-      console.log("action payload-----------------",action.payload.quantity)
-
+    
     })
   }
 });
 
-console.log('initial states-------------',initialState)
 
 export default CartItems.reducer;
 export const { setCartData } = CartItems.actions;

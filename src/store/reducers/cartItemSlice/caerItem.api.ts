@@ -16,9 +16,7 @@ export const addFoodItemToCart = createAsyncThunk('api/cart',async(foodDetails :
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`
     }
-    console.log('headers---------------------',headers)
-    console.log('in add food item to cart:: :: :: :": :: :: ::',token)
     const response = await axios({method, url, headers, data: foodDetails})
-    console.log('thunk response---------------',response)
+   
     return response.data.payload[0] 
 }) 

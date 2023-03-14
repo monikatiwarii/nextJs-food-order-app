@@ -59,10 +59,9 @@ const PopularRecipes: React.FC<PopularRecipesProps> = ({
 
   let foodArray: foodItemType[] = [];
   useEffect(() => {
-    console.log('in category name useeffect',categoryName);  
+   
     (async ()=>{
-    console.log('in category name useeffect FN');  
-
+  
       const res:any = await callAPI("GET",`foods/find/${categoryName}`)
       setFoodList(res.data.payload)
     })();
