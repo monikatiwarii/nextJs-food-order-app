@@ -43,8 +43,10 @@ const PopularRecipes: React.FC<PopularRecipesProps> = ({
   useEffect(() => {
     let categoryArray : any[]= [];
     categoryItem?.map(data => {   
-      if (selectedCategory?.find(val => val.name === data.name)) {
-        categoryArray.push(data);
+      if (selectedCategory?.find(val => {
+        if(val.name === data.name){
+          categoryArray.push(val);
+        }})) {
       }
     }); 
     if(categoryArray.length > 0){
@@ -238,7 +240,7 @@ const PopularRecipes: React.FC<PopularRecipesProps> = ({
                   }}
                   >
                   <Image
-                    src={food.image}
+                    src={`${baseURL}/${food.image}`}
                     height={0}
                     width={0}
                     sizes="(max-width:0) 100vw,

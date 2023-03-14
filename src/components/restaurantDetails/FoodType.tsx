@@ -7,6 +7,7 @@ import { categoryType } from '../../types/constants/category.type';
 import { foodItemType } from '../../types/constants/foodItem.type';
 import { addFoodItemToCart } from '../../store/reducers/cartItemSlice/caerItem.api';
 import callAPI from '../../../pages/api/callAPI';
+import baseURL from '../../api';
 
 interface FoodTypeProps {
   selectedFoods: foodItemType[] | undefined;
@@ -213,7 +214,7 @@ const FoodType: React.FC<FoodTypeProps> = ({
                         width: '100%',
                         borderRadius: '10px'
                       }}
-                      src={data.fooditem_image}
+                      src={`${baseURL}/${data.fooditem_image}`}
                       alt=""
                     />
                   </Box>
