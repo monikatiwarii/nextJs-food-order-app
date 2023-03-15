@@ -72,7 +72,7 @@ const Cart: NextPage<CartProps> = ({cartDataItems}) => {
   },[])
 
   
-  const decrementQuantity = (data:any) => {
+  const decrementQuantity = (data:CartDataItem) => {
     dispatch(
       addFoodItemToCart({
         id: data.fooditem.id,

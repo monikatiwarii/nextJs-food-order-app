@@ -6,7 +6,7 @@ export default async (method='', url='', data={}, headers={}) => {
     // let token =  typeof window !== 'undefined' && localStorage.getItem("token")? localStorage.getItem("token") : ``
 
     // console.log('token-------------------------',token)
-     let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJpYXQiOjE2Nzg4NzE4ODUsImV4cCI6MTY3ODk1ODI4NX0./cWNlJg8Bhz6QYRoF0u1bXTN0m_Hv-VI58An7U_Bzclw'
+     let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJpYXQiOjE2Nzg4NzM5MzcsImV4cCI6MTY3ODk2MDMzN30.9EWdwZWvRlLEOsLrICb6sn6qrfx8IQa1wVA-mxOBSjI'
 
     url= `${baseURL}/api/${url}`
     
