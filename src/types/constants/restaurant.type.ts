@@ -20,6 +20,8 @@ export interface Time {
 }
 
 export interface Category {
+  id:number;
   name: string;
-  [key: number]: string
+  created_at : Date;
+  updated_at : Date
 };

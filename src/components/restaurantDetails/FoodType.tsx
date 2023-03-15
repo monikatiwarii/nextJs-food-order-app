@@ -1,7 +1,7 @@
 import { Box, Button, Divider, Typography } from '@mui/material';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
-import { restaurantType } from '../../types/constants/restaurant.type';
+import { Category, restaurantType } from '../../types/constants/restaurant.type';
 import { category, foodItem } from '../../data/data';
 import { categoryType } from '../../types/constants/category.type';
 import { foodItemType } from '../../types/constants/foodItem.type';
@@ -76,10 +76,10 @@ const FoodType: React.FC<FoodTypeProps> = ({
             rowGap: '10px',
             paddingTop: '50px'
           }}>
-          {selectedRestaurant?.category.map((data:any,index) => {
+          {selectedRestaurant?.category.map((data:Category) => {
             return (
               <>
-                <Button key={index}
+                <Button key={data.id}
                   onClick={() => {
                     categoryHandler(data);
                   }}
