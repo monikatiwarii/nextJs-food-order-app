@@ -2,7 +2,7 @@ import { createSlice, isAnyOf, PayloadAction } from '@reduxjs/toolkit';
 import { CartDataItem } from '../../../types/constants/cartDataItem.type';
 import { CartData, cartDataItemType } from '../../../types/constants/cartDataItems.types';
 import { cartItemsType, cartItemType } from '../../../types/redux/cartItem.type';
-import { addFoodItemToCart } from './caerItem.api';
+import { addFoodItemToCart } from './cartItem.api';
 
 const initialState: any = {
   cartItems: [],

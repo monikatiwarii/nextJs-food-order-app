@@ -10,7 +10,7 @@ import { foodItemType } from '../../types/constants/foodItem.type';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import baseURL from '../../api';
-import { addFoodItemToCart } from '../../store/reducers/cartItemSlice/caerItem.api';
+import { addFoodItemToCart } from '../../store/reducers/cartItemSlice/cartItem.api';
 import { useRouter } from 'next/router';
 import { useDispatch } from '../../store';
 import { selectedCategoryType } from '../../types/constants/selectedCategory.type';

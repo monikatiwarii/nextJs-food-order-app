@@ -5,7 +5,7 @@ import { Category, restaurantType } from '../../types/constants/restaurant.type'
 import { category, foodItem } from '../../data/data';
 import { categoryType } from '../../types/constants/category.type';
 import { foodItemType } from '../../types/constants/foodItem.type';
-import { addFoodItemToCart } from '../../store/reducers/cartItemSlice/caerItem.api';
+import { addFoodItemToCart } from '../../store/reducers/cartItemSlice/cartItem.api';
 import callAPI from '../../../pages/api/callAPI';
 import baseURL from '../../api';
 

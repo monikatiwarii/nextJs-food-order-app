@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from '../src/store';
 import AuthComponent from '../src/components/common/AuthComponent';
 import { useRouter } from 'next/router';
 import callAPI from './api/callAPI';
-import { addFoodItemToCart } from '../src/store/reducers/cartItemSlice/caerItem.api';
+import { addFoodItemToCart } from '../src/store/reducers/cartItemSlice/cartItem.api';
 import { foodItemType } from '../src/types/constants/foodItem.type';
 import { cartDataItemType } from '../src/types/constants/cartDataItems.types';
 import { CartDataItem } from '../src/types/constants/cartDataItem.type';
@@ -72,7 +72,7 @@ const Cart: NextPage<CartProps> = ({cartDataItems}) => {
   },[])
 
   
-  const decrementQuantity = (data:CartDataItem) => {
+  const decrementQuantity = (data:any) => {
     dispatch(
       addFoodItemToCart({
         id: data.fooditem.id,
@@ -225,7 +225,7 @@ export const getServerSideProps : GetServerSideProps = async context => {
   const cartDataItems: any = await callAPI(method, url)
   return {
     props: {
-      cartDataItems: cartDataItems?.data?.payload 
+      cartDataItems: cartDataItems?.data?.payload || {}
     }
   };
 };

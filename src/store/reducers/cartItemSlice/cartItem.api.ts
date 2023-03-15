@@ -6,7 +6,7 @@ import { foodDetails } from "../../../types/constants/foodDetail.type";
 
 let token =  typeof window !== 'undefined' && localStorage.getItem("token")? localStorage.getItem("token") : ``
 
-export const addFoodItemToCart = createAsyncThunk('api/cart',async(foodDetails : foodDetails)=>{
+export const addFoodItemToCart = createAsyncThunk('api/cart',async(foodDetails : any)=>{
 
     let url = `${baseURL}/api/cart`
     let method = `PATCH`

@@ -13,7 +13,7 @@ import { foodItemType } from '../../src/types/constants/foodItem.type';
 import { useDispatch } from '../../src/store';
 import baseURL from '../../src/api';
 import axios from 'axios';
-import { addFoodItemToCart } from '../../src/store/reducers/cartItemSlice/caerItem.api';
+import { addFoodItemToCart } from '../../src/store/reducers/cartItemSlice/cartItem.api';
 import callAPI from '../api/callAPI';
 import { useRouter } from 'next/router';
 import { cartDataItemType } from '../../src/types/constants/cartDataItems.types';
