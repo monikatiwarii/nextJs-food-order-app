@@ -91,7 +91,9 @@ const Discount: React.FC<DiscountProps> = ({
             },
             marginTop: '50px'
           }}>
-          <Box
+         {isCoupenUsed &&
+         <>
+         <Box
             sx={{
               display: 'flex',
               width: {
@@ -167,6 +169,7 @@ const Discount: React.FC<DiscountProps> = ({
               {discount > 0 ? '-' : ''} ₹{discount}
             </Typography>
           </Box>
+          </>}
           <Box
             sx={{
               display: 'flex',
