@@ -6,9 +6,7 @@ import Header from '../../src/components/header/Header';
 import BrandsSection from '../../src/components/restaurants/BrandsSection';
 import FoodItemSection from '../../src/components/restaurants/FoodItemSection';
 import TrandingItems from '../../src/components/restaurants/TrandingItems';
-import { CartDataItem } from '../../src/types/constants/cartDataItem.type';
 import { cartDataItemType } from '../../src/types/constants/cartDataItems.types';
-import { cartItemType } from '../../src/types/redux/cartItem.type';
 import callAPI from '../api/callAPI';
 
 interface RestaurantsProps {

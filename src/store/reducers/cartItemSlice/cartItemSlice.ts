@@ -1,4 +1,6 @@
 import { createSlice, isAnyOf, PayloadAction } from '@reduxjs/toolkit';
+import { CartDataItem } from '../../../types/constants/cartDataItem.type';
+import { CartData, cartDataItemType } from '../../../types/constants/cartDataItems.types';
 import { cartItemsType, cartItemType } from '../../../types/redux/cartItem.type';
 import { addFoodItemToCart } from './caerItem.api';
 
@@ -9,7 +11,7 @@ const initialState: any = {
   userId :0
 };
 
-const CartItems:any = createSlice({
+const CartItems:any= createSlice({
   name: 'CartItems',
   initialState,
   reducers: {
@@ -22,12 +24,6 @@ const CartItems:any = createSlice({
       }
 
     },
-    removeCartItem(state: cartItemsType, { payload }: PayloadAction<cartItemType>) {
-      state.cartItems = state.cartItems.filter(data => data.id !== payload.id);
-    },
-    clearCartData(state: cartItemsType) {
-      return { ...state, cartItems: [] };
-    }
   },
   extraReducers :(builder)=>{
   
@@ -42,5 +38,4 @@ const CartItems:any = createSlice({
 
 export default CartItems.reducer;
 export const { setCartData } = CartItems.actions;
-export const { removeCartItem } = CartItems.actions;
-export const { clearCartData } = CartItems.actions;
+

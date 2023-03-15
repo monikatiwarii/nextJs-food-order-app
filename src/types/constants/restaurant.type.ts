@@ -1,5 +1,5 @@
 export interface restaurantType {
-  restaurantId: number;
+  id: number;
   name: string;
   address: string;
   time: Time;

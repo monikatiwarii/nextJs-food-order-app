@@ -153,7 +153,7 @@ const FoodType: React.FC<FoodTypeProps> = ({
               if (data.name === categoryType)
                 return (
                   <Typography
-                    key={data.name}
+                    key={data.id}
                     sx={{
                       fontFamily: 'Poppins',
                       fontStyle: 'normal',

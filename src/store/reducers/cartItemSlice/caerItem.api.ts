@@ -1,14 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import baseURL from "../../../api";
-import { foodItemType } from "../../../types/constants/foodItem.type";
-import { cartItemType } from "../../../types/redux/cartItem.type";
+import { foodDetails } from "../../../types/constants/foodDetail.type";
+
 
 let token =  typeof window !== 'undefined' && localStorage.getItem("token")? localStorage.getItem("token") : ``
 
+export const addFoodItemToCart = createAsyncThunk('api/cart',async(foodDetails : foodDetails)=>{
 
-
-export const addFoodItemToCart = createAsyncThunk('api/cart',async(foodDetails : any)=>{
     let url = `${baseURL}/api/cart`
     let method = `PATCH`
     let data= {}

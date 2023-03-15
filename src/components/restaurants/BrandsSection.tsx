@@ -6,6 +6,7 @@ import axios from "axios"
 
 import { restaurants } from '../../data/data';
 import baseURL from '../../api';
+import { restaurantType } from '../../types/constants/restaurant.type';
 
 interface BrandsSectionProps {}
 const BrandsSection: React.FC<BrandsSectionProps> = () => {
@@ -51,7 +52,7 @@ const BrandsSection: React.FC<BrandsSectionProps> = () => {
             display: 'none'
           }
         }}>
-        {restaurants?.map((data:any, index: any) => {
+        {restaurants?.map((data:restaurantType) => {
           return (
             <Box key={data.id}>
               <Link href={`/restaurants/${data.slug}`}>
