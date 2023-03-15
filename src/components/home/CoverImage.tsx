@@ -14,11 +14,10 @@ import { states } from '../../data/data';
 import MaxWidthWrapper from '../common/MaxWidthWrapper';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useSelector } from '../../store';
-import { foodItemType } from '../../types/constants/foodItem.type';
+import { CartDataItem } from '../../types/constants/cartDataItem.type';
 
 interface CoverImageProps {
-  cartData: any | undefined
+  cartData: CartDataItem | undefined
   logoutHandler : ()=>void
 }
 
@@ -26,12 +25,13 @@ interface CoverImageProps {
 
 const CoverImage: React.FC<CoverImageProps> = ({ cartData,logoutHandler }) => {
   let counter = 0;
-  let cartDataItems = useSelector((state: any) => state.cartItemSlice.cartItems);
 
-  cartData?.map((count: any) => {
+  if(Array.isArray(cartData)){
+  cartData.map((count: CartDataItem) => {
     counter += count.quantity;
     return count;
   });
+}
 
   return (
     <>

@@ -2,9 +2,10 @@ import { Box, Grid, Typography } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 import { restaurantImage } from '../../data/data';
+import { diningOutType } from '../../types/constants/diningOut.type';
 
 interface DiningOutProps {
-  diningOut : any
+  diningOut : diningOutType[]
 }
 const DiningOut: React.FC<DiningOutProps> = ({diningOut}) => {
 
@@ -23,9 +24,9 @@ const DiningOut: React.FC<DiningOutProps> = ({diningOut}) => {
           xs: '10px'
         }
       }}>
-      {diningOut?.map((data:any, index:any) => {
+      {diningOut?.map((data:diningOutType) => {
         return (
-          <Grid item xs={12} sm={6} md={4} key={index}>
+          <Grid item xs={12} sm={6} md={4} key={data.id}>
             <Box
               sx={{
                 background: '#FFFFFF',

@@ -19,17 +19,20 @@ import axios from 'axios';
 import { addFoodItemToCart } from '../../src/store/reducers/cartItemSlice/caerItem.api';
 import callAPI from '../api/callAPI';
 import { useRouter } from 'next/router';
+import { cartItemsType } from '../../src/types/redux/cartItem.type';
+import { cartDataItemType } from '../../src/types/constants/cartDataItems.types';
+import { selectedCategoryType } from '../../src/types/constants/selectedCategory.type';
 
 interface RestaurantDetailProps {
   selectedRestaurant: restaurantType | undefined;
-  selectedFoods: foodItemType[] | undefined
-  restaurantId: number
-   cartDataItems  : any | undefined
+  selectedFoods: foodItemType[] | undefined;
+  restaurantId: number;
+   cartDataItems  : cartDataItemType | undefined;
 }
 const RestaurantDetail: NextPage<RestaurantDetailProps> = ({ selectedRestaurant, selectedFoods, restaurantId,cartDataItems }) => {
 
   const [alert, setAlert] = useState<boolean>(false);
-  const[cartData,setCartData] = useState<any>(cartDataItems)
+  const[cartData,setCartData] = useState<cartDataItemType>()
 
   const router = useRouter()
 
@@ -44,10 +47,11 @@ const RestaurantDetail: NextPage<RestaurantDetailProps> = ({ selectedRestaurant,
   };
 
   const [categoryType, setCategoryType] = useState<string>('Recommended');
-  const [catWiseFoods, setcatWiseFoods] = useState<any>()
+  const [catWiseFoods, setcatWiseFoods] = useState<Array<foodItemType>>([])
 
   useEffect(()=>{
-    setcatWiseFoods(selectedFoods)
+    if(!!selectedFoods)
+      setcatWiseFoods(selectedFoods)
   },[])
 
   const dispatch = useDispatch();
@@ -65,8 +69,8 @@ const RestaurantDetail: NextPage<RestaurantDetailProps> = ({ selectedRestaurant,
     );
   };
 
-  const categoryHandler = async (data: any) => {
-
+  const categoryHandler = async (data: selectedCategoryType) => {
+   
     let rP = {
       rId: restaurantId,
       cId: data.id
@@ -88,7 +92,7 @@ const RestaurantDetail: NextPage<RestaurantDetailProps> = ({ selectedRestaurant,
           </Alert>
         </Snackbar>
       )}
-      <Header cartData={ cartDataItems.cartData}
+      <Header cartData= {cartDataItems?.cartData}
       logoutHandler= {logoutHandler} />
       <RestaurantHeader />
       <MaxWidthWrapper>

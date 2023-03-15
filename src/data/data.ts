@@ -6,7 +6,7 @@ import { foodListType } from '../types/constants/foodList.type';
 import { foodtypesType } from '../types/constants/foodtype.type';
 import { menusType } from '../types/constants/menus.type';
 import { restaurantType } from '../types/constants/restaurant.type';
-import { restaurantImageType } from '../types/constants/restaurantImage.type';
+import { restaurantImageType } from '../types/constants/diningOut.type';
 import { statesType } from '../types/constants/states.type';
 import { trandingFoodType } from '../types/constants/trandingFoods.type';
 

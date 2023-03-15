@@ -1,7 +1,7 @@
 import { Box, Button, InputAdornment, TextField } from '@mui/material';
 import { Alert, Snackbar } from '@mui/material';
 import LockIcon from '@mui/icons-material/Lock';
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { AccountCircle } from '@mui/icons-material';
 import { NextPage } from 'next';
@@ -40,7 +40,7 @@ const Login: NextPage<LoginProps> = () => {
   }
 
 
-  const loginHandler = async(e: any) => {
+  const loginHandler = async(e:ChangeEvent<HTMLSelectElement>) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
     
   };
@@ -104,7 +104,7 @@ const Login: NextPage<LoginProps> = () => {
                   </InputAdornment>
                 )
               }}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => loginHandler(e)}
+              onChange={(e: any) => loginHandler(e)}
               placeholder="Email"
               label="email"
               type="email"
@@ -130,7 +130,7 @@ const Login: NextPage<LoginProps> = () => {
                   </InputAdornment>
                 )
               }}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => loginHandler(e)}
+              onChange={(e: any) => loginHandler(e)}
               placeholder="Password"
               label="password"
               type="password"

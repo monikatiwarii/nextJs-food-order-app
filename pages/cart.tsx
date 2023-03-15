@@ -12,17 +12,17 @@ import { useRouter } from 'next/router';
 import callAPI from './api/callAPI';
 import { addFoodItemToCart } from '../src/store/reducers/cartItemSlice/caerItem.api';
 import { foodItemType } from '../src/types/constants/foodItem.type';
-import { cartDataItemType } from '../src/types/constants/cartDataItem.types';
+import { cartDataItemType } from '../src/types/constants/cartDataItems.types';
+import { CartDataItem } from '../src/types/constants/cartDataItem.type';
+import { Axios } from 'axios';
 
 interface CartProps {
-  cartDataItems : any | undefined
+  cartDataItems : cartDataItemType | undefined
  
 }
 let isCoupenUsed: boolean = false;
 const Cart: NextPage<CartProps> = ({cartDataItems}) => {
  
-  
-  let cartDataItem = useSelector(state => state.cartItemSlice.cartItems);
   const logoutHandler = ()=>{
     localStorage.removeItem("token")
     localStorage.removeItem("isLoggedIn")
@@ -42,7 +42,7 @@ const Cart: NextPage<CartProps> = ({cartDataItems}) => {
   const [invalidCoupen, setInvalidCoupen] = useState<string>('');
   const [invalidCoupenButton, setInvalidCoupenButton] = useState<any>();
   
-  const[cartData,setCartData] = useState<any>(cartDataItems)
+  const[cartData,setCartData] = useState<CartDataItem>()
 
   const [newTotal, setNewTotal] = useState<number>(0)
 
@@ -51,26 +51,28 @@ const Cart: NextPage<CartProps> = ({cartDataItems}) => {
       let url = `cart`
       let method = `GET`  
      const response: any =  await callAPI(method, url) 
+
      setCartData(response?.data?.payload.cartData)
      setNewTotal(response?.data?.payload?.total)
      setGrandTotal(response?.data?.payload?.total)
     }
   
   useEffect(()=>{
-    if(Object.keys(cartDataItems).length > 0 ){
-      setCartData(cartDataItems.cartData)
-      setNewTotal(cartDataItems.total)
-      setGrandTotal(cartDataItems.total)
+    if(!!cartDataItems){
+      if(Object.keys(cartDataItems).length > 0 ){
+        setCartData(cartDataItems.cartData)
+        setNewTotal(cartDataItems.total)
+        setGrandTotal(cartDataItems.total)
+      }
+      else{
+        setNewCartData()
+      }  
     }
-    else{
-      setNewCartData()
-    }
+    
   },[])
 
-
   
-  const decrementQuantity = (data: any) => {
-
+  const decrementQuantity = (data:CartDataItem) => {
     dispatch(
       addFoodItemToCart({
         id: data.fooditem.id,
@@ -84,7 +86,7 @@ const Cart: NextPage<CartProps> = ({cartDataItems}) => {
 
   };
 
-  const incrementQuantity = (data : any) => {
+  const incrementQuantity = (data : CartDataItem) => {
     if(data.quantity < 5){ 
     dispatch(
       addFoodItemToCart({
@@ -106,10 +108,12 @@ const Cart: NextPage<CartProps> = ({cartDataItems}) => {
     
     let method = "GET"
     let url = `coupons/${couponValue}`
-    const couponData: any = await callAPI(method,url) 
+    let couponData: any = await callAPI(method,url) 
+
+    // couponData = (!!couponData) ? couponData.data.payload : couponData
+
     if(couponData?.data.success){
       let couponRes = couponData?.data.payload;
-
       if(couponRes.type === "FLAT"){
         setDiscount(couponRes.value)
         setGrandTotal(newTotal-couponRes.value) 
@@ -141,8 +145,12 @@ const Cart: NextPage<CartProps> = ({cartDataItems}) => {
       setInvalidCoupenButton(removeCouponButton);
       isCoupenUsed = true
     }
-    else{
+    else if(couponValue == ''){
       setInvalidCoupen('');
+
+    }
+    else{
+      setInvalidCoupen('Invalid Coupon');
     }
   };
       // remove coupon
@@ -170,7 +178,7 @@ const Cart: NextPage<CartProps> = ({cartDataItems}) => {
         coupon : couponValue,
         total : grandTotal
       }
-      const orderResponse =  await callAPI("POST","checkout",data)
+      const orderResponse : any =  await callAPI("POST","checkout",data)
       localStorage.setItem('isOrdered', true.toString());
       router.push('/order');
       setLoading(true);
@@ -182,7 +190,7 @@ const Cart: NextPage<CartProps> = ({cartDataItems}) => {
         <MaxWidthWrapper>
           <Header cartData={cartData}
           logoutHandler={logoutHandler}/>
-          {cartData.length > 0 ? (
+          { !!cartData && Object.keys(cartData).length > 0 ? (
             <>
               <Discount
                 total={total}
@@ -195,7 +203,6 @@ const Cart: NextPage<CartProps> = ({cartDataItems}) => {
                 handleChangeCoupon={handleChangeCoupon}
                 orderHandler={orderHandler}
                 isCoupenUsed={isCoupenUsed}
-                cartData = {cartDataItems}
                 newTotal={newTotal}
               />
               <CartData 
@@ -218,7 +225,7 @@ export const getServerSideProps : GetServerSideProps = async context => {
   const cartDataItems: any = await callAPI(method, url)
   return {
     props: {
-      cartDataItems: cartDataItems?.data?.payload || {},
+      cartDataItems: cartDataItems?.data?.payload 
     }
   };
 };

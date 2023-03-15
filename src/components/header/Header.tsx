@@ -5,9 +5,11 @@ import Link from 'next/link';
 import MaxWidthWrapper from '../common/MaxWidthWrapper';
 import Image from 'next/image';
 import { useSelector } from '../../store';
+import { CartDataItem } from '../../types/constants/cartDataItem.type';
+import { cartItemType } from '../../types/redux/cartItem.type';
 
 interface HeaderProps {
-  cartData :any | undefined
+  cartData :CartDataItem | undefined
   logoutHandler :()=> void
 }
 const Header: React.FC<HeaderProps> = ({
@@ -17,10 +19,9 @@ const Header: React.FC<HeaderProps> = ({
 
   
   let counter = 0;
-  let cartDataItems = useSelector(state => state.cartItemSlice.cartItems);
-
+ 
   if(Array.isArray(cartData)){
-    cartData?.map((count: any) => {
+    cartData?.map((count: cartItemType) => {
       counter += count.quantity;
       return count;
     });

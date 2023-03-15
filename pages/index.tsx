@@ -20,18 +20,20 @@ import { selectedCategoryType } from '../src/types/constants/selectedCategory.ty
 import callAPI from './api/callAPI';
 import { selectedCategory } from '../src/data/data';
 import { useRouter } from 'next/router';
+import { cartDataItemType } from '../src/types/constants/cartDataItems.types';
+import { diningOutType } from '../src/types/constants/diningOut.type';
 
 
 interface HomeProps {
   selectedCategory : selectedCategoryType[] | undefined
   categoryItem : categoryType[] | undefined
   foodsItem : foodItemType[] | undefined
-  cartDataItems : any | undefined
+  cartDataItems : cartDataItemType | undefined
 }
 const Home: NextPage<HomeProps> = ({selectedCategory,categoryItem,foodsItem,cartDataItems}) => {
   
   const router = useRouter()
-  const [diningOut,setDiningOut] = useState()  
+  const [diningOut,setDiningOut] = useState<Array<diningOutType>>([])  
   const [loading, setLoading] = React.useState(true);
   
   useEffect(() => {
@@ -64,7 +66,7 @@ const Home: NextPage<HomeProps> = ({selectedCategory,categoryItem,foodsItem,cart
         <LoaderPage />
       ) : (
         <AuthGuard>
-          <CoverImage cartData ={cartDataItems.cartData}
+          <CoverImage cartData ={cartDataItems?.cartData}
           logoutHandler={logoutHandler}/>
           <MaxWidthWrapper>
             <DiningOut diningOut = {diningOut}  />

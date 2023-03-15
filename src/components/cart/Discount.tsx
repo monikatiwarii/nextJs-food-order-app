@@ -1,6 +1,5 @@
 import { Box, Button, InputBase, styled, Typography } from '@mui/material';
 import React from 'react';
-
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
   'label + &': {
     marginTop: theme.spacing(3)
@@ -24,14 +23,13 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
 }));
 
 interface DiscountProps {
-  cartData : any;
   isCoupenUsed: boolean;
   total: number;
   discount: string | number;
   grandTotal: number;
   couponValue: string;
   invalidCoupen: string;
-  invalidCoupenButton: any;
+  invalidCoupenButton: string;
   applyCoupon: () => void;
   orderHandler: () => void;
   handleChangeCoupon: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
@@ -39,7 +37,6 @@ interface DiscountProps {
 }
 let isCoupenUsed = false;
 const Discount: React.FC<DiscountProps> = ({
-  cartData,
   total,
   discount,
   grandTotal,
