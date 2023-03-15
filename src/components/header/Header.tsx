@@ -9,23 +9,23 @@ import { CartDataItem } from '../../types/constants/cartDataItem.type';
 import { cartItemType } from '../../types/redux/cartItem.type';
 
 interface HeaderProps {
-  cartData :CartDataItem | undefined
+  count : number
   logoutHandler :()=> void
 }
 const Header: React.FC<HeaderProps> = ({
-  cartData,
+  count,
   logoutHandler
 }) => {
 
   
-  let counter = 0;
+  // let counter = 0;
  
-  if(Array.isArray(cartData)){
-    cartData?.map((count: cartItemType) => {
-      counter += count.quantity;
-      return count;
-    });
-  }
+  // if(Array.isArray(cartData)){
+  //   cartData?.map((count: cartItemType) => {
+  //     counter += count.quantity;
+  //     return count;
+  //   });
+  // }
 
   return (
     <MaxWidthWrapper>
@@ -108,7 +108,7 @@ const Header: React.FC<HeaderProps> = ({
                 color: '#FFFFFF',
                 textAlign: 'center'
               }}>
-              {counter}
+              {count}
             </Typography>
           </Box>
           <Box

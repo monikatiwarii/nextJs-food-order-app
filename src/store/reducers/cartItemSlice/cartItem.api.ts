@@ -1,7 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import baseURL from "../../../api";
-import { foodDetails } from "../../../types/constants/foodDetail.type";
 
 
 let token =  typeof window !== 'undefined' && localStorage.getItem("token")? localStorage.getItem("token") : ``
@@ -16,6 +15,7 @@ export const addFoodItemToCart = createAsyncThunk('api/cart',async(foodDetails :
         "Authorization": `Bearer ${token}`
     }
     const response = await axios({method, url, headers, data: foodDetails})
+
    
     return response.data.payload[0] 
 }) 

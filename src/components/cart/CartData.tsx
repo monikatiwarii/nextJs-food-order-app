@@ -1,11 +1,5 @@
 import { Box, Button, Divider, Typography } from '@mui/material';
-import axios from 'axios';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
-import baseURL from '../../api';
-import { useSelector } from '../../store';
-import { cartItemType } from '../../types/redux/cartItem.type';
-import callAPI from '../../../pages/api/callAPI';
 import { CartDataItem } from '../../types/constants/cartDataItem.type';
 interface CartDataProps {
   cartData : any | undefined

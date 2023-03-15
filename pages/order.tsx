@@ -5,7 +5,7 @@ import AuthGuard from '../src/components/common/AuthGuard';
 import LoaderPage from '../src/components/common/LoaderPage';
 import OrderSuccessfull from '../src/components/orderSuccessfull/OrderSuccessfull';
 import { useDispatch } from '../src/store';
-import { clearCartData } from '../src/store/reducers/cartItemSlice/cartItemSlice';
+
 
 interface OrderProps {}
 const Order: NextPage<OrderProps> = () => {
@@ -15,8 +15,6 @@ const Order: NextPage<OrderProps> = () => {
     if (localStorage.getItem('isOrdered')) {
       setLoading(false);
     }
-
-    dispatch(clearCartData());
   }, []);
 
   const orderHandler = () => {

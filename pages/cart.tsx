@@ -46,6 +46,7 @@ const Cart: NextPage<CartProps> = ({cartDataItems}) => {
 
   const [newTotal, setNewTotal] = useState<number>(0)
 
+  
 
   const setNewCartData= async ()=>{
       let url = `cart`
@@ -71,7 +72,19 @@ const Cart: NextPage<CartProps> = ({cartDataItems}) => {
     
   },[])
 
-  
+ 
+ let counter = 0;
+  if(Array.isArray(cartData)){ 
+    cartData.map((data)=>{
+      counter += data.quantity
+    })
+  }
+
+  useEffect(()=>{
+    setCount(counter)
+  },[counter])
+ 
+    
   const decrementQuantity = (data:CartDataItem) => {
     dispatch(
       addFoodItemToCart({
@@ -188,7 +201,8 @@ const Cart: NextPage<CartProps> = ({cartDataItems}) => {
     return (
       <AuthComponent>
         <MaxWidthWrapper>
-          <Header cartData={cartData}
+          <Header 
+          count={count}
           logoutHandler={logoutHandler}/>
           { !!cartData && Object.keys(cartData).length > 0 ? (
             <>

@@ -23,12 +23,12 @@ interface RestaurantDetailProps {
   selectedRestaurant: restaurantType | undefined;
   selectedFoods: foodItemType[] | undefined;
   restaurantId: number;
-   cartDataItems  : cartDataItemType | undefined;
+  cartDataItems  : cartDataItemType | undefined;
 }
 const RestaurantDetail: NextPage<RestaurantDetailProps> = ({ selectedRestaurant, selectedFoods, restaurantId,cartDataItems }) => {
 
   const [alert, setAlert] = useState<boolean>(false);
-  const[cartData,setCartData] = useState<cartDataItemType>()
+  const[cartData,setCartData] = useState<any>(cartDataItems?.cartData)
 
   const router = useRouter()
 
@@ -44,6 +44,7 @@ const RestaurantDetail: NextPage<RestaurantDetailProps> = ({ selectedRestaurant,
 
   const [categoryType, setCategoryType] = useState<string>('Recommended');
   const [catWiseFoods, setcatWiseFoods] = useState<Array<foodItemType>>([])
+  const [count,setCount] = useState<number>(0)
 
   useEffect(()=>{
     if(!!selectedFoods)
@@ -57,13 +58,31 @@ const RestaurantDetail: NextPage<RestaurantDetailProps> = ({ selectedRestaurant,
 
     setAlert(true);
 
-    dispatch(
-      addFoodItemToCart({
-        id: data.fooditem_id,
-        quantity: 1
-      })
-    );
+  dispatch(
+    addFoodItemToCart({
+      id: data.fooditem_id,
+      quantity: 1
+    })
+  );
+
+   
+    let url = `cart`
+    let method = `GET` 
+    const cartDatas: any = await callAPI(method, url)
+    setCartData(cartDatas.data.payload.cartData)
   };
+ 
+
+  let counter = 0;
+  if(Array.isArray(cartData)){ 
+    cartData.map((data)=>{
+      counter += data.quantity
+    })
+  }
+
+  useEffect(()=>{
+    setCount(counter)
+  },[counter])
 
   const categoryHandler = async (data: selectedCategoryType) => {
    
@@ -88,7 +107,8 @@ const RestaurantDetail: NextPage<RestaurantDetailProps> = ({ selectedRestaurant,
           </Alert>
         </Snackbar>
       )}
-      <Header cartData= {cartDataItems?.cartData}
+      <Header 
+      count = {count}
       logoutHandler= {logoutHandler} />
       <RestaurantHeader />
       <MaxWidthWrapper>
